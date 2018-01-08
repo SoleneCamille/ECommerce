@@ -45,7 +45,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public Categorie updateCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

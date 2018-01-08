@@ -25,6 +25,8 @@ public class Categorie implements Serializable {
 	private String nomCategorie;
 	@Lob
 	private byte[] photo;
+	
+	
 	private String description;
 	
 	@OneToMany(mappedBy="categorie", cascade=CascadeType.ALL)

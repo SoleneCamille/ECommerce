@@ -7,24 +7,30 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Page d'ajout de catégorie</title>
+	<title>Page d'ajout de catÃ©gorie</title>
 </h:head>
 
 <h:body>
 
-	<h1 style="text-align: center; color: red">Formulaire d'ajout de catégorie</h1>
+	<!-- insertion du header -->
+	<ui:insert name="page">
+		<!-- insÃ©rer concrÃ¨tement le layout avec la balise ui:include -->
+		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
+	</ui:insert>
+
+	<h1 style="text-align: center; color: red">Formulaire d'ajout de
+		catÃ©gorie</h1>
 
 	<h:form>
 		<h:panelGrid columns="2">
 			Nom de la Categorie : <h:inputText
 				value="#{catMB.categorie.nomCategorie}" />
-			Photo : <h:inputText value="#{catMB.categorie.photo}" />
 			Description : <h:inputText value="#{catMB.categorie.description}" />
+		</h:panelGrid>
+		<p:commandButton value="Ajouter" action="#{catMB.ajouterCategorie}"
+			update="@all" />
 
-			<p:commandButton value="Ajouter" action="#{catMB.ajouterCategorie}"
-				update="@all" />
-	
-</h:panelGrid>
+
 	</h:form>
 
 
