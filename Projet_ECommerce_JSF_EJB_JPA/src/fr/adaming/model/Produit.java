@@ -2,11 +2,15 @@ package fr.adaming.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,9 +31,13 @@ public class Produit implements Serializable{
 	
 	
 	//transformation de l'association simple de l'UML en java
-	//@ManyToOne
-	//@JoinColumn(name="categorie_id", referencedCol ="id_cat)
-	//private Categorie categorie;
+	@ManyToOne
+	@JoinColumn(name="cat_id", referencedColumnName="id_cat")
+	private Categorie categorie;
+	
+	@OneToMany(mappedBy="produit", cascade=CascadeType.ALL)
+	private java.util.List<LignesCommande> lignesCommande;
+	
 	
 	//déclaration des constructeurs
 	public Produit() {
@@ -130,6 +138,18 @@ public class Produit implements Serializable{
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
+
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+	
+	
 	
 	
 	
