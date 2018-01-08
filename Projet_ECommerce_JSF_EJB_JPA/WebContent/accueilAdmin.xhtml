@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page d'accueil Admin</title>
+</h:head>
+
+<h:body>
+	<!-- insertion du header -->
+	<ui:insert name="page">
+		<!-- insérer concrètement le layout avec la balise ui:include -->
+		<ui:include src="/templates/header.xhtml"></ui:include>
+	</ui:insert>
+
+
+
+
+	<h1 style="text-align: center; color: red">Accueil Liste des Catégories</h1>
+	
+	<!-- <p:contentFlow value="#{imagesView.images}" var="image">
+    <p:graphicImage name="demo/images/nature/#{image}" styleClass="content" />
+    <div class="caption">#{image}</div>
+</p:contentFlow>
+
+
+	<p:dataTable var="cat" value="#{sessionScope.categoriesList}">
+		<p:column headerText="Id">
+			<h:outputText value="#{cat.id}" />
+		</p:column>
+
+		<p:column headerText="Marque">
+			<h:outputText value="#{cat.}" />
+		</p:column>
+
+		<p:column headerText="Type">
+			<h:outputText value="#{car.type}" />
+		</p:column>
+
+		<p:column headerText="N° Série">
+			<h:outputText value="#{car.numSerie}" />
+		</p:column>
+
+		<p:column headerText="ID Agent">
+			<h:outputText value="#{car.agent.id}" />
+		</p:column>
+	</p:dataTable>-->
+
+
+
+</h:body>
 </html>
