@@ -4,28 +4,27 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
-	
-	
+
+
 <head>
-<meta charset="ISO-8859-1">
+
 <title>Page login</title>
 </head>
 <body>
 
-<h:form>
-    <h:panelGrid columns="2" cellpadding="5">
-        <h:outputText value="Basic: " />
-        <p:inputText id="idMail" value="#{aMB.admin.mail}" required=true/>
-         <h:outputText value="Basic: " />
-        <p:password id="idMdp" value="#{aMB.admin.mdp}" required=true/>
-        
-        <p:separator/>
-        
-         <p:commandButton  value="Connexion" action="#{aMB.seConnecter}"/>
-</h:panelGrid>
-</h:form>
+	<h:form>
+		<h:panelGrid columns="2" cellpadding="5">
+    
+    		Mail : <h:inputText value="#{aMB.admin.mail}" />
+			Mot de Passe : <h:inputSecret value="#{aMB.admin.mdp}" />
 
-<h:messages style="color:red" />
+			<p:separator />
+
+			<p:commandButton value="Connexion" action="#{aMB.seConnecter}" />
+		</h:panelGrid>
+	</h:form>
+
+	<h:messages style="color:red" />
 
 </body>
 </html>
