@@ -32,8 +32,9 @@ public class Commande implements Serializable {
 	 private List<LignesCommande> listeLigneCommande;
 	 @ManyToOne
 	 @JoinColumn(name="client_id", referencedColumnName="id_client")
-private Client client;
-	// constructeurs
+	 private Client client;
+	
+	 // constructeurs
 
 	public Commande() {
 		super();
@@ -74,6 +75,14 @@ private Client client;
 
 	public void setListeLigneCommande(List<LignesCommande> listeLigneCommande) {
 		this.listeLigneCommande = listeLigneCommande;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
 	}
 	
 	
