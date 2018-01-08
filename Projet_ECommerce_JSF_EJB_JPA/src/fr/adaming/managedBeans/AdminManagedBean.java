@@ -100,6 +100,9 @@ public String seConnecter() {
 		return "login";
 	}
 
+public String renvoiLogin(){
+	return "login";
+}
 	
 	
 
