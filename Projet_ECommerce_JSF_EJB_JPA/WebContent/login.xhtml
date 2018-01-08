@@ -6,24 +6,28 @@
 	xmlns:p="http://primefaces.org/ui">
 
 
-<head>
+<h:head>
 
-<title>Page login</title>
-</head>
-<body>
+	<title>Page login</title>
+</h:head>
+<h:body>
 
 	<h:form>
-		<h:panelGrid columns="2">
-			Mail : <h:inputText value="#{aMB.admin.mail}" />
-			Mot de Passe : <h:inputSecret value="#{aMB.admin.mdp}" />
+	
+		<h:panelGrid columns="2" style="margin-left:700px; margin-top:350px">
+			<h:outputText value="Mail" style="font:30px"></h:outputText>
+			<h:inputText value="#{aMB.admin.mail}" style="width:200px;height:30px; backgroung-border:silver" />
+			<h:outputText value="Mot de passe" style="size:30px"></h:outputText>
+			<h:inputSecret value="#{aMB.admin.mdp}" style="width:200px;height:30px; backgroung-border:silver"/>
 
-			<p:commandButton value="Se connecter" action="#{aMB.seConnecter}"
-				update="@all" />
+			<p:spacer height="50" />
+			<p:commandButton style="background-color:dodgerblue;backgroung-border:dodgerblue; width:150px;height:35px"
+				value="Connexion" action="#{aMB.seConnecter}" update="@all" />
 		</h:panelGrid>
 
 		<h:messages style="color:red" />
 
 	</h:form>
 
-</body>
+</h:body>
 </html>
