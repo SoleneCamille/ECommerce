@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>header</title>
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:menubar style="margin-top:5px; background-color:gold">
+			<p:menuitem>
+				<p:graphicImage name="" width="25px"
+					height="25px" />
+			</p:menuitem>
+
+			<p:menuitem value="Accueil" icon="ui-icon-check" url="accueil.xhtml" />
+
+			<p:submenu label="Client" icon="ui-icon-person">
+				<p:menuitem value="Ajouter Client" url=""
+					icon="ui-icon-circle-plus" />
+				<p:menuitem value="Modifier Client" url=""
+					icon="ui-icon-arrowrefresh-1-s" />
+				<p:menuitem value="Supprimer Client" url=""
+					icon="ui-icon-scissors" />
+				<p:menuitem value="Rechercher Client" url=""
+					icon="ui-icon-search" />
+			</p:submenu>
+
+			<p:submenu label="Compte Courant" icon="ui-icon-folder-collapsed">
+				<p:menuitem value="Ajouter Compte Courant" url=""
+					icon="ui-icon-circle-plus" />
+				<p:menuitem value="Modifier Compte Courant"
+					url="" icon="ui-icon-arrowrefresh-1-s" />
+				<p:menuitem value="Supprimer Compte Courant"
+					url="" icon="ui-icon-scissors" />
+				<p:submenu label="Rechercher Compte" icon="ui-icon-search">
+					<p:menuitem value="Par son ID" url=""
+						icon="ui-icon-search" />
+					<p:menuitem value="Par l'ID du Client"
+						url="" icon="ui-icon-search" />
+				</p:submenu>
+			</p:submenu>
+
+			<p:submenu label="Opérations" icon="ui-icon-cart">
+				<p:menuitem value="Effectuer un retrait" url=""
+					icon="ui-icon-minus" />
+				<p:menuitem value="Effectuer un versement" url=""
+					icon="ui-icon-plus" />
+				<p:menuitem value="Effectuer un virement" url=""
+					icon="ui-icon-shuffle" />
+			</p:submenu>
+
+			<f:facet name="options">
+				<p:commandButton value="Quitter" action=""
+					style="border:none; background-color:gold"></p:commandButton>
+			</f:facet>
+		</p:menubar>
+	</h:form>
+
+
+</h:body>
+</html>
