@@ -24,9 +24,9 @@ public class Commande implements Serializable {
 	private Date dateCommande;
 
 	// transformation UML en java
-	// @OneToMany(mappedBy="commande",
-	// cascade=CascadeType.REMOVE,fetch=FetchType.LAZY)
-	// private List<LigneCommande> listeLigneCommande;
+	 @OneToMany(mappedBy="commande",
+	 cascade=CascadeType.REMOVE,fetch=FetchType.LAZY)
+	 private List<LignesCommande> listeLigneCommande;
 
 	// constructeurs
 
