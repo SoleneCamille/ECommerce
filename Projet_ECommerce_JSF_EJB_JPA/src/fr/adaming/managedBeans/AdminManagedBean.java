@@ -30,6 +30,7 @@ public class AdminManagedBean implements Serializable {
 	// constructeur vide
 	public AdminManagedBean() {
 		super();
+		this.admin=new Administrateur();
 	}
 
 	// getters & setters
@@ -70,6 +71,7 @@ public class AdminManagedBean implements Serializable {
 
 		try {
 			Administrateur aOut = adminService.isExist(this.admin);
+			System.out.println(aOut);
 
 			// récup de la liste de categories
 			listeCategories = categorieService.getAllCategories();
