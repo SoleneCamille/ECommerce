@@ -28,31 +28,30 @@ public class Client implements Serializable {
 	private String tel;
 
 	// UML en java
-	@OneToMany(mappedBy="client", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private List<Commande> listeCommande;
 
 	public Client() {
 		super();
 	}
 
-	public Client(String nomClient, String adresse, String email, String tel, List<Commande> listeCommande) {
+	public Client(String nomClient, String adresse, String email, String tel) {
 		super();
 		this.nomClient = nomClient;
 		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
-		this.listeCommande = listeCommande;
+
 	}
 
-	public Client(Long idClient, String nomClient, String adresse, String email, String tel,
-			List<Commande> listeCommande) {
+	public Client(Long idClient, String nomClient, String adresse, String email, String tel) {
 		super();
 		this.idClient = idClient;
 		this.nomClient = nomClient;
 		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
-		this.listeCommande = listeCommande;
+
 	}
 
 	public Long getIdClient() {
