@@ -12,7 +12,23 @@
 
 <h:body>
 
+	<h1 style="text-align: center; color: red">Formulaire d'ajout de catégorie</h1>
 
+	<h:form>
+		<h:panelGrid columns="2">
+			Nom de la Categorie : <h:inputText
+				value="#{catMB.categorie.nomCategorie}" />
+			Photo : <h:inputText value="#{catMB.categorie.photo}" />
+			Description : <h:inputText value="#{catMB.categorie.description}" />
+
+			<p:commandButton value="Ajouter" action="#{catMB.ajouterCategorie}"
+				update="@all" />
+		</h:panelGrid>
+
+
+
+
+	</h:form>
 
 
 

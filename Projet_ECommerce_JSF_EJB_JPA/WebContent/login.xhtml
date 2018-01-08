@@ -13,18 +13,17 @@
 <body>
 
 	<h:form>
-		<h:panelGrid columns="2" cellpadding="5">
-    
-    		Mail : <h:inputText value="#{aMB.admin.mail}" required="true"/>
-			Mot de Passe : <h:inputSecret value="#{aMB.admin.mdp}" required="true"/>
+		<h:panelGrid columns="2">
+			Mail : <h:inputText value="#{aMB.admin.mail}" />
+			Mot de Passe : <h:inputSecret value="#{aMB.admin.mdp}" />
 
-			<p:separator />
-
-			<p:commandButton value="Connexion" action="#{aMB.seConnecter}" update="msg" />
+			<p:commandButton value="Se connecter" action="#{aMB.seConnecter}"
+				update="@all" />
 		</h:panelGrid>
-	</h:form>
 
-	<h:messages id="msg" style="color:red" />
+		<h:messages style="color:red" />
+
+	</h:form>
 
 </body>
 </html>
