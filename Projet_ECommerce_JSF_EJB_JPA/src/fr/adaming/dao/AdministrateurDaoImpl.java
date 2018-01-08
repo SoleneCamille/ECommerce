@@ -1,13 +1,15 @@
 package fr.adaming.dao;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.adaming.model.Administrateur;
 
+@Stateless
 public class AdministrateurDaoImpl implements IAdministrateurDao {
-	@PersistenceContext(unitName = "PU_projet") // pour l'injection d'un EM
+	@PersistenceContext(unitName = "PU_Projet") // pour l'injection d'un EM
 	EntityManager em;
 
 	@Override

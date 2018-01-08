@@ -15,29 +15,23 @@
 	<h:form>
 		<p:menubar style="margin-top:5px; background-color:gold">
 			<p:menuitem>
-				<p:graphicImage name="" width="25px"
-					height="25px" />
+
 			</p:menuitem>
 
 			<p:menuitem value="Accueil" icon="ui-icon-check" url="accueil.xhtml" />
 
 			<p:submenu label="Selectionner une catégorie" icon="ui-icon-person">
-				<p:menuitem value="" url=""
-					icon="ui-icon-circle-plus" />
-				<p:menuitem value="" url=""
-					icon="ui-icon-arrowrefresh-1-s" />
-				<p:menuitem value="" url=""
-					icon="ui-icon-scissors" />
-				<p:menuitem value="" url=""
-					icon="ui-icon-search" />
+				<p:menuitem value="" url="#" icon="ui-icon-circle-plus" />
+				<p:menuitem value="" url="#" icon="ui-icon-arrowrefresh-1-s" />
+				<p:menuitem value="" url="#" icon="ui-icon-scissors" />
+				<p:menuitem value="" url="#" icon="ui-icon-search" />
 			</p:submenu>
-
-			<f:facet name="panier">
-				<p:commandButton value="Panier" action=""
+			<f:facet name="options">
+				<p:commandButton value="Panier" action="login.xhtml"
 					style="border:none; background-color:gold"></p:commandButton>
-			</f:facet>
-			
-			<f:facet name="connexion">
+
+
+
 				<p:commandButton value="Se connecter" action="login.xhtml"
 					style="border:none; background-color:gold"></p:commandButton>
 			</f:facet>
