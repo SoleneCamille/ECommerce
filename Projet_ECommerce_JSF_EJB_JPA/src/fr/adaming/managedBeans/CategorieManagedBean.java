@@ -1,5 +1,6 @@
 package fr.adaming.managedBeans;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.service.ICategorieService;
@@ -21,6 +23,7 @@ public class CategorieManagedBean implements Serializable {
 	@EJB
 	private ICategorieService categorieService;
 
+//	private Part file;
 	private Categorie categorie;
 	private List<Categorie> listeCategories;
 
@@ -57,10 +60,20 @@ public class CategorieManagedBean implements Serializable {
 		this.categorieService = categorieService;
 	}
 	
+	
+
+
+//	public Part getFile() {
+//		return file;
+//	}
+//
+//	public void setFile(Part file) {
+//		this.file = file;
+//	}
+
 	//les méthodes métiers
 	public String ajouterCategorie() {
 		this.categorie = categorieService.addCategorie(this.categorie);
-		System.out.println("qshshj######################");
 		
 		if (this.categorie!=null) {
 			//récupération de la nouvelle liste de la bd
