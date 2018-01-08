@@ -18,7 +18,7 @@ import javax.persistence.Table;
 @Table(name = "produits")
 public class Produit implements Serializable {
 
-	// déclaration des attributs ddddddddddd
+	// déclaration des attributs 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_p")
