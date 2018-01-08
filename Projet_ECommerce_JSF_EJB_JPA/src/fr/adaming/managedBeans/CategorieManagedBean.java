@@ -7,6 +7,8 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -23,7 +25,7 @@ public class CategorieManagedBean implements Serializable {
 	@EJB
 	private ICategorieService categorieService;
 
-//	private Part file;
+	// private Part file;
 	private Categorie categorie;
 	private List<Categorie> listeCategories;
 
@@ -39,7 +41,7 @@ public class CategorieManagedBean implements Serializable {
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
 
-	//getters et setters
+	// getters et setters
 	public Categorie getCategorie() {
 		return categorie;
 	}
@@ -59,40 +61,71 @@ public class CategorieManagedBean implements Serializable {
 	public void setCategorieService(ICategorieService categorieService) {
 		this.categorieService = categorieService;
 	}
-	
-	
 
+	// public Part getFile() {
+	// return file;
+	// }
+	//
+	// public void setFile(Part file) {
+	// this.file = file;
+	// }
 
-//	public Part getFile() {
-//		return file;
-//	}
-//
-//	public void setFile(Part file) {
-//		this.file = file;
-//	}
-
-	//les méthodes métiers
+	// les méthodes métiers
 	public String ajouterCategorie() {
 		this.categorie = categorieService.addCategorie(this.categorie);
-		
-		if (this.categorie!=null) {
-			//récupération de la nouvelle liste de la bd
+
+		if (this.categorie != null) {
+			// récupération de la nouvelle liste de la bd
 			this.listeCategories = categorieService.getAllCategories();
-			
-			//mettre à jour la liste dans la session
+
+			// mettre à jour la liste dans la session
+			maSession.setAttribute("categoriesList", this.listeCategories);
+
+			return "accueilAdmin";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'a pas pu être ajoutée !", null));
+			return "login";
+		}
+
+	}
+
+	public String modifierCategorie() {
+		this.categorie = categorieService.updateCategorie(this.categorie);
+
+		if (this.categorie != null) {
+			// récupération de la nouvelle liste de la bd
+			this.listeCategories = categorieService.getAllCategories();
+
+			// mettre à jour la liste dans la session
+			maSession.setAttribute("categoriesList", this.listeCategories);
+
+			return "accueilAdmin";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
+			return "modifCat";
+		}
+
+	}
+
+	public String supprimerCategorie() {
+		int verif = categorieService.deleteCategorie(this.categorie.getIdCategorie());
+
+		if (verif == 1) {
+			// récupération de la nouvelle liste de la bd
+			this.listeCategories = categorieService.getAllCategories();
+
+			// mettre à jour la liste dans la session
 			maSession.setAttribute("categoriesList", this.listeCategories);
 			
 			return "accueilAdmin";
 		} else {
-			return "login";
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
+			return "supprCat";
 		}
 		
 	}
-	
-	public String modifierCategorie(){
-		return null;
-	}
-	
-
 
 }

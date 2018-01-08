@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Page d'ajout de categorie</title>
+	<title>Page de suppression de categorie</title>
 </h:head>
 
 <h:body>
@@ -18,24 +18,24 @@
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
 
-	<h1 style="text-align: center; color: red">Formulaire d'ajout de
+	<h1 style="text-align: center; color: red">Formulaire de suppression de
 		categorie</h1>
 
 	<center>
 		<h:form>
 			<h:panelGrid columns="2">
-			Nom de la Categorie : <h:inputText
-					value="#{catMB.categorie.nomCategorie}" />
-			Description : <h:inputText value="#{catMB.categorie.description}" />
+			ID de la categorie : <h:inputText value="#{catMB.categorie.idCategorie}"/>
 			</h:panelGrid>
-			<p:commandButton value="Ajouter" action="#{catMB.ajouterCategorie}"
-				update="msgAj" />
+			<p:commandButton value="Supprimer" action="#{catMB.supprimerCategorie}"
+				update="msgSuppr" />
 
 
 		</h:form>
 	</center>
 
-	<h:messages id="msgAj"/>
+	<h:messages id="msgSuppr"/>
+
+
 
 </h:body>
 </html>

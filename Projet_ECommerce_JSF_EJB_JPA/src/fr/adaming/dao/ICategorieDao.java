@@ -18,6 +18,6 @@ public interface ICategorieDao {
 	
 	public int deleteCategorie(int idCategorie);
 	
-	public Categorie getCategorieById(int idCategorie);
+	public Categorie getCategorieByIdOrName(Categorie cat);
 
 }

@@ -41,9 +41,8 @@ public class CategorieServiceImpl implements ICategorieService {
 	}
 
 	@Override
-	public int deleteCategorie(int idCategorie) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteCategorie(int idCategorie) {	
+		return categorieDao.deleteCategorie(idCategorie);
 	}
 
 	@Override

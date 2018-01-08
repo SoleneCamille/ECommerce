@@ -51,13 +51,21 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public int deleteCategorie(int idCategorie) {
-		// TODO Auto-generated method stub
-		return 0;
+		//création de la requete SQL
+		String req = "delete from Categorie as cat where cat.idCategorie = :pId";
+		
+		//creation du query
+		Query query = em.createQuery(req);
+		
+		//assignation des paramètres de la requete
+		query.setParameter("pId", idCategorie);
+		
+		return query.executeUpdate();
 	}
 
 	@Override
-	public Categorie getCategorieById(int idCategorie) {
-		Categorie catFind = em.find(Categorie.class, idCategorie);
+	public Categorie getCategorieByIdOrName(Categorie cat) {
+		Categorie catFind = em.find(Categorie.class, cat.getIdCategorie());		
 		return catFind;
 	}
 
