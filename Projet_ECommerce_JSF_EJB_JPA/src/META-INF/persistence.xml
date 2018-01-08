@@ -12,6 +12,7 @@
 	<class>fr.adaming.model.Client</class>
 	<class>fr.adaming.model.LignesCommande</class>
 	<class>fr.adaming.model.Produit</class>
+	<class>fr.adaming.model.Administrateur</class>
 	
 	<!-- assignation des valeurs aux props de hibernate -->
 	<properties>
