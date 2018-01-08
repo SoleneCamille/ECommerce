@@ -58,6 +58,21 @@ public class CategorieManagedBean implements Serializable {
 	}
 	
 	//les méthodes métiers
-	
+	public String ajouterCategorie() {
+		this.categorie = categorieService.addCategorie(this.categorie);
+		
+		if (this.categorie!=null) {
+			//récupération de la nouvelle liste de la bd
+			this.listeCategories = categorieService.getAllCategories();
+			
+			//mettre à jour la liste dans la session
+			maSession.setAttribute("categoriesList", this.listeCategories);
+			
+			return "success";
+		} else {
+			return "ajoutCat";
+		}
+		
+	}
 
 }

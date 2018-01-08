@@ -27,8 +27,7 @@ public class CategorieServiceImpl implements ICategorieService{
 
 	@Override
 	public Categorie addCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return null;
+		return categorieDao.addCategorie(cat);
 	}
 
 	@Override

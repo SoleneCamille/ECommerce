@@ -38,8 +38,9 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public Categorie addCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return null;
+		em.persist(cat);
+		//envoi de la requete
+		return cat;
 	}
 
 	@Override
