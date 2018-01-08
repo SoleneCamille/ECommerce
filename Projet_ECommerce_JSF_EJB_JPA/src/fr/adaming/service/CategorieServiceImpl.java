@@ -9,13 +9,13 @@ import fr.adaming.dao.ICategorieDao;
 import fr.adaming.model.Categorie;
 
 @Stateful
-public class CategorieServiceImpl implements ICategorieService{
+public class CategorieServiceImpl implements ICategorieService {
 
-	//transformation de l'association uml en java
+	// transformation de l'association uml en java
 	@EJB
 	private ICategorieDao categorieDao;
-	
-	//setter pour la categorie DAO
+
+	// setter pour la categorie DAO
 	public void setCategorieDao(ICategorieDao categorieDao) {
 		this.categorieDao = categorieDao;
 	}
@@ -32,8 +32,12 @@ public class CategorieServiceImpl implements ICategorieService{
 
 	@Override
 	public Categorie updateCategorie(Categorie cat) {
-		// TODO Auto-generated method stub
-		return null;
+		Categorie catFind = categorieDao.getCategorieById(cat.getIdCategorie());
+		if (catFind != null) {
+			return categorieDao.updateCategorie(cat);
+		} else {
+			return null;
+		}
 	}
 
 	@Override

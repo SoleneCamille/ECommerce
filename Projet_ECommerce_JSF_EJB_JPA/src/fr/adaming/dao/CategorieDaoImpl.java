@@ -45,8 +45,8 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public Categorie updateCategorie(Categorie cat) {
-		
-		return null;
+		em.merge(cat);
+		return cat;
 	}
 
 	@Override
@@ -57,8 +57,8 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public Categorie getCategorieById(int idCategorie) {
-		// TODO Auto-generated method stub
-		return null;
+		Categorie catFind = em.find(Categorie.class, idCategorie);
+		return catFind;
 	}
 
 }

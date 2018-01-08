@@ -17,12 +17,27 @@
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
 
+	<h1 style="text-align: center; color: red">Accueil Liste des
+		Catégories</h1>
 
+	<p:dataTable var="cat" value="#{sessionScope.categoriesList}">
 
+		<p:column headerText="Id">
+			<h:outputText value="#{cat.idCategorie}" />
+		</p:column>
 
-	<h1 style="text-align: center; color: red">Accueil Liste des Catégories</h1>
-	
+		<p:column headerText="Nom">
+			<h:outputText value="#{cat.nomCategorie}" />
+		</p:column>
 
+		<p:column headerText="Description">
+			<h:outputText value="#{cat.description}" />
+		</p:column>
+
+		<p:column headerText="photo">
+			<h:outputText value="photo" />
+		</p:column>
+	</p:dataTable>
 
 
 

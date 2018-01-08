@@ -16,20 +16,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="categories")
+@Table(name = "categories")
 public class Categorie implements Serializable {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_cat")
-	private Long idCategorie;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_cat")
+	private int idCategorie;
 	private String nomCategorie;
 	@Lob
 	private byte[] photo;
-	
-	
+
 	private String description;
-	
-	@OneToMany(mappedBy="categorie", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
 	private List<Produit> listeProduits;
 
 	public Categorie() {
@@ -42,7 +41,7 @@ public class Categorie implements Serializable {
 		this.photo = photo;
 	}
 
-	public Categorie(Long idCategorie, String nomCategorie, byte[] photo, String description) {
+	public Categorie(int idCategorie, String nomCategorie, byte[] photo, String description) {
 		super();
 		this.idCategorie = idCategorie;
 		this.nomCategorie = nomCategorie;
@@ -50,11 +49,11 @@ public class Categorie implements Serializable {
 		this.description = description;
 	}
 
-	public Long getIdCategorie() {
+	public int getIdCategorie() {
 		return idCategorie;
 	}
 
-	public void setIdCategorie(Long idCategorie) {
+	public void setIdCategorie(int idCategorie) {
 		this.idCategorie = idCategorie;
 	}
 
@@ -90,5 +89,4 @@ public class Categorie implements Serializable {
 		this.listeProduits = listeProduits;
 	}
 
-	
 }

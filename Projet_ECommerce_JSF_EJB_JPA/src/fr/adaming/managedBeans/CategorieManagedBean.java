@@ -89,6 +89,10 @@ public class CategorieManagedBean implements Serializable {
 		
 	}
 	
+	public String modifierCategorie(){
+		return null;
+	}
+	
 
 
 }
