@@ -60,6 +60,7 @@ public class CategorieManagedBean implements Serializable {
 	//les méthodes métiers
 	public String ajouterCategorie() {
 		this.categorie = categorieService.addCategorie(this.categorie);
+		System.out.println("qshshj######################");
 		
 		if (this.categorie!=null) {
 			//récupération de la nouvelle liste de la bd
@@ -70,9 +71,11 @@ public class CategorieManagedBean implements Serializable {
 			
 			return "accueilAdmin";
 		} else {
-			return "ajoutCat";
+			return "login";
 		}
 		
 	}
+	
+
 
 }

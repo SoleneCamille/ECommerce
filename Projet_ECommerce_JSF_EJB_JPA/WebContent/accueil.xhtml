@@ -17,8 +17,30 @@
 		<ui:include src="/templates/headerAccueil.xhtml"></ui:include>
 	</ui:insert>
 
+<h2>Catégories</h2>
 
-je suis dans l'accueil
+<p:dataTable var="cat" value="#{sessionScope.categoriesList}">
+		<p:column headerText="Id">
+			<h:outputText value="#{cat.id}" />
+		</p:column>
+
+		<p:column headerText="Id">
+			<h:outputText value="#{cat.idCategorie}" />
+		</p:column>
+
+		<p:column headerText="Nom">
+			<h:outputText value="#{cat.nomCategorie}" />
+		</p:column>
+
+		<p:column headerText="Description">
+			<h:outputText value="#{cat.description}" />
+		</p:column>
+
+		<p:column headerText="photo">
+			<h:outputText value="photo" />
+		</p:column>
+	</p:dataTable>
+
 
 
 </h:body>
