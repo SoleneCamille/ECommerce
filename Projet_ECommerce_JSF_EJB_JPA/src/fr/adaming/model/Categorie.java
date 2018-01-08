@@ -27,10 +27,6 @@ public class Categorie implements Serializable {
 	
 	@OneToMany(mappedBy="categorie", cascade=CascadeType.ALL)
 	private List<Produit> listeProduits;
-	
-	@ManyToOne
-	@JoinColumn(name="admin_id", referencedColumnName="id_a")
-	private Administrateur admin;
 
 	public Categorie() {
 		super();
@@ -89,17 +85,5 @@ public class Categorie implements Serializable {
 	public void setListeProduits(List<Produit> listeProduits) {
 		this.listeProduits = listeProduits;
 	}
-
-	public Administrateur getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Administrateur admin) {
-		this.admin = admin;
-	}
-	
-	
-	
-	
 
 }
