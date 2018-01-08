@@ -2,18 +2,23 @@ package fr.adaming.dao;
 
 import java.util.List;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import fr.adaming.model.Categorie;
 
-@Stateful
+@Stateless
 public class CategorieDaoImpl implements ICategorieDao {
 
 	@PersistenceContext(unitName = "PU_Projet") // pour l'injection d'un EM
 	EntityManager em;
+	
+	//setter pour l'injection d'indépendance
+	public void setEm(EntityManager em) {
+		this.em = em;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -28,6 +33,8 @@ public class CategorieDaoImpl implements ICategorieDao {
 		// envoi de la requete et récupération du résultat
 		return query.getResultList();
 	}
+
+	
 
 	@Override
 	public Categorie addCategorie(Categorie cat) {
