@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="Projet_ECommerce_JSF_EJB_JPA">
+	<persistence-unit name="PU_Projet" transaction-type="JTA">
+	
+	
+	<!-- définition de la datasource utilisée -->
+	<jta-data-source>java:/ma_ds2</jta-data-source>
+	
+	<!-- énumération des classes persistantes -->
+	<class>fr.adaming.model.Commande</class>
+	<class>fr.adaming.model.Categorie</class>
+	<class>fr.adaming.model.Client</class>
+	<class>fr.adaming.model.LignesCommande</class>
+	<class>fr.adaming.model.Produit</class>
+	
+	<!-- assignation des valeurs aux props de hibernate -->
+	<properties>
+	<property name="hibernate.hbm2ddl.auto" value="update"/>
+	<property name="hibernate.show_sql" value="true"/>
+	</properties>
 	</persistence-unit>
 </persistence>
