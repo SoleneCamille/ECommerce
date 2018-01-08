@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,12 +21,12 @@ public class Commande implements Serializable {
 	// attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id_comm")
 	private Long idCommande;
 	private Date dateCommande;
 
 	// transformation UML en java
-	 @OneToMany(mappedBy="commande",
-	 cascade=CascadeType.REMOVE,fetch=FetchType.LAZY)
+	 @OneToMany(mappedBy="commande", cascade=CascadeType.ALL)
 	 private List<LignesCommande> listeLigneCommande;
 
 	// constructeurs
@@ -62,5 +63,15 @@ public class Commande implements Serializable {
 	public void setDateCommande(Date dateCommande) {
 		this.dateCommande = dateCommande;
 	}
+
+	public List<LignesCommande> getListeLigneCommande() {
+		return listeLigneCommande;
+	}
+
+	public void setListeLigneCommande(List<LignesCommande> listeLigneCommande) {
+		this.listeLigneCommande = listeLigneCommande;
+	}
+	
+	
 
 }

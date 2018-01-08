@@ -27,14 +27,68 @@ public class LignesCommande implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="produit_id", referencedColumnName="id_p")
 	private Produit produit;
+	
+	@ManyToOne
+	@JoinColumn(name="commande_id", referencedColumnName="id_comm")
+	private Commande commande;
 
 	//déclaration des constructeurs
 	public LignesCommande() {
 		super();
 	}
-	
-	
-	
-	
 
+	public LignesCommande(int quantite, int prix) {
+		super();
+		this.quantite = quantite;
+		this.prix = prix;
+	}
+
+	public LignesCommande(int idLigne, int quantite, int prix) {
+		super();
+		this.idLigne = idLigne;
+		this.quantite = quantite;
+		this.prix = prix;
+	}
+
+	public int getIdLigne() {
+		return idLigne;
+	}
+
+	public void setIdLigne(int idLigne) {
+		this.idLigne = idLigne;
+	}
+
+	public int getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
+	}
+
+	public int getPrix() {
+		return prix;
+	}
+
+	public void setPrix(int prix) {
+		this.prix = prix;
+	}
+
+	public Produit getProduit() {
+		return produit;
+	}
+
+	public void setProduit(Produit produit) {
+		this.produit = produit;
+	}
+
+	public Commande getCommande() {
+		return commande;
+	}
+
+	public void setCommande(Commande commande) {
+		this.commande = commande;
+	}
+	
+	
 }

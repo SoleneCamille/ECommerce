@@ -1,6 +1,7 @@
 package fr.adaming.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,7 +37,7 @@ public class Produit implements Serializable{
 	private Categorie categorie;
 	
 	@OneToMany(mappedBy="produit", cascade=CascadeType.ALL)
-	private java.util.List<LignesCommande> lignesCommande;
+	private List<LignesCommande> lignesCommande;
 	
 	
 	//déclaration des constructeurs
@@ -148,11 +149,17 @@ public class Produit implements Serializable{
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
+
+
+	public List<LignesCommande> getLignesCommande() {
+		return lignesCommande;
+	}
+
+
+	public void setLignesCommande(List<LignesCommande> lignesCommande) {
+		this.lignesCommande = lignesCommande;
+	}
 	
-	
-	
-	
-	
-	
+		
 
 }
