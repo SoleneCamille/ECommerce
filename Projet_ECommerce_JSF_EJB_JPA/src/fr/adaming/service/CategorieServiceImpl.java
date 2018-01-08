@@ -32,7 +32,7 @@ public class CategorieServiceImpl implements ICategorieService {
 
 	@Override
 	public Categorie updateCategorie(Categorie cat) {
-		Categorie catFind = categorieDao.getCategorieById(cat.getIdCategorie());
+		Categorie catFind = categorieDao.getCategorieByIdOrName(cat);
 		if (catFind != null) {
 			return categorieDao.updateCategorie(cat);
 		} else {
@@ -46,9 +46,8 @@ public class CategorieServiceImpl implements ICategorieService {
 	}
 
 	@Override
-	public Categorie getCategorieById(int idCategorie) {
-		// TODO Auto-generated method stub
-		return null;
+	public Categorie getCategorieByIdOrName(Categorie cat) {
+		return categorieDao.getCategorieByIdOrName(cat);
 	}
 
 }

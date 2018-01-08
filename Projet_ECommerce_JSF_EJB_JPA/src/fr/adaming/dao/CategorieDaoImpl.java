@@ -65,7 +65,20 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public Categorie getCategorieByIdOrName(Categorie cat) {
-		Categorie catFind = em.find(Categorie.class, cat.getIdCategorie());		
+		//creation de la requete JPQL
+		String req = "select cat from Categorie as cat where cat.idCategorie=:pId "
+				+ "or cat.nomCategorie=:pNom";
+		
+		//creation du query
+		Query query = em.createQuery(req);
+		
+		//assignation des paramètres
+		query.setParameter("pId", cat.getIdCategorie());
+		query.setParameter("pNom", cat.getNomCategorie());
+		
+		//envoi de la requete et récupération du resultat
+		Categorie catFind = (Categorie) query.getSingleResult();
+			
 		return catFind;
 	}
 

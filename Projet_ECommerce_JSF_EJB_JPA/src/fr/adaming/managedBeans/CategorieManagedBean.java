@@ -127,5 +127,15 @@ public class CategorieManagedBean implements Serializable {
 		}
 		
 	}
+	
+	public String consulterCategorie() {
+		Categorie catFind = categorieService.getCategorieByIdOrName(this.categorie);
+		
+		if (catFind!=null) {
+			this.categorie = catFind;
+		}
+		
+		return "rechercheCat";
+	}
 
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page de consultation d'une categorie</title>
+</h:head>
+
+<h:body>
+
+	<!-- insertion du header -->
+	<ui:insert name="page">
+		<!-- inserer concretement le layout avec la balise ui:include -->
+		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
+	</ui:insert>
+
+	<h1 style="text-align: center; color: red">Formulaire de
+		consultation de categorie</h1>
+
+	<h2>Veuillez entrez l'ID ou le nom de la categorie que vous
+		souhaitez consulter</h2>
+
+	<center>
+		<h:form>
+			<h:panelGrid columns="2">
+			ID de la categorie : <h:inputText
+					value="#{catMB.categorie.idCategorie}" />
+			Nom de la categorie : <h:inputText
+					value="#{catMB.categorie.nomCategorie}" />
+			</h:panelGrid>
+			<p:commandButton value="Consulter"
+				action="#{catMB.consulterCategorie}" update="msgConsult" />
+		</h:form>
+		
+		
+	</center>
+	
+	<p:dataTable var="cat" value="#{catMB.categorie}">
+
+		<p:column headerText="Id">
+			<h:outputText value="#{cat.idCategorie}" />
+		</p:column>
+
+		<p:column headerText="Nom">
+			<h:outputText value="#{cat.nomCategorie}" />
+		</p:column>
+
+		<p:column headerText="Description">
+			<h:outputText value="#{cat.description}" />
+		</p:column>
+
+		<p:column headerText="photo">
+			<h:outputText value="photo" />
+		</p:column>
+	</p:dataTable>
+
+	<h:messages id="msgConsult" />
+
+
+
+</h:body>
+</html>
