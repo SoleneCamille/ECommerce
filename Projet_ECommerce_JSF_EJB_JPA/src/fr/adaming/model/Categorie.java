@@ -31,22 +31,18 @@ public class Categorie implements Serializable {
 		super();
 	}
 
-	public Categorie(String nomCategorie, byte[] photo, String description, List<Produit> listeProduits) {
+	public Categorie(String nomCategorie, byte[] photo, String description) {
 		super();
 		this.nomCategorie = nomCategorie;
 		this.photo = photo;
-		this.description = description;
-		this.listeProduits = listeProduits;
 	}
 
-	public Categorie(Long idCategorie, String nomCategorie, byte[] photo, String description,
-			List<Produit> listeProduits) {
+	public Categorie(Long idCategorie, String nomCategorie, byte[] photo, String description) {
 		super();
 		this.idCategorie = idCategorie;
 		this.nomCategorie = nomCategorie;
 		this.photo = photo;
 		this.description = description;
-		this.listeProduits = listeProduits;
 	}
 
 	public Long getIdCategorie() {
