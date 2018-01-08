@@ -20,11 +20,11 @@
 
 			<p:separator />
 
-			<p:commandButton value="Connexion" action="#{aMB.seConnecter}" />
+			<p:commandButton value="Connexion" action="#{aMB.seConnecter}" update="msg" />
 		</h:panelGrid>
 	</h:form>
 
-	<h:messages style="color:red" />
+	<h:messages id="msg" style="color:red" />
 
 </body>
 </html>
