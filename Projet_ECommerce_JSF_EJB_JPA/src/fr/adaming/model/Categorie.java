@@ -3,6 +3,8 @@ package fr.adaming.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,13 +18,13 @@ import javax.persistence.Table;
 public class Categorie implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_cat")
 	private Long idCategorie;
 	private String nomCategorie;
 	private byte[] photo;
 	private String description;
 	
-	@OneToMany
-	@JoinColumn(name="produit_id", referencedColumnName="id_p")
+	@OneToMany(mappedBy="categorie", cascade=CascadeType.ALL)
 	private List<Produit> listeProduits;
 
 	public Categorie() {
