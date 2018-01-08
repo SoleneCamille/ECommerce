@@ -61,7 +61,7 @@ this.produit = produitService.addProduit(this.produit);
 		
 		if (this.produit!=null) {
 			//récupération de la nouvelle liste de la bd
-			this.listeProduit = produitService.getProduitByCat(produit.getCategorie().getIdCategorie());
+			this.listeProduit = produitService.getProduitByCat(produit.getId_cat());
 			
 			//mettre à jour la liste dans la session
 			maSession.setAttribute("produitList", this.listeProduit);

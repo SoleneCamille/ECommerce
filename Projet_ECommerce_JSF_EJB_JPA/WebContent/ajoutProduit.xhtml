@@ -21,7 +21,7 @@
 		<h:panelGrid columns="2">
 		
 			 <p:outputLabel value="Id catégorie:" for="acSimple" />
-        <p:autoComplete id="acSimple" value="#{pMB.produit.categorie.idCategorie}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:autoComplete id="acSimple" value="#{pMB.produit.id_cat}" completeMethod="#{autoCompleteView.completeText}" />
  
         <p:outputLabel value="Description:" for="acMinLength" />
         <p:autoComplete id="acMinLength" value="#{pMB.produit.description}" completeMethod="#{autoCompleteView.completeText}" effect="fade" />
@@ -43,8 +43,7 @@
  
 
 
-	<p:commandButton value="Ajouter" action="#{pMB.ajouterProduit}"
-				update="@all" />
+	<h:commandButton value="Ajouter" action="#{pMB.ajouterProduit}"	update="@all" />
 	</h:panelGrid>
 	</h:form>
 </center>

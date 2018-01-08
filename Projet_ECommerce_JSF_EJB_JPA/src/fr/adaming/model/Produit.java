@@ -30,6 +30,7 @@ public class Produit implements Serializable {
 	private int quantite;
 	private boolean selectionne;
 	private byte[] photo;
+	private int id_cat;
 
 	// transformation de l'association simple de l'UML en java
 	@ManyToOne
@@ -45,7 +46,7 @@ public class Produit implements Serializable {
 	}
 
 	public Produit(String designation, String description, double prix, double remise, int quantite,
-			boolean selectionne, byte[] photo) {
+			boolean selectionne, byte[] photo, int id_cat) {
 		super();
 		this.designation = designation;
 		this.description = description;
@@ -53,10 +54,11 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.id_cat=id_cat;
 	}
 
 	public Produit(Long idProduit, String designation, String description, double prix, double remise, int quantite,
-			boolean selectionne, byte[] photo) {
+			boolean selectionne, byte[] photo,int id_cat) {
 		super();
 		this.idProduit = idProduit;
 		this.designation = designation;
@@ -65,7 +67,9 @@ public class Produit implements Serializable {
 		this.quantite = quantite;
 		this.selectionne = selectionne;
 		this.photo = photo;
+		this.id_cat=id_cat;
 	}
+	
 
 	// déclaration des getters et setters
 	public Long getIdProduit() {
@@ -148,4 +152,13 @@ public class Produit implements Serializable {
 		this.remise = remise;
 	}
 
+	public int getId_cat() {
+		return id_cat;
+	}
+
+	public void setId_cat(int id_cat) {
+		this.id_cat = id_cat;
+	}
+
+	
 }

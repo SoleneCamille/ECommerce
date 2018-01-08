@@ -17,7 +17,7 @@
 	</ui:insert>
 <h:form>
  <p:outputLabel value="Id catégorie:" for="acSimple" />
-        <p:autoComplete id="acSimple" value="#{pMB.produit.categorie.idCategorie}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:autoComplete id="acSimple" value="#{pMB.produit.id_cat}" completeMethod="#{autoCompleteView.completeText}" />
 
  <p:commandButton style="background-color:dodgerblue;backgroung-border:dodgerblue; width:150px;height:35px"
 				value="Afficher" action="#{pMB.afficherProduit}"  />
