@@ -68,7 +68,7 @@ public class CategorieManagedBean implements Serializable {
 			//mettre à jour la liste dans la session
 			maSession.setAttribute("categoriesList", this.listeCategories);
 			
-			return "success";
+			return "accueilAdmin";
 		} else {
 			return "ajoutCat";
 		}
