@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Page login</title>
 </head>
 <body>
+
+<h:form>
+    <h:panelGrid columns="2" cellpadding="5">
+        <h:outputText value="Basic: " />
+        <p:inputText id="idMail" value="#{aMB.admin.mail}" required=true/>
+         <h:outputText value="Basic: " />
+        <p:password id="idMdp" value="#{aMB.admin.mdp}" required=true/>
+        
+        <p:separator/>
+        
+         <p:commandButton  value="Connexion" action="#{aMB.seConnecter}"/>
+</h:panelGrid>
+</h:form>
+
+<h:messages style="color:red" />
 
 </body>
 </html>
