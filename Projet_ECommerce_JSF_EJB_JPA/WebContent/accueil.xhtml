@@ -17,26 +17,34 @@
 		<ui:include src="/templates/headerAccueil.xhtml"></ui:include>
 	</ui:insert>
 
-<h2>Catégories</h2>
+	<h:form>
+		<p:dataScroller value="#{sessionScope.categoriesList}" var="cat"
+			chunkSize="10">
+			<f:facet name="header">
+            Categories
+        </f:facet>
 
-<p:dataTable var="cat" value="#{sessionScope.categoriesList}">
+			<h:panelGrid columns="2" style="width:100%"
+				columnClasses="logo,detail">
+				<h:graphicImage value="#{cat.image}" />
 
-		<p:column headerText="Id">
-			<h:outputText value="#{cat.idCategorie}" />
-		</p:column>
+				<p:outputPanel>
+					<h:panelGrid columns="2" cellpadding="5">
+						<h:outputText value="Id:" />
+						<h:outputText value="#{cat.idCategorie}" style="font-weight: bold" />
 
-		<p:column headerText="Nom">
-			<h:outputText value="#{cat.nomCategorie}" />
-		</p:column>
+						<h:outputText value="Nom:" />
+						<h:outputText value="#{cat.nomCategorie}"
+							style="font-weight: bold" />
 
-		<p:column headerText="Description">
-			<h:outputText value="#{cat.description}" />
-		</p:column>
-
-		<p:column headerText="photo">
-			<h:outputText value="#{cat.photo}" />
-		</p:column>
-	</p:dataTable>
+						<h:outputText value="Description:" />
+						<h:outputText value="#{cat.description}" style="font-weight: bold" />
+						<p:separator/>
+					</h:panelGrid>
+				</p:outputPanel>
+			</h:panelGrid>
+		</p:dataScroller>
+	</h:form>
 
 
 </h:body>

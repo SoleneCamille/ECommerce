@@ -56,25 +56,4 @@ public class ClientManagedBean implements Serializable {
 		this.catService = catService;
 	}
 
-	// méthodes métiers
-	public String entrerSite() {
-		//récupérer la liste de catégories
-		List<Categorie> listOut = catService.getAllCategories();
-		this.listeCategories = new ArrayList<Categorie>();
-		
-		for(Categorie element:listOut) {
-			if (element.getPhoto()==null) {
-				element.setImage(null);
-			} else {
-				element.setImage("data:image/png;base64,"+Base64.encodeBase64String(element.getPhoto()));
-			}
-			this.listeCategories.add(element);
-		}
-
-		// ajouter la liste dans la session
-		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categoriesList", listeCategories);
-
-		return "accueil";
-	}
-
 }
