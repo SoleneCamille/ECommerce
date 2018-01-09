@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import fr.adaming.model.Categorie;
@@ -25,14 +26,13 @@ public class ClientManagedBean implements Serializable {
 	private Client client;
 	private List<Categorie> listeCategories;
 
-	private HttpSession maSession;
 
-	//constructeur vide
+	// constructeur vide
 	public ClientManagedBean() {
 		this.client = new Client();
 	}
 
-	//getters et setters
+	// getters et setters
 	public Client getClient() {
 		return client;
 	}
@@ -52,12 +52,17 @@ public class ClientManagedBean implements Serializable {
 	public void setCatService(ICategorieService catService) {
 		this.catService = catService;
 	}
-	
-	//méthodes métiers
-	public String entrerSite(){
-		return null;
+
+	// méthodes métiers
+	public String entrerSite() {
+		System.out.println("--------------------------------------------------------------------------- Coucou");
+		//récupérer la liste de catégories
+		listeCategories = catService.getAllCategories();
+
+		// ajouter la liste dans la session
+		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("categoriesList", listeCategories);
+
+		return "accueil";
 	}
-	
-	
 
 }
