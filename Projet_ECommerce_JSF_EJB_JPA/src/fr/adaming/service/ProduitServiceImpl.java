@@ -5,7 +5,9 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
+import fr.adaming.dao.ICategorieDao;
 import fr.adaming.dao.IProduitDao;
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Stateful
@@ -13,6 +15,9 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@EJB
 	private IProduitDao produitDao;
+
+	@EJB
+	private ICategorieDao catDao;
 	
 	//setter produitDao	
 	
@@ -24,8 +29,18 @@ public class ProduitServiceImpl implements IProduitService {
 	
 	//methodes
 
+	public void setCatDao(ICategorieDao catDao) {
+		this.catDao = catDao;
+	}
+
+
+
 	@Override
-	public Produit addProduit(Produit p) {
+	public Produit addProduit(Produit p, Categorie c) {
+		
+		Categorie cOut=catDao.getCategorieByIdOrName(c);
+		p.setCategorie(cOut);
+		System.out.println("------ "+c.getIdCategorie());
 	return produitDao.addProduit(p);
 	}
 

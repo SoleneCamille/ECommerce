@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 
@@ -11,7 +12,7 @@ import fr.adaming.model.Produit;
 public interface IProduitService {
 	
 	
-	public Produit addProduit(Produit p);
+	public Produit addProduit(Produit p, Categorie c);
 	public int deleteProduit(int id);
 	public Produit updateProduit (Produit p);
 	public Produit getProduitbyId(int id);

@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 
 @Stateless
@@ -15,15 +16,20 @@ public class ProduitDaoImpl implements IProduitDao {
 	@PersistenceContext(unitName = "PU_Projet")
 	EntityManager em;
 
+	private List<Produit>listeProduits;
 	// setters pour l'injection de l'indépendance
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
+	
+	
 
 	@Override
 	public Produit addProduit(Produit p) {
-		em.persist(p);
+		
+		em.merge(p);
 		return p;
+		
 	}
 
 	@Override
@@ -65,13 +71,14 @@ public class ProduitDaoImpl implements IProduitDao {
 	@Override
 	public List<Produit> getProduitByCat(int id) {
 		// construire la requete JPQL
-		String req = "select p from Produit as p WHERE cat_id=:pIdC";
+		String req = "select p from Produit as p WHERE p.categorie.idCategorie=:pIdC";
 
 		// créer un query
 		Query query = em.createQuery(req);
 		query.setParameter("pIdC", id);
 
 		// envoi de la requete et récupération du résultat
+		System.out.println(query.getResultList());
 		return query.getResultList();
 	}
 

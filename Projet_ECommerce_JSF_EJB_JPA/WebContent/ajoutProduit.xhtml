@@ -21,7 +21,7 @@
 		<h:panelGrid columns="2">
 		
 			 <p:outputLabel value="Id catégorie:" for="acSimple" />
-        <p:autoComplete id="acSimple" value="#{pMB.produit.id_cat}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:inputText id="acSimple" value="#{pMB.categorie.idCategorie}" />
  
         <p:outputLabel value="Description:" for="acMinLength" />
         <p:autoComplete id="acMinLength" value="#{pMB.produit.description}" completeMethod="#{autoCompleteView.completeText}" effect="fade" />
