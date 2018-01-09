@@ -131,8 +131,12 @@ public class CategorieManagedBean implements Serializable {
 	public String consulterCategorie() {
 		Categorie catFind = categorieService.getCategorieByIdOrName(this.categorie);
 		
+		
 		if (catFind!=null) {
 			this.categorie = catFind;
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
 		}
 		
 		return "rechercheCat";
