@@ -15,16 +15,26 @@
 		<!-- insérer concrètement le layout avec la balise ui:include -->
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
-<h:form>
- <p:outputLabel value="Id catégorie:" for="acSimple" />
-        <p:autoComplete id="acSimple" value="#{pMB.categorie.idCategorie}" completeMethod="#{autoCompleteView.completeText}" />
+	<h:form>
+		<p:outputLabel value="Id produit:" for="acSimple" />
+		<p:autoComplete id="acSimple" value="#{pMB.produit.idProduit}"
+			completeMethod="#{autoCompleteView.completeText}" />
 
- <h:commandButton style="background-color:dodgerblue;backgroung-border:dodgerblue; width:150px;height:35px"
-				value="Afficher" action="#{pMB.afficherProduit}"  />
-</h:form>
+		<h:commandButton
+			style="background-color:dodgerblue;backgroung-border:dodgerblue; width:150px;height:35px"
+			value="Afficher" action="#{pMB.afficherProduit}" />
 
-<h2>Liste des produits</h2>
-<p:dataTable var="pdt" value="#{sessionScope.produitList}">
+		<p:outputLabel value="Nom produit:" for="acS" />
+		<p:autoComplete id="acS" value="#{pMB.produit.designation}"
+			completeMethod="#{autoCompleteView.completeText}" />
+
+		<h:commandButton
+			style="background-color:dodgerblue;backgroung-border:dodgerblue; width:150px;height:35px"
+			value="Afficher" action="#{pMB.afficherProduit}" />
+	</h:form>
+
+	<h2>Liste des produits</h2>
+	<p:dataTable var="pdt" value="#{sessionScope.produit}" rendered="#{pMB.indice}">
 
 		<p:column headerText="Id">
 			<h:outputText value="#{pdt.idProduit}" />
@@ -33,18 +43,18 @@
 		<p:column headerText="Désignation">
 			<h:outputText value="#{pdt.designation}" />
 		</p:column>
+		<p:column headerText="Description">
+			<h:outputText value="#{pdt.description}" />
+		</p:column>
 
 		<p:column headerText="Prix">
 			<h:outputText value="#{pdt.prix}" />
 		</p:column>
-		
+
 		<p:column headerText="Remise">
 			<h:outputText value="#{pdt.remise}" />
 		</p:column>
-		
-		<p:column headerText="Prix après remise">
-			<h:outputText value="#{pMB.calculPrix}" />
-		</p:column>
+
 
 		<p:column headerText="photo">
 			<h:outputText value="photo" />

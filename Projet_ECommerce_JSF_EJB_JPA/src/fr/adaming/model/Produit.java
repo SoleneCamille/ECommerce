@@ -22,7 +22,7 @@ public class Produit implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_p")
-	private Long idProduit;
+	private int idProduit;
 	private String designation;
 	private String description;
 	private double prix;
@@ -56,7 +56,7 @@ public class Produit implements Serializable {
 		
 	}
 
-	public Produit(Long idProduit, String designation, String description, double prix, double remise, int quantite,
+	public Produit(int idProduit, String designation, String description, double prix, double remise, int quantite,
 			boolean selectionne, byte[] photo) {
 		super();
 		this.idProduit = idProduit;
@@ -71,11 +71,11 @@ public class Produit implements Serializable {
 	
 
 	// déclaration des getters et setters
-	public Long getIdProduit() {
+	public int getIdProduit() {
 		return idProduit;
 	}
 
-	public void setIdProduit(Long idProduit) {
+	public void setIdProduit(int idProduit) {
 		this.idProduit = idProduit;
 	}
 

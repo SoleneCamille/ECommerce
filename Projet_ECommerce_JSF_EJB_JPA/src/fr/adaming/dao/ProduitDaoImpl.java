@@ -56,9 +56,23 @@ public class ProduitDaoImpl implements IProduitDao {
 	}
 
 	@Override
-	public Produit getProduitbyId(int id) {
-		Produit pFind = em.find(Produit.class, id);
-		return pFind;
+	public Produit getProduitbyIdorName(Produit p) {
+		
+		//creation de la requete JPQL
+				String req = "select p from Produit as p where p.idProduit=:pId "
+						+ "or p.designation=:pNom";
+				
+				//creation du query
+				Query query = em.createQuery(req);
+				
+				//assignation des paramètres
+				query.setParameter("pId", p.getIdProduit());
+				query.setParameter("pNom", p.getDesignation());
+				
+				//envoi de la requete et récupération du resultat
+				Produit pFind = (Produit) query.getSingleResult();
+					
+				return pFind;
 
 	}
 

@@ -28,6 +28,8 @@ public class ProduitManagedBean {
 	private Categorie categorie;
 
 	private HttpSession maSession;
+	
+	private boolean indice=false;
 
 	// constructeur
 
@@ -69,6 +71,16 @@ public class ProduitManagedBean {
 
 
 	
+	public boolean isIndice() {
+		return indice;
+	}
+
+
+	public void setIndice(boolean indice) {
+		this.indice = indice;
+	}
+
+
 	public Categorie getCategorie() {
 		return categorie;
 	}
@@ -103,14 +115,16 @@ public class ProduitManagedBean {
 	}
 	
 	public String afficherProduit(){
-		this.listeProduit=produitService.getProduitByCat(categorie.getIdCategorie());
+		this.produit=produitService.getProduitbyIdorName(this.produit);
 		
-		if(this.listeProduit!=null){
-		maSession.setAttribute("produitList", this.listeProduit);
+		if(this.produit!=null){
+		maSession.setAttribute("produit", this.produit);
+		this.indice=true;
 		
 		return "afficheProduit";}
 		else{
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Liste vide"));
+			this.indice=false;
 			return "afficheProduit";
 		}
 	}

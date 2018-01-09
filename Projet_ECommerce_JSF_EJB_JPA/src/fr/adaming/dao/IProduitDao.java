@@ -13,7 +13,7 @@ public interface IProduitDao {
 	public Produit addProduit(Produit p);
 	public int deleteProduit(int id);
 	public Produit updateProduit (Produit p);
-	public Produit getProduitbyId(int id);
+	public Produit getProduitbyIdorName(Produit p);
 	public Produit getProduitByName(String name);
 	public List<Produit>getProduitByCat(int id);
 
