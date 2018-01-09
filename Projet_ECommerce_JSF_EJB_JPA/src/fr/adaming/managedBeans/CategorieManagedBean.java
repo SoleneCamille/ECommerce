@@ -235,7 +235,7 @@ System.out.println(catFind);
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
 		}
 
-		return "rechercheCat2";
+		return "rechercheCat";
 	}
 
 	// méthode pour transformer une image en table de byte
