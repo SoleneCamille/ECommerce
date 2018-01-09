@@ -21,7 +21,9 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "catMB")
 @ViewScoped
@@ -31,11 +33,17 @@ public class CategorieManagedBean implements Serializable {
 	@EJB
 	private ICategorieService categorieService;
 
+	@EJB
+	private IProduitService produitService;
+
 	private Categorie categorie;
 	private List<Categorie> listeCategories;
+	private List<Produit> listeProduits;
 
 	private HttpSession maSession;
 	private String image;
+
+	private boolean indices;
 
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
@@ -76,6 +84,26 @@ public class CategorieManagedBean implements Serializable {
 		this.image = image;
 	}
 
+	public List<Produit> getListeProduits() {
+		return listeProduits;
+	}
+
+	public void setListeProduits(List<Produit> listeProduits) {
+		this.listeProduits = listeProduits;
+	}
+
+	public boolean isIndices() {
+		return indices;
+	}
+
+	public void setIndices(boolean indices) {
+		this.indices = indices;
+	}
+
+	public void setProduitService(IProduitService produitService) {
+		this.produitService = produitService;
+	}
+
 	// les méthodes métiers
 	public String entrerSite() {
 		// récupérer la liste de catégories
@@ -98,9 +126,8 @@ public class CategorieManagedBean implements Serializable {
 	}
 
 	public String ajouterCategorie() {
-		System.out.println("------------   aprers ajout" + categorie.getPhoto().length);
 		this.categorie = categorieService.addCategorie(this.categorie);
-		
+
 		if (this.categorie != null) {
 			// récupération de la nouvelle liste de la bd
 			List<Categorie> listOut = categorieService.getAllCategories();
@@ -123,7 +150,7 @@ public class CategorieManagedBean implements Serializable {
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'a pas pu être ajoutée !", null));
 			return "login";
 		}
-		
+
 	}
 
 	public String modifierCategorie() {
@@ -169,7 +196,21 @@ public class CategorieManagedBean implements Serializable {
 
 		if (catFind != null) {
 			this.categorie = catFind;
+			this.indices = true;
+
+			List<Produit> liste = produitService.getProduitByCat(this.categorie);
+
+			if (liste != null) {
+				this.listeProduits = liste;
+				this.indices = true;
+
+			} else {
+				this.indices=false;
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pas de produit dans cette catégorie", null));
+			}
 		} else {
+			this.indices=false;
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
 		}
@@ -180,13 +221,11 @@ public class CategorieManagedBean implements Serializable {
 	// méthode pour transformer une image en table de byte
 	public void upload(FileUploadEvent event) {
 		UploadedFile uploadedFile = event.getFile();
-		System.out.println("------------   " + uploadedFile.getFileName());
 		// récupérer le contenu de l'image en byte
 		byte[] contents = uploadedFile.getContents();
 
 		// stocker le contenu dans l'attribut photo de categorie
 		categorie.setPhoto(contents);
-		System.out.println("------------   " + categorie.getPhoto().length);
 		// transforme byteArray en string (format base64)
 		this.image = "data:image/png;base64," + Base64.encodeBase64String(contents);
 	}
