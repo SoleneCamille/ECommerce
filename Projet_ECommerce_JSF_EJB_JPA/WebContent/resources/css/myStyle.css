@@ -1,5 +1,5 @@
 #entree {
-	background-image: url("#{ resource [ 'images:fondEntree.jpg' ]}");
+	background-image: url("#{ resource [ 'images:fondEntree.gif' ]}");
 	background-repeat: no-repeat;
 	background-size: cover;
 }
@@ -8,6 +8,6 @@
 	background-color : azure;
 	border-style : groove;
 	border-color : black;
-	margin : 200px;
+	margin : 300px;
 	padding-bottom :10px;
 }
