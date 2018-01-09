@@ -9,11 +9,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "categories")
@@ -26,6 +25,9 @@ public class Categorie implements Serializable {
 	@Lob
 	private byte[] photo;
 	private String description;
+	
+	@Transient
+	private String image;
 
 	@OneToMany(mappedBy = "categorie", cascade = CascadeType.ALL)
 	private List<Produit> listeProduits;
@@ -88,5 +90,15 @@ public class Categorie implements Serializable {
 	public void setListeProduits(List<Produit> listeProduits) {
 		this.listeProduits = listeProduits;
 	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	
 
 }

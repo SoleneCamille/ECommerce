@@ -28,12 +28,13 @@
 					value="#{catMB.categorie.nomCategorie}" />
 			Description : <h:inputText value="#{catMB.categorie.description}" />
 			</h:panelGrid>
+			Photo : <p:fileUpload fileUploadListener="#{catMB.upLoad}"
+				mode="advanced" auto="true" update="idImg" />
+				<h:graphicImage id="idImg" value="#{catMB.image}"/>
 			<p:commandButton value="Ajouter" action="#{catMB.ajouterCategorie}"
 				update="msgAj" />
 
-			<p:fileUpload fileUploadListener="#{catMB.upLoad}"
-				mode="advanced" auto="true" update="idImg" />
-				<h:graphicImage id="idImg" value="#{catMB.image}"/>
+			
 
 		</h:form>
 	</center>

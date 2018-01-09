@@ -14,6 +14,10 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import org.apache.commons.codec.binary.Base64;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
+
 import fr.adaming.model.Categorie;
 import fr.adaming.service.ICategorieService;
 
@@ -142,4 +146,19 @@ public class CategorieManagedBean implements Serializable {
 		return "rechercheCat";
 	}
 
+	
+	
+	//méthode pour transformer une image en table de byte
+	public void upload(FileUploadEvent event) {
+		UploadedFile uploadedFile = event.getFile();
+		
+		//récupérer le contenu de l'image en byte
+		byte[] contents = uploadedFile.getContents();
+		
+		//stocker le contenu dans l'attribut photo de categorie
+		categorie.setPhoto(contents);
+		
+		//transforme byteArray en string (format base64)
+		String image="data:image/png;base64,"+Base64.encodeBase64String(contents);
+	}
 }
