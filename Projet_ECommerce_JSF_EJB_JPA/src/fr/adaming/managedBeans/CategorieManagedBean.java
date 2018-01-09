@@ -1,3 +1,4 @@
+
 package fr.adaming.managedBeans;
 
 import java.io.File;
@@ -11,6 +12,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
@@ -25,12 +27,13 @@ import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "catMB")
-@RequestScoped
+@ViewScoped
 public class CategorieManagedBean implements Serializable {
 
 	// transformation de l'association UML en java
 	@EJB
 	private ICategorieService categorieService;
+
 	@EJB
 	private IProduitService produitService;
 
@@ -74,24 +77,12 @@ public class CategorieManagedBean implements Serializable {
 		this.categorieService = categorieService;
 	}
 
-	public void setProduitService(IProduitService produitService) {
-		this.produitService = produitService;
-	}
-
 	public String getImage() {
 		return image;
 	}
 
 	public void setImage(String image) {
 		this.image = image;
-	}
-
-	public boolean isIndices() {
-		return indices;
-	}
-
-	public void setIndices(boolean indices) {
-		this.indices = indices;
 	}
 
 	public List<Produit> getListeProduits() {
@@ -102,12 +93,24 @@ public class CategorieManagedBean implements Serializable {
 		this.listeProduits = listeProduits;
 	}
 
-	// les méthodes métiers
+	public boolean isIndices() {
+		return indices;
+	}
 
+	public void setIndices(boolean indices) {
+		this.indices = indices;
+	}
+
+	public void setProduitService(IProduitService produitService) {
+		this.produitService = produitService;
+	}
+
+	// les méthodes métiers
 	public String entrerSite() {
-		// récuperer la liste des categories
+		// récupérer la liste de catégories
 		List<Categorie> listOut = categorieService.getAllCategories();
 		this.listeCategories = new ArrayList<Categorie>();
+
 		for (Categorie element : listOut) {
 			if (element.getPhoto() == null) {
 				element.setImage(null);
@@ -115,12 +118,12 @@ public class CategorieManagedBean implements Serializable {
 				element.setImage("data:image/png;base64," + Base64.encodeBase64String(element.getPhoto()));
 			}
 			this.listeCategories.add(element);
-
 		}
-		// ajouter la liste dans la session
-		maSession.setAttribute("categoriesListe", listeCategories);
-		return "accueil";
 
+		// ajouter la liste dans la session
+		maSession.setAttribute("categoriesList", listeCategories);
+
+		return "accueil";
 	}
 
 	public String ajouterCategorie() {
@@ -130,11 +133,12 @@ public class CategorieManagedBean implements Serializable {
 			// récupération de la nouvelle liste de la bd
 			List<Categorie> listOut = categorieService.getAllCategories();
 			this.listeCategories = new ArrayList<Categorie>();
+
 			for (Categorie element : listOut) {
 				if (element.getPhoto() == null) {
 					element.setImage(null);
 				} else {
-					element.setImage("data:image/png;base64," + Base64.encodeBase64String(element.getPhoto()));
+					element.setImage("data:image/jpeg;base64," + Base64.encodeBase64String(element.getPhoto()));
 				}
 				this.listeCategories.add(element);
 			}
@@ -201,17 +205,13 @@ public class CategorieManagedBean implements Serializable {
 				this.listeProduits = liste;
 				this.indices = true;
 
-			}
-
-			else {
-				this.indices = false;
+			} else {
+				this.indices=false;
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("Pas de produit dans cette catégorie"));
-
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pas de produit dans cette catégorie", null));
 			}
-
 		} else {
-			this.indices = false;
+			this.indices=false;
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
 		}
@@ -222,15 +222,12 @@ public class CategorieManagedBean implements Serializable {
 	// méthode pour transformer une image en table de byte
 	public void upload(FileUploadEvent event) {
 		UploadedFile uploadedFile = event.getFile();
-
 		// récupérer le contenu de l'image en byte
 		byte[] contents = uploadedFile.getContents();
 
 		// stocker le contenu dans l'attribut photo de categorie
 		categorie.setPhoto(contents);
-
 		// transforme byteArray en string (format base64)
 		this.image = "data:image/png;base64," + Base64.encodeBase64String(contents);
 	}
-
 }
