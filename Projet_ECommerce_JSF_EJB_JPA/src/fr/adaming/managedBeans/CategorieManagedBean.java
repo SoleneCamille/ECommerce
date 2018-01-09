@@ -30,6 +30,7 @@ import fr.adaming.service.IProduitService;
 @ViewScoped
 public class CategorieManagedBean implements Serializable {
 
+
 	// transformation de l'association UML en java
 	@EJB
 	private ICategorieService categorieService;
@@ -45,6 +46,7 @@ public class CategorieManagedBean implements Serializable {
 	private String image;
 
 	private boolean indices;
+	private boolean indiceProduit;
 
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
@@ -103,6 +105,16 @@ public class CategorieManagedBean implements Serializable {
 
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
+	}
+	
+	
+
+	public boolean isIndiceProduit() {
+		return indiceProduit;
+	}
+
+	public void setIndiceProduit(boolean indiceProduit) {
+		this.indiceProduit = indiceProduit;
 	}
 
 	// les méthodes métiers
@@ -194,6 +206,9 @@ public class CategorieManagedBean implements Serializable {
 
 	public String consulterCategorie() {
 		Categorie catFind = categorieService.getCategorieByIdOrName(this.categorie);
+System.out.println("#########################");
+System.out.println(catFind);
+
 
 		if (catFind != null) {
 			this.categorie = catFind;
@@ -203,15 +218,19 @@ public class CategorieManagedBean implements Serializable {
 
 			if (liste != null) {
 				this.listeProduits = liste;
-				this.indices = true;
+				this.indiceProduit = true;
 
-			} else {
-				this.indices=false;
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pas de produit dans cette catégorie", null));
 			}
+
+			else {
+				this.indiceProduit = false;
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Pas de produit dans cette catégorie"));
+
+			}
+
 		} else {
-			this.indices=false;
+			this.indices = false;
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
 		}
