@@ -19,69 +19,42 @@
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
 
-	<h1 style="text-align: center; color: red">
-		consultation de categorie</h1>
+	<div class="cadre">
+		<h1 style="text-align: center; color: black">Consultation de
+			categorie</h1>
+	</div>
 
 
 
 	<center>
-	
-	
-	<p:dataTable var="cat" value="#{catMB.categorie}"  >
 
-		<p:column headerText="Id" >
-			<h:outputText value="#{cat.idCategorie}" />
-		</p:column>
 
-		<p:column headerText="Nom">
-			<h:outputText value="#{cat.nomCategorie}" />
-		</p:column>
+		<p:dataTable var="cat" value="#{sessionScope.categorie}">
 
-		<p:column headerText="Description">
-			<h:outputText value="#{cat.description}" />
-		</p:column>
+			<p:column headerText="Id">
+				<h:outputText value="#{cat.idCategorie}" />
+			</p:column>
 
-		<p:column headerText="photo">
-			<h:outputText value="photo" />
-		</p:column>
-	</p:dataTable>
-	
-	
-	
-	<p:dataTable var="pdt" value="#{catMB.listeProduits}"  >
+			<p:column headerText="Nom">
+				<h:outputText value="#{cat.nomCategorie}" />
+			</p:column>
 
-		<p:column headerText="Id">
-			<h:outputText value="#{pdt.idProduit}" />
-		</p:column>
+			<p:column headerText="Description">
+				<h:outputText value="#{cat.description}" />
+			</p:column>
 
-		<p:column headerText="Désignation">
-			<h:outputText value="#{pdt.designation}" />
-		</p:column>
+			<p:column headerText="photo">
+				<p:graphicImage value="#{cat.image}"/>
+			</p:column>
+		</p:dataTable>
 
-		<p:column headerText="Description">
-			<h:outputText value="#{pdt.description}" />
-		</p:column>
 
-		<p:column headerText="photo">
-			<h:outputText value="photo" />
-		</p:column>
-		
-		<p:column headerText="Prix">
-			<h:outputText value="#{pdt.prix}" />
-		</p:column>
-		
-			<p:column headerText="Remise">
-			<h:outputText value="#{pdt.remise}" />
-		</p:column>
-		<p:column headerText="Stock">
-			<h:outputText value="#{pdt.quantite}" />
-		</p:column>
-		
-	</p:dataTable>
 
-	<h:messages id="msgConsult" />
 
-</center>
+
+		<h:messages id="msgConsult" />
+
+	</center>
 
 </h:body>
 </html>

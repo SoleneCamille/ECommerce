@@ -30,7 +30,6 @@ import fr.adaming.service.IProduitService;
 @ViewScoped
 public class CategorieManagedBean implements Serializable {
 
-
 	// transformation de l'association UML en java
 	@EJB
 	private ICategorieService categorieService;
@@ -106,8 +105,6 @@ public class CategorieManagedBean implements Serializable {
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
 	}
-	
-	
 
 	public boolean isIndiceProduit() {
 		return indiceProduit;
@@ -206,36 +203,42 @@ public class CategorieManagedBean implements Serializable {
 
 	public String consulterCategorie() {
 		Categorie catFind = categorieService.getCategorieByIdOrName(this.categorie);
-System.out.println("#########################");
-System.out.println(catFind);
-
 
 		if (catFind != null) {
+				if (catFind.getPhoto() == null) {
+					catFind.setImage(null);
+				} else {
+					catFind.setImage("data:image/png;base64," + Base64.encodeBase64String(catFind.getPhoto()));
+				}
+			
 			this.categorie = catFind;
-			this.indices = true;
 
-			List<Produit> liste = produitService.getProduitByCat(this.categorie);
-
-			if (liste != null) {
-				this.listeProduits = liste;
-				this.indiceProduit = true;
-
-			}
-
-			else {
-				this.indiceProduit = false;
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage("Pas de produit dans cette catégorie"));
-
-			}
+			//ajout de la catégorie dans la session
+			maSession.setAttribute("categorie", this.categorie);
+			
+			
+//			List<Produit> liste = produitService.getProduitByCat(this.categorie);
+//
+//			if (liste != null) {
+//				this.listeProduits = liste;
+//				this.indiceProduit = true;
+//
+//			} else {
+//				this.indiceProduit = false;
+//				FacesContext.getCurrentInstance().addMessage(null,
+//						new FacesMessage("Pas de produit dans cette catégorie"));
+//
+//			}
 
 		} else {
 			this.indices = false;
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
+			
 		}
+		
+		return "rechercheCat2";
 
-		return "rechercheCat";
 	}
 
 	// méthode pour transformer une image en table de byte

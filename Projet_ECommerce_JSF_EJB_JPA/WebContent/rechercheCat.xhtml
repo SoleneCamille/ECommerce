@@ -41,106 +41,10 @@
 		</h:form>
 		
 		</div>
-		
-		<p:spacer height="20" />
-	
-	
-	<p:dataTable var="cat" value="#{catMB.categorie}" rendered="#{catMB.indices}" >
 
-		<p:column headerText="Id" >
-			<h:outputText value="#{cat.idCategorie}" />
-		</p:column>
-
-		<p:column headerText="Nom">
-			<h:outputText value="#{cat.nomCategorie}" />
-		</p:column>
-
-		<p:column headerText="Description">
-			<h:outputText value="#{cat.description}" />
-		</p:column>
-
-		<p:column headerText="photo">
-			<h:outputText value="photo" />
-		</p:column>
-	</p:dataTable>
 	
 	
 	
-	<p:dataTable var="pdt" value="#{catMB.listeProduits}" rendered="#{catMB.indiceProduit}" >
-
-		<p:column headerText="Id">
-			<h:outputText value="#{pdt.idProduit}" />
-		</p:column>
-
-		<p:column headerText="Désignation">
-			<h:outputText value="#{pdt.designation}" />
-		</p:column>
-
-		<p:column headerText="Description">
-			<h:outputText value="#{pdt.description}" />
-		</p:column>
-
-		<p:column headerText="photo">
-			<h:outputText value="photo" />
-		</p:column>
-		
-		<p:column headerText="Prix">
-			<h:outputText value="#{pdt.prix}" />
-		</p:column>
-		
-			<p:column headerText="Remise">
-			<h:outputText value="#{pdt.remise}" />
-		</p:column>
-		<p:column headerText="Stock">
-			<h:outputText value="#{pdt.quantite}" />
-		</p:column>
-		
-	</p:dataTable>
-
-	<h:messages id="msgConsult" />
-
-<h:form>
-    <p:dataTable var="cat" value="#{catMB.categorie}">
-        <f:facet name="header">
-            Expand rows to see detailed information
-        </f:facet>
-        <p:column style="width:16px">
-            <p:rowToggler />
-        </p:column>
-        <p:column headerText="Id">
-            <h:outputText value="#{cat.idCategorie}" />
-        </p:column>
-        <p:column headerText="Nom">
-            <h:outputText value="#{cat.nomCategorie}" />
-        </p:column>
-         <p:column headerText="Description">
-            <h:outputText value="#{cat.description}" />
-        </p:column>
-         <p:column headerText="Photo">
-            <h:outputText value="#{cat.photo}" />
-        </p:column>
- 
-        <p:rowExpansion>
-            <p:panelGrid  columns="2" columnClasses="label,value" style="width:300px">
-                <f:facet name="header">
-                    <p:graphicImage name=""/> 
-                </f:facet>
- 
-                <h:outputText value="Id:" />
-                <h:outputText value="#{cat.idCategorie}" />
- 
-                <h:outputText value="Nom" />
-                <h:outputText value="#{cat.nomCategorie}" />
- 
-                <h:outputText value="Description:" />
-                <h:outputText value="#{cat.description}" />
- 
-               
-            </p:panelGrid>
-        </p:rowExpansion>
-    </p:dataTable>
-</h:form>
-
 
 </h:body>
 </html>
