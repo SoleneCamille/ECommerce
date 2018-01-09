@@ -15,6 +15,6 @@ public interface IProduitDao {
 	public Produit updateProduit (Produit p);
 	public Produit getProduitbyIdorName(Produit p);
 	public Produit getProduitByName(String name);
-	public List<Produit>getProduitByCat(int id);
+	public List<Produit>getProduitByCat(Categorie c);
 
 }

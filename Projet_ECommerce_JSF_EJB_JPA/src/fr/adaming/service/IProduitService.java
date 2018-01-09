@@ -17,6 +17,6 @@ public interface IProduitService {
 	public Produit updateProduit (Produit p, Categorie c);
 	public Produit getProduitbyIdorName(Produit p);
 	public Produit getProduitByName(String name);
-	public List<Produit> getProduitByCat(int id);
+	public List<Produit> getProduitByCat(Categorie c);
 
 }

@@ -82,16 +82,18 @@ public class ProduitDaoImpl implements IProduitDao {
 		return pFind;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Produit> getProduitByCat(int id) {
+	public List<Produit> getProduitByCat(Categorie c) {
 		// construire la requete JPQL
 		String req = "select p from Produit as p WHERE p.categorie.idCategorie=:pIdC";
 
 		// créer un query
 		Query query = em.createQuery(req);
-		query.setParameter("pIdC", id);
+		query.setParameter("pIdC", c.getIdCategorie());
 
 		// envoi de la requete et récupération du résultat
+		System.out.println("############################");
 		System.out.println(query.getResultList());
 		return query.getResultList();
 	}

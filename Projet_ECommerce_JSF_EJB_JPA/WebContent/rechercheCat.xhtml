@@ -26,22 +26,24 @@
 
 	<center>
 		<h:form>
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="2" >
 			ID de la categorie : <h:inputText
 					value="#{catMB.categorie.idCategorie}" />
 			Nom de la categorie : <h:inputText
 					value="#{catMB.categorie.nomCategorie}" />
 			</h:panelGrid>
-			<p:commandButton value="Consulter"
-				action="#{catMB.consulterCategorie}" update="@all" />
+			<p:spacer height="10" />
+			<p:commandButton value="Consulter Catégorie"
+				action="#{catMB.consulterCategorie}" update="@all" style="background-color:dodgerblue;backgroung-border:dodgerblue"/>
+				
 		</h:form>
 		
-		
+		<p:spacer height="20" />
 	
 	
-	<p:dataTable var="cat" value="#{catMB.categorie}">
+	<p:dataTable var="cat" value="#{catMB.categorie}" rendered="#{catMB.indices}" >
 
-		<p:column headerText="Id">
+		<p:column headerText="Id" >
 			<h:outputText value="#{cat.idCategorie}" />
 		</p:column>
 
@@ -60,7 +62,7 @@
 	
 	
 	
-	<p:dataTable var="pdt" value="#{pMB.listeProduit}">
+	<p:dataTable var="pdt" value="#{catMB.listeProduits}" rendered="#{catMB.indices}" >
 
 		<p:column headerText="Id">
 			<h:outputText value="#{pdt.idProduit}" />

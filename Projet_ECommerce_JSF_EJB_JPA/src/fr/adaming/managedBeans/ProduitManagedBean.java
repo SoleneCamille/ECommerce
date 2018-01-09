@@ -98,7 +98,7 @@ public class ProduitManagedBean {
 		
 		if (p!=null) {
 			//récupération de la nouvelle liste de la bd
-			this.listeProduit = produitService.getProduitByCat(this.categorie.getIdCategorie());
+			this.listeProduit = produitService.getProduitByCat(this.categorie);
 			
 			//mettre à jour la liste dans la session
 			maSession.setAttribute("produitList", this.listeProduit);
@@ -153,19 +153,7 @@ public class ProduitManagedBean {
 		}
 	}
 	
-	public String  afficherProduitByCat(){
-		List<Produit>liste=produitService.getProduitByCat(this.categorie.getIdCategorie());
-		if(liste!=null){
-			this.listeProduit=liste;
-			return "rechercheCat";
-			
-		}
-		else{
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pas de produit dans cette catégorie"));
-			return "rechercheCat";
-			
-		}
-	}
+	
 	
 	
 	

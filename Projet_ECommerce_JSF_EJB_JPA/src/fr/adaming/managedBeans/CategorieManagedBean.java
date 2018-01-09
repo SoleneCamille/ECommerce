@@ -2,6 +2,7 @@ package fr.adaming.managedBeans;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +20,9 @@ import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
 import fr.adaming.model.Categorie;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "catMB")
 @RequestScoped
@@ -28,12 +31,17 @@ public class CategorieManagedBean implements Serializable {
 	// transformation de l'association UML en java
 	@EJB
 	private ICategorieService categorieService;
+	@EJB
+	private IProduitService produitService;
 
 	private Categorie categorie;
 	private List<Categorie> listeCategories;
+	private List<Produit> listeProduits;
 
 	private HttpSession maSession;
 	private String image;
+
+	private boolean indices;
 
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
@@ -65,7 +73,10 @@ public class CategorieManagedBean implements Serializable {
 	public void setCategorieService(ICategorieService categorieService) {
 		this.categorieService = categorieService;
 	}
-	
+
+	public void setProduitService(IProduitService produitService) {
+		this.produitService = produitService;
+	}
 
 	public String getImage() {
 		return image;
@@ -75,14 +86,58 @@ public class CategorieManagedBean implements Serializable {
 		this.image = image;
 	}
 
+	public boolean isIndices() {
+		return indices;
+	}
+
+	public void setIndices(boolean indices) {
+		this.indices = indices;
+	}
+
+	public List<Produit> getListeProduits() {
+		return listeProduits;
+	}
+
+	public void setListeProduits(List<Produit> listeProduits) {
+		this.listeProduits = listeProduits;
+	}
+
 	// les méthodes métiers
+
+	public String entrerSite() {
+		// récuperer la liste des categories
+		List<Categorie> listOut = categorieService.getAllCategories();
+		this.listeCategories = new ArrayList<Categorie>();
+		for (Categorie element : listOut) {
+			if (element.getPhoto() == null) {
+				element.setImage(null);
+			} else {
+				element.setImage("data:image/png;base64," + Base64.encodeBase64String(element.getPhoto()));
+			}
+			this.listeCategories.add(element);
+
+		}
+		// ajouter la liste dans la session
+		maSession.setAttribute("categoriesListe", listeCategories);
+		return "accueil";
+
+	}
+
 	public String ajouterCategorie() {
 		this.categorie = categorieService.addCategorie(this.categorie);
 
 		if (this.categorie != null) {
 			// récupération de la nouvelle liste de la bd
-			this.listeCategories = categorieService.getAllCategories();
-
+			List<Categorie> listOut = categorieService.getAllCategories();
+			this.listeCategories = new ArrayList<Categorie>();
+			for (Categorie element : listOut) {
+				if (element.getPhoto() == null) {
+					element.setImage(null);
+				} else {
+					element.setImage("data:image/png;base64," + Base64.encodeBase64String(element.getPhoto()));
+				}
+				this.listeCategories.add(element);
+			}
 			// mettre à jour la liste dans la session
 			maSession.setAttribute("categoriesList", this.listeCategories);
 
@@ -123,43 +178,59 @@ public class CategorieManagedBean implements Serializable {
 
 			// mettre à jour la liste dans la session
 			maSession.setAttribute("categoriesList", this.listeCategories);
-			
+
 			return "accueilAdmin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
 			return "supprCat";
 		}
-		
+
 	}
-	
+
 	public String consulterCategorie() {
 		Categorie catFind = categorieService.getCategorieByIdOrName(this.categorie);
-		
-		
-		if (catFind!=null) {
+
+		if (catFind != null) {
 			this.categorie = catFind;
+			this.indices = true;
+
+			List<Produit> liste = produitService.getProduitByCat(this.categorie);
+
+			if (liste != null) {
+				this.listeProduits = liste;
+				this.indices = true;
+
+			}
+
+			else {
+				this.indices = false;
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Pas de produit dans cette catégorie"));
+
+			}
+
 		} else {
+			this.indices = false;
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
 		}
-		
+
 		return "rechercheCat";
 	}
 
-	
-	
-	//méthode pour transformer une image en table de byte
+	// méthode pour transformer une image en table de byte
 	public void upload(FileUploadEvent event) {
 		UploadedFile uploadedFile = event.getFile();
-		
-		//récupérer le contenu de l'image en byte
+
+		// récupérer le contenu de l'image en byte
 		byte[] contents = uploadedFile.getContents();
-		
-		//stocker le contenu dans l'attribut photo de categorie
+
+		// stocker le contenu dans l'attribut photo de categorie
 		categorie.setPhoto(contents);
-		
-		//transforme byteArray en string (format base64)
-		this.image="data:image/png;base64,"+Base64.encodeBase64String(contents);
+
+		// transforme byteArray en string (format base64)
+		this.image = "data:image/png;base64," + Base64.encodeBase64String(contents);
 	}
+
 }
