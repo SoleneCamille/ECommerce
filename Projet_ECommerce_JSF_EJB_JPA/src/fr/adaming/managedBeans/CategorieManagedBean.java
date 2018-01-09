@@ -29,11 +29,11 @@ public class CategorieManagedBean implements Serializable {
 	@EJB
 	private ICategorieService categorieService;
 
-	// private Part file;
 	private Categorie categorie;
 	private List<Categorie> listeCategories;
 
 	private HttpSession maSession;
+	private String image;
 
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
@@ -65,14 +65,15 @@ public class CategorieManagedBean implements Serializable {
 	public void setCategorieService(ICategorieService categorieService) {
 		this.categorieService = categorieService;
 	}
+	
 
-	// public Part getFile() {
-	// return file;
-	// }
-	//
-	// public void setFile(Part file) {
-	// this.file = file;
-	// }
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	// les méthodes métiers
 	public String ajouterCategorie() {
@@ -159,6 +160,6 @@ public class CategorieManagedBean implements Serializable {
 		categorie.setPhoto(contents);
 		
 		//transforme byteArray en string (format base64)
-		String image="data:image/png;base64,"+Base64.encodeBase64String(contents);
+		this.image="data:image/png;base64,"+Base64.encodeBase64String(contents);
 	}
 }
