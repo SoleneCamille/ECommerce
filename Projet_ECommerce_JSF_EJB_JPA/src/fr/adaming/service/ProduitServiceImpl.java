@@ -40,7 +40,6 @@ public class ProduitServiceImpl implements IProduitService {
 		
 		Categorie cOut=catDao.getCategorieByIdOrName(c);
 		p.setCategorie(cOut);
-		System.out.println("------ "+c.getIdCategorie());
 	return produitDao.addProduit(p);
 	}
 
