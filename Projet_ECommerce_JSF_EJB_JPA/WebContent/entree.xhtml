@@ -8,15 +8,30 @@
 
 <h:head>
 	<title>Bienvenue sur le site de Winter is coming !</title>
+	<h:outputStylesheet library="css" name="myStyle.css" />
 </h:head>
 
-<h:body>
+<h:body id="entree">
 
-	<h:form>
-		<p:commandButton value="Acceder aux offres"
-			action="#{clientMB.entrerSite}" />
+	<div id="cadre">
+		<h1 style="text-align: center; color: gold">
+			Bienvenue sur le site de <i>Winter is coming !</i>
+		</h1>
+		<h2 style="text-align: center; color: gold">Votre fournisseur
+			officiel de tous les incontournables en hiver !!</h2>
 
-	</h:form>
+
+
+		<h:form>
+			<center>
+				<p:commandButton value="Acceder aux offres"
+					action="#{clientMB.entrerSite}" style="background-color:gold" />
+			</center>
+		</h:form>
+
+	</div>
+
+
 
 </h:body>
 </html>

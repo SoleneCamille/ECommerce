@@ -1,0 +1,13 @@
+#entree {
+	background-image: url("#{ resource [ 'images:fondEntree.jpg' ]}");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+#cadre {
+	background-color : azure;
+	border-style : groove;
+	border-color : black;
+	margin : 200px;
+	padding-bottom :10px;
+}

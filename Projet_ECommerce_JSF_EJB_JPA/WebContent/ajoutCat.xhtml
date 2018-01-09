@@ -22,7 +22,7 @@
 		categorie</h1>
 
 	<center>
-		<h:form>
+		<h:form enctype="multipart/form-data">
 			<h:panelGrid columns="2">
 			Nom de la Categorie : <h:inputText
 					value="#{catMB.categorie.nomCategorie}" />
@@ -31,11 +31,14 @@
 			<p:commandButton value="Ajouter" action="#{catMB.ajouterCategorie}"
 				update="msgAj" />
 
+			<p:fileUpload fileUploadListener="#{catMB.upLoad}"
+				mode="advanced" auto="true" update="idImg" />
+				<h:graphicImage id="idImg" value="#{catMB.image}"/>
 
 		</h:form>
 	</center>
 
-	<h:messages id="msgAj"/>
+	<h:messages id="msgAj" />
 
 </h:body>
 </html>
