@@ -19,28 +19,30 @@
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
 
-	<h1 style="text-align: center; color: red">Formulaire d'ajout de
-		categorie</h1>
+	<div class="cadre">
+		<h1 style="text-align: center; color: black">Formulaire d'ajout de
+			categorie</h1>
 
-	<center>
+
 		<h:form enctype="multipart/form-data">
-			<h:panelGrid columns="2">
+			<center>
+				<h:panelGrid columns="2">
 			Nom de la Categorie : <h:inputText
-					value="#{catMB.categorie.nomCategorie}" />
+						value="#{catMB.categorie.nomCategorie}" />
 			Description : <h:inputText value="#{catMB.categorie.description}" />
-			</h:panelGrid>
-			Photo : <p:fileUpload fileUploadListener="#{catMB.upload}"
-				mode="advanced" auto="true" update="idImg" />
-				<h:graphicImage id="idImg" value="#{catMB.image}"/>
-			<p:commandButton value="Ajouter" action="#{catMB.ajouterCategorie}"
-				update="msgAj" />
+				</h:panelGrid>
+				Photo : <p:fileUpload fileUploadListener="#{catMB.upload}" mode="advanced"
+					auto="true" update="idImg" style="width:135px"/>
+				<h:graphicImage id="idImg" value="#{catMB.image}" />
+				<p:commandButton value="Ajouter" action="#{catMB.ajouterCategorie}"
+					update="msgAj" />
 
-			
-
+<br/>
+			</center>
 		</h:form>
-	</center>
 
-	<h:messages id="msgAj" />
 
+		<h:messages id="msgAj" />
+	</div>
 </h:body>
 </html>

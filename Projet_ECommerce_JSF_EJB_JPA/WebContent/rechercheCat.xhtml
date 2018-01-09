@@ -8,6 +8,7 @@
 
 <h:head>
 	<title>Page de consultation d'une categorie</title>
+	<h:outputStylesheet library="css" name="myStyle.css" />
 </h:head>
 
 <h:body>
@@ -17,15 +18,16 @@
 		<!-- inserer concretement le layout avec la balise ui:include -->
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
-
-	<h1 style="text-align: center; color: red">Formulaire de
+<div class="cadre">
+	<h1 style="text-align: center; color: black">Formulaire de
 		consultation de categorie</h1>
 
 	<h2>Veuillez entrez l'ID ou le nom de la categorie que vous
 		souhaitez consulter</h2>
 
-	<center>
+	
 		<h:form>
+		<center>
 			<h:panelGrid columns="2" >
 			ID de la categorie : <h:inputText
 					value="#{catMB.categorie.idCategorie}" />
@@ -35,8 +37,10 @@
 			<p:spacer height="10" />
 			<h:commandButton value="Consulter Catégorie"
 				action="#{catMB.consulterCategorie}"  style="background-color:dodgerblue;backgroung-border:dodgerblue"/>
-				
+			</center>	
 		</h:form>
+		
+		</div>
 		
 		<p:spacer height="20" />
 	
@@ -137,9 +141,6 @@
     </p:dataTable>
 </h:form>
 
-
-
-</center>
 
 </h:body>
 </html>

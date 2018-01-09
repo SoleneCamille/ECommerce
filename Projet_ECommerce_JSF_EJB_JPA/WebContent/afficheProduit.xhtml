@@ -16,7 +16,14 @@
 		<!-- insérer concrètement le layout avec la balise ui:include -->
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
+	
+	<div class="cadre">
+	<h1 style="text-align: center; color: black">Formulaire de consultation d'un
+		produit</h1>
+		<h2 style="text-align: center">Veuillez chercher le produit par son nom ou son ID</h2>
 	<h:form>
+	<center>
+	<h:panelGrid columns="3">
 		<p:outputLabel value="Id produit:" for="acSimple" />
 		<p:autoComplete id="acSimple" value="#{pMB.produit.idProduit}"
 			completeMethod="#{autoCompleteView.completeText}" />
@@ -32,9 +39,11 @@
 		<h:commandButton
 			style="background-color:dodgerblue;backgroung-border:dodgerblue; width:150px;height:35px"
 			value="Afficher" action="#{pMB.afficherProduit}" />
+			</h:panelGrid>
+			</center>
 	</h:form>
+	</div>
 
-	<h2>Liste des produits</h2>
 	<p:dataTable var="pdt" value="#{sessionScope.produit}" rendered="#{pMB.indice}">
 
 		<p:column headerText="Id">

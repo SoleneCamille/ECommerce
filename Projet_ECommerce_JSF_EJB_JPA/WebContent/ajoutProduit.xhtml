@@ -17,8 +17,12 @@
 		<!-- insérer concrètement le layout avec la balise ui:include -->
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
-<center>
+	
+	<div class="cadre">
+	<h1 style="text-align: center; color: black">Formulaire d'ajout de produit</h1>
+
 	<h:form>
+	<center>
 		<h:panelGrid columns="2">
 		
 			 <p:outputLabel value="Id catégorie:" for="acSimple" />
@@ -46,9 +50,10 @@
 
 	<h:commandButton value="Ajouter" action="#{pMB.ajouterProduit}"	update="@all" />
 	</h:panelGrid>
+	</center>
 	</h:form>
-</center>
 
+</div>
 
 
 

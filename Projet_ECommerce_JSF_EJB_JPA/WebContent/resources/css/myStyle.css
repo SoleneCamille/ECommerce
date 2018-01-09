@@ -10,10 +10,13 @@ body{
 	background-size: cover;
 }
 
-#cadre {
+.cadre {
 	background-color : azure;
 	border-style : groove;
 	border-color : black;
+}
+
+#cadre1{
 	margin : 300px;
 	padding-bottom :10px;
 }

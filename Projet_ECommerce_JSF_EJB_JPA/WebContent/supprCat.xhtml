@@ -19,24 +19,27 @@
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
 
-	<h1 style="text-align: center; color: red">Formulaire de suppression de
-		categorie</h1>
+	<div class="cadre">
+		<h1 style="text-align: center; color: black">Formulaire de
+			suppression de categorie</h1>
 
-	<center>
+
 		<h:form>
-			<h:panelGrid columns="2">
-			ID de la categorie : <h:inputText value="#{catMB.categorie.idCategorie}"/>
-			</h:panelGrid>
-			<p:commandButton value="Supprimer" action="#{catMB.supprimerCategorie}"
-				update="msgSuppr" />
+			<center>
+				<h:panelGrid columns="2">
+			ID de la categorie : <h:inputText
+						value="#{catMB.categorie.idCategorie}" />
+				</h:panelGrid>
+				<p:commandButton value="Supprimer"
+					action="#{catMB.supprimerCategorie}" update="msgSuppr" />
 
-
+			</center>
 		</h:form>
-	</center>
-
-	<h:messages id="msgSuppr"/>
 
 
+		<h:messages id="msgSuppr" />
+
+	</div>
 
 </h:body>
 </html>

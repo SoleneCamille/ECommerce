@@ -13,27 +13,32 @@
 </h:head>
 <h:body>
 
-<h1 style="color:red; text-align: center">Formulaire de connexion</h1>
-	<h:form>
-		<center>
-			<h:panelGrid columns="2" style="margin-top:150px">
-				<h:outputText value="Mail" style="font:30px"></h:outputText>
-				<h:inputText value="#{aMB.admin.mail}"
-					style="width:200px;height:30px; backgroung-border:silver" />
-				<h:outputText value="Mot de passe" style="size:30px"></h:outputText>
-				<h:inputSecret value="#{aMB.admin.mdp}"
-					style="width:200px;height:30px; backgroung-border:silver" />
+	<div class="cadre">
+		<h1 style="color: black; text-align: center">Formulaire de
+			connexion</h1>
 
-				<p:spacer height="50" />
-				<p:commandButton
-					style="background-color:dodgerblue;backgroung-border:dodgerblue; width:150px;height:35px"
-					value="Connexion" action="#{aMB.seConnecter}" update="@all" />
-			</h:panelGrid>
-		</center>
+		<h:form>
+			<center>
+				<h:panelGrid columns="2" style="margin-top:50px">
+					<h:outputText value="Mail" style="font:30px"></h:outputText>
+					<h:inputText value="#{aMB.admin.mail}"
+						style="width:200px;height:30px; backgroung-border:silver" />
+					<h:outputText value="Mot de passe" style="size:30px"></h:outputText>
+					<h:inputSecret value="#{aMB.admin.mdp}"
+						style="width:200px;height:30px; backgroung-border:silver" />
 
-		<h:messages style="color:red" />
+					<p:spacer height="50" />
+					<p:commandButton
+						style="background-color:dodgerblue;backgroung-border:dodgerblue; width:150px;height:35px"
+						value="Connexion" action="#{aMB.seConnecter}" update="@all" />
+				</h:panelGrid>
+			</center>
 
-	</h:form>
+			<h:messages style="color:red" />
+
+		</h:form>
+
+	</div>
 
 </h:body>
 </html>

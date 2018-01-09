@@ -19,12 +19,13 @@
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
 
-
-	<h1 style="text-align: center; color: red">Formulaire de modification de
+<div class="cadre">
+	<h1 style="text-align: center; color: black">Formulaire de modification de
 		produit</h1>
 		
-	<center>
+	
 		<h:form>
+		<center>
 			<h:panelGrid columns="2">
 			
 			 <p:outputLabel value="Id catégorie:" for="acId" />
@@ -55,13 +56,14 @@
 <p:commandButton value="Modifier" action="#{pMB.modifierProduit}"
 				update="msgMod" />
 </h:panelGrid>
+</center>
 		</h:form>
 
 
-	</center>
+	
 
 <h:messages id="msgMod"/>
-
+</div>
 
 </h:body>
 </html>
