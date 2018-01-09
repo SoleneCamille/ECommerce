@@ -128,4 +128,45 @@ public class ProduitManagedBean {
 			return "afficheProduit";
 		}
 	}
+	
+	public String supprimerProduit(){
+		int verif=produitService.deleteProduit(this.produit.getIdProduit());
+		if(verif==1){
+			//this.listeProduit = produitService.getProduitByCat(this.categorie.getIdCategorie());
+			//maSession.setAttribute("produitList", this.listeProduit);
+			return "rechercheCat";
+			
+		}else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec suppression"));
+			return "supprProduit";}
+		
+	}
+	
+	public String modifierProduit(){
+		Produit p=produitService.updateProduit(this.produit, this.categorie);
+		if(p!=null){
+			maSession.setAttribute("produit", this.produit);
+			return "rechercheCat";
+		}else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
+			return "modifProduit";
+		}
+	}
+	
+	public String  afficherProduitByCat(){
+		List<Produit>liste=produitService.getProduitByCat(this.categorie.getIdCategorie());
+		if(liste!=null){
+			this.listeProduit=liste;
+			return "rechercheCat";
+			
+		}
+		else{
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pas de produit dans cette catégorie"));
+			return "rechercheCat";
+			
+		}
+	}
+	
+	
+	
 }

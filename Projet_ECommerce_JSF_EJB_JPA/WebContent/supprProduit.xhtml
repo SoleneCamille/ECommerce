@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page suppression produit</title>
+</h:head>
+
+<h:body>
+<!-- insertion du header -->
+<ui:insert name="page">
+		<!-- insérer concrètement le layout avec la balise ui:include -->
+		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
+	</ui:insert>
+<center>
+	<h:form>
+		<h:panelGrid columns="2">
+		
+			 <p:outputLabel value="Id Produit:" for="acSimple" />
+        <p:inputText id="acSimple" value="#{pMB.produit.idProduit}" />
+
+
+	<p:commandButton value="Supprimer" action="#{pMB.supprimerProduit}"	update="@all" />
+	</h:panelGrid>
+	</h:form>
+</center>
+
+
+
+
+</h:body>
+
 </html>

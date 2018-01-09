@@ -1,10 +1,66 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 
-</body>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Page de modification de produit</title>
+</h:head>
+
+<h:body>
+
+	<!-- insertion du header -->
+	<ui:insert name="page">
+		<!-- inserer concretement le layout avec la balise ui:include -->
+		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
+	</ui:insert>
+
+
+	<h1 style="text-align: center; color: red">Formulaire de modification de
+		produit</h1>
+		
+	<center>
+		<h:form>
+			<h:panelGrid columns="2">
+			
+			 <p:outputLabel value="Id catégorie:" for="acId" />
+        <p:inputText id="acId" value="#{pMB.categorie.idCategorie}" />
+			
+			 <p:outputLabel value="Id Produit:" for="acSimple" />
+ <h:inputText value="#{pMB.produit.idProduit}" id="acSimple"/>
+ 
+ 
+        <p:outputLabel value="Désignation:" for="acDelay" />
+        <p:inputText id="acDelay"  value="#{pMB.produit.designation}"  />
+        
+        <p:outputLabel value="Description:" for="acMinLength" />
+        <p:inputText id="acMinLength" value="#{pMB.produit.description}" />
+ 
+        <p:outputLabel value="photo:" for="acMaxResults" />
+        <p:inputText id="acMaxResults"  value="0"  />
+ 
+        <p:outputLabel value="Prix:" for="acForce" />
+        <p:inputText id="acForce"  value="#{pMB.produit.prix}" />
+ 
+        <p:outputLabel value="Stock:" for="dd" />
+        <p:inputText id="dd"  value="#{pMB.produit.quantite}"/>
+ 
+        <p:outputLabel value="Remise (%):" for="cache" />
+        <p:inputText id="cache"  value="#{pMB.produit.remise}"  />
+
+<p:commandButton value="Modifier" action="#{pMB.modifierProduit}"
+				update="msgMod" />
+</h:panelGrid>
+		</h:form>
+
+
+	</center>
+
+<h:messages id="msgMod"/>
+
+
+</h:body>
 </html>

@@ -37,7 +37,7 @@
 		</h:form>
 		
 		
-	</center>
+	
 	
 	<p:dataTable var="cat" value="#{catMB.categorie}">
 
@@ -57,10 +57,43 @@
 			<h:outputText value="photo" />
 		</p:column>
 	</p:dataTable>
+	
+	
+	
+	<p:dataTable var="pdt" value="#{pMB.listeProduit}">
+
+		<p:column headerText="Id">
+			<h:outputText value="#{pdt.idProduit}" />
+		</p:column>
+
+		<p:column headerText="Désignation">
+			<h:outputText value="#{pdt.designation}" />
+		</p:column>
+
+		<p:column headerText="Description">
+			<h:outputText value="#{pdt.description}" />
+		</p:column>
+
+		<p:column headerText="photo">
+			<h:outputText value="photo" />
+		</p:column>
+		
+		<p:column headerText="Prix">
+			<h:outputText value="#{pdt.prix}" />
+		</p:column>
+		
+			<p:column headerText="Remise">
+			<h:outputText value="#{pdt.remise}" />
+		</p:column>
+		<p:column headerText="Stock">
+			<h:outputText value="#{pdt.quantite}" />
+		</p:column>
+		
+	</p:dataTable>
 
 	<h:messages id="msgConsult" />
 
-
+</center>
 
 </h:body>
 </html>
