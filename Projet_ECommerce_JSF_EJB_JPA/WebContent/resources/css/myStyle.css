@@ -4,6 +4,12 @@
 	background-size: cover;
 }
 
+body{
+	background-image: url("#{ resource [ 'images:fondGeneral.jpg' ]}");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
 #cadre {
 	background-color : azure;
 	border-style : groove;
