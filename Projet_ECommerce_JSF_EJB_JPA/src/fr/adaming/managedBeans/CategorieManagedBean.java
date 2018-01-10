@@ -237,7 +237,7 @@ public class CategorieManagedBean implements Serializable {
 			
 		}
 		
-		return "rechercheCat2";
+		return "rechercheCat";
 
 	}
 

@@ -42,7 +42,41 @@
 		
 		</div>
 
-	
+	<h:form>
+			<p:dataTable var="cat" value="#{sessionScope.categorie}">
+				<f:facet name="header">
+            Expand rows to see detailed information
+        </f:facet>
+				<p:column style="width:16px">
+					<p:rowToggler />
+				</p:column>
+				<p:column headerText="Id">
+					<h:outputText value="#{cat.idCategorie}" />
+				</p:column>
+				<p:column headerText="Nom">
+					<h:outputText value="#{cat.nomCategorie}" />
+				</p:column>
+
+				<p:rowExpansion>
+					<p:panelGrid columns="2" columnClasses="label,value"
+						style="width:300px">
+						<f:facet name="header">
+							<p:graphicImage value="#{sessionScope.categorie}" />
+						</f:facet>
+
+						<h:outputText value="Id:" />
+						<h:outputText value="#{cat.idCategorie}" />
+
+						<h:outputText value="Nom:" />
+						<h:outputText value="#{cat.nomCategorie}" />
+
+						<h:outputText value="Description:" />
+						<h:outputText value="#{cat.description}"/>
+
+					</p:panelGrid>
+				</p:rowExpansion>
+			</p:dataTable>
+		</h:form>
 	
 	
 
