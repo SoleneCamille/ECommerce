@@ -10,9 +10,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "produits")
@@ -29,7 +31,13 @@ public class Produit implements Serializable {
 	private double remise;
 	private int quantite;
 	private boolean selectionne;
+	@Lob
 	private byte[] photo;
+	
+	@Transient
+	private String image;
+	
+	
 	
 	// transformation de l'association simple de l'UML en java
 	@ManyToOne
@@ -151,7 +159,13 @@ public class Produit implements Serializable {
 		this.remise = remise;
 	}
 
-	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	
 }
