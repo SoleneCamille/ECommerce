@@ -1,19 +1,20 @@
 package fr.adaming.managedBeans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.codec.binary.Base64;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
+import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 
 @ManagedBean(name = "clientMB")
@@ -28,11 +29,18 @@ public class ClientManagedBean implements Serializable {
 
 	private Client client;
 	private List<Categorie> listeCategories;
-
-
+	private Categorie categorie;
+	private HttpSession maSession;
+	private List<Produit> listeProduit;
 	// constructeur vide
 	public ClientManagedBean() {
 		this.client = new Client();
+
+	}
+	
+	@PostConstruct
+	public void init() {
+		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
 
 	// getters et setters
@@ -54,6 +62,62 @@ public class ClientManagedBean implements Serializable {
 
 	public void setCatService(ICategorieService catService) {
 		this.catService = catService;
+	}
+
+	public Categorie getCategorie() {
+		return categorie;
+	}
+
+	public void setCategorie(Categorie categorie) {
+		this.categorie = categorie;
+	}
+
+	
+	
+	public HttpSession getMaSession() {
+		return maSession;
+	}
+
+	public void setMaSession(HttpSession maSession) {
+		this.maSession = maSession;
+	}
+
+	public List<Produit> getListeProduit() {
+		return listeProduit;
+	}
+
+	public void setListeProduit(List<Produit> listeProduit) {
+		this.listeProduit = listeProduit;
+	}
+	
+	
+	
+
+	// methodes
+	public String consulterCategorie() {
+		Categorie catFind = catService.getCategorieByIdOrName(this.categorie);
+
+		this.categorie = catFind;
+
+		// ajout de la catégorie dans la session
+		maSession.setAttribute("categ", this.categorie);
+
+		List<Produit> liste = this.categorie.getListeProduits();
+
+		if (liste != null) {
+			listeProduit = liste;
+
+			// ajout de la liste de produits dans la session
+			maSession.setAttribute("listeProd2", this.listeProduit);
+			
+
+		} else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pas de produit dans cette catégorie"));
+
+		}
+
+		return "afficheProduitsClients";
+
 	}
 
 }

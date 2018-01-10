@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Affichage produits de la catégorie</title>
+	<h:outputStylesheet library="css" name="myStyle.css" />
+</h:head>
+
+<h:body>
+	<ui:insert name="page">
+		<!-- insérer concrètement le layout avec la balise ui:include -->
+		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
+	</ui:insert>
+
+
+	<p:dataTable var="pdt" value="#{sessionScope.produit}" >
+
+		<p:column headerText="Id">
+			<h:outputText value="#{pdt.idProduit}" />
+		</p:column>
+
+		<p:column headerText="Désignation">
+			<h:outputText value="#{pdt.designation}" />
+		</p:column>
+		<p:column headerText="Description">
+			<h:outputText value="#{pdt.description}" />
+		</p:column>
+
+		<p:column headerText="Prix">
+			<h:outputText value="#{pdt.prix}" />
+		</p:column>
+
+		<p:column headerText="Remise">
+			<h:outputText value="#{pdt.remise}" />
+		</p:column>
+
+
+		<p:column headerText="photo">
+			<h:outputText value="photo" />
+		</p:column>
+	</p:dataTable>
+
+
+
+</h:body>
+</html>

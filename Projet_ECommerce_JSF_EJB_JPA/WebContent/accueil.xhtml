@@ -31,7 +31,9 @@
 			<p:panel header="#{cat.idCategorie}" style="text-align:center">
 				<h:panelGrid columns="2" style="width:300px"
 					columnClasses="logo,detail">
-					<h:graphicImage value="#{cat.image}" />
+					<p:link outcome="afficheProduitsClient" >
+					<f:param name="idCat" value="#{cat.idCategorie}"/>
+					<h:graphicImage value="#{cat.image}" /></p:link>>
 
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="2">
