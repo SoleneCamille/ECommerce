@@ -45,7 +45,7 @@
 	<h:form>
 			<p:dataTable var="cat" value="#{sessionScope.categ}">
 				<f:facet name="header">
-            Expand rows to see detailed information
+            Categorie
         </f:facet>
 				<p:column style="width:16px">
 					<p:rowToggler />
@@ -81,7 +81,7 @@
 		<h:form>
 			<p:dataTable var="p" value="#{sessionScope.listeProd2}">
 				<f:facet name="header">
-            Expand rows to see detailed information
+            Liste des produits de la categorie
         </f:facet>
 				<p:column style="width:16px">
 					<p:rowToggler />
@@ -97,7 +97,7 @@
 					<p:panelGrid columns="2" columnClasses="label,value"
 						style="width:300px">
 						<f:facet name="header">
-							<h:graphicImage value="photo" />
+							<h:graphicImage value="#{p.image}" />
 						</f:facet>
 
 						<h:outputText value="Id:" />

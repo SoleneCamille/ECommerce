@@ -129,8 +129,8 @@ public class ProduitManagedBean {
 			} else {
 				pFind.setImage("data:image/jpeg;base64," + Base64.encodeBase64String(pFind.getPhoto()));
 			}
-			
-			this.produit=pFind;
+
+			this.produit = pFind;
 			maSession.setAttribute("produit", this.produit);
 
 			return "afficheProduit";
@@ -153,9 +153,24 @@ public class ProduitManagedBean {
 	}
 
 	public String modifierProduit() {
-		Produit p = produitService.updateProduit(this.produit, this.categorie);
-		if (p != null) {
-			maSession.setAttribute("produit", this.produit);
+		this.produit = produitService.updateProduit(this.produit, this.categorie);
+		if (this.produit != null) {
+			// récupération de la nouvelle liste de la bd
+			List<Produit> listOut = produitService.getProduitByCat(this.categorie);
+			this.listeProduit = new ArrayList<Produit>();
+
+			for (Produit element : listOut) {
+				if (element.getPhoto() == null) {
+					element.setImage(null);
+				} else {
+					element.setImage("data:image/jpeg;base64," + Base64.encodeBase64String(element.getPhoto()));
+				}
+				this.listeProduit.add(element);
+			}
+
+			// mettre à jour la liste dans la session
+			maSession.setAttribute("produitList", this.listeProduit);
+
 			return "rechercheCat";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));

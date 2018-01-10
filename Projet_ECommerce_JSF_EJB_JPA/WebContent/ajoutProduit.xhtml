@@ -12,50 +12,50 @@
 </h:head>
 
 <h:body>
-<!-- insertion du header -->
-<ui:insert name="page">
+	<!-- insertion du header -->
+	<ui:insert name="page">
 		<!-- insérer concrètement le layout avec la balise ui:include -->
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
-	
+
 	<div class="cadre">
-	<h1 style="text-align: center; color: black">Formulaire d'ajout de produit</h1>
+		<h1 style="text-align: center; color: black">Formulaire d'ajout
+			de produit</h1>
 
-	<h:form enctype="multipart/form-data">
-	<center>
-		<h:panelGrid columns="2">
-		
-			 <p:outputLabel value="Id catégorie:" for="acSimple" />
-        <p:inputText id="acSimple" value="#{pMB.categorie.idCategorie}" />
- 
-        <p:outputLabel value="Description:" for="acMinLength" />
-        <p:autoComplete id="acMinLength" value="#{pMB.produit.description}" completeMethod="#{autoCompleteView.completeText}" effect="fade" />
- 
-        <p:outputLabel value="Désignation:" for="acDelay" />
-        <p:autoComplete id="acDelay"  value="#{pMB.produit.designation}" completeMethod="#{autoCompleteView.completeText}" effect="blind" />
- 
-        <p:outputLabel value="photo:" for="acMaxResults" />
-        <p:autoComplete id="acMaxResults"  value="0"  />
- 
-        <p:outputLabel value="Prix:" for="acForce" />
-        <p:fileUpload fileUploadListener="#{pMB.upload}" mode="advanced"
-					auto="true" id="acForce" update="idImg" style="width:135px"/>
-				<h:graphicImage id="idImg" value="#{pMB.image}" />
- 
-        <p:outputLabel value="Stock:" for="dd" />
-        <p:autoComplete id="dd"  value="#{pMB.produit.quantite}" completeMethod="#{autoCompleteView.completeText}" />
- 
-        <p:outputLabel value="Remise (%):" for="cache" />
-        <p:autoComplete id="cache"  value="#{pMB.produit.remise}" completeMethod="#{autoCompleteView.completeText}" />
- 
+		<h:form enctype="multipart/form-data">
+			<center>
+				<h:panelGrid columns="2">
 
+					ID Categorie :
+					<p:inputText value="#{pMB.categorie.idCategorie}" />
 
-	<h:commandButton value="Ajouter" action="#{pMB.ajouterProduit}"	update="@all" />
-	</h:panelGrid>
-	</center>
-	</h:form>
+					Description :
+					<p:inputText value="#{pMB.produit.description}"/>
 
-</div>
+					Designation :
+					<p:inputText value="#{pMB.produit.designation}"/>
+
+					Prix :
+					<p:inputText value="#{pMB.produit.prix}" />
+
+					Stock :
+					<p:inputText value="#{pMB.produit.quantite}"/>
+
+					Remise (%) :
+					<p:inputText value="#{pMB.produit.remise}"/>
+
+					Photo:
+					<p:fileUpload fileUploadListener="#{pMB.upload}" mode="advanced"
+						auto="true" update="idImg" style="width:135px" />
+					<h:graphicImage id="idImg" value="#{pMB.image}" />
+
+					<p:commandButton value="Ajouter" action="#{pMB.ajouterProduit}"
+						update="@all" />
+				</h:panelGrid>
+			</center>
+		</h:form>
+
+	</div>
 
 
 

@@ -19,51 +19,54 @@
 		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
 	</ui:insert>
 
-<div class="cadre">
-	<h1 style="text-align: center; color: black">Formulaire de modification de
-		produit</h1>
-		
-	
-		<h:form>
-		<center>
-			<h:panelGrid columns="2">
-			
-			 <p:outputLabel value="Id catégorie:" for="acId" />
-        <p:inputText id="acId" value="#{pMB.categorie.idCategorie}" />
-			
-			 <p:outputLabel value="Id Produit:" for="acSimple" />
- <h:inputText value="#{pMB.produit.idProduit}" id="acSimple"/>
- 
- 
-        <p:outputLabel value="Désignation:" for="acDelay" />
-        <p:inputText id="acDelay"  value="#{pMB.produit.designation}"  />
-        
-        <p:outputLabel value="Description:" for="acMinLength" />
-        <p:inputText id="acMinLength" value="#{pMB.produit.description}" />
- 
-        <p:outputLabel value="photo:" for="acMaxResults" />
-        <p:inputText id="acMaxResults"  value="0"  />
- 
-        <p:outputLabel value="Prix:" for="acForce" />
-        <p:inputText id="acForce"  value="#{pMB.produit.prix}" />
- 
-        <p:outputLabel value="Stock:" for="dd" />
-        <p:inputText id="dd"  value="#{pMB.produit.quantite}"/>
- 
-        <p:outputLabel value="Remise (%):" for="cache" />
-        <p:inputText id="cache"  value="#{pMB.produit.remise}"  />
+	<div class="cadre">
+		<h1 style="text-align: center; color: black">Formulaire de
+			modification de produit</h1>
 
-<p:commandButton value="Modifier" action="#{pMB.modifierProduit}"
-				update="msgMod" />
-</h:panelGrid>
-</center>
+
+		<h:form>
+			<center>
+				<h:panelGrid columns="2">
+			
+					ID Categorie
+        			<p:inputText value="#{pMB.categorie.idCategorie}" />
+			
+					ID Produit :
+ 					<p:inputText value="#{pMB.produit.idProduit}"/>
+
+
+					Designation :
+					<p:inputText value="#{pMB.produit.designation}" />
+
+					Description :
+					<p:inputText value="#{pMB.produit.description}" />
+
+					Prix :
+					<p:inputText value="#{pMB.produit.prix}" />
+
+					Stock :
+					<p:inputText value="#{pMB.produit.quantite}" />
+
+					Remise :
+					<p:inputText value="#{pMB.produit.remise}" />
+					
+					
+					Photo :
+					<p:fileUpload fileUploadListener="#{pMB.upload}" mode="advanced"
+					auto="true" update="idImg" style="width:135px" />
+				<h:graphicImage id="idImg" value="#{pMB.image}" />
+
+					<p:commandButton value="Modifier" action="#{pMB.modifierProduit}"
+						update="msgMod" />
+				</h:panelGrid>
+			</center>
 		</h:form>
 
 
-	
 
-<h:messages id="msgMod"/>
-</div>
+
+		<h:messages id="msgMod" />
+	</div>
 
 </h:body>
 </html>

@@ -33,6 +33,11 @@
 						value="#{catMB.categorie.nomCategorie}" />
 			Description : <h:inputText value="#{catMB.categorie.description}" />
 				</h:panelGrid>
+
+			Photo :
+				<p:fileUpload fileUploadListener="#{catMB.upload}" mode="advanced"
+					auto="true" update="idImg" style="width:135px" />
+				<h:graphicImage id="idImg" value="#{catMB.image}" />
 				<p:commandButton value="Modifier"
 					action="#{catMB.modifierCategorie}" update="msgMod" />
 
@@ -44,6 +49,6 @@
 
 		<h:messages id="msgMod" />
 
-		</div>
+	</div>
 </h:body>
 </html>
