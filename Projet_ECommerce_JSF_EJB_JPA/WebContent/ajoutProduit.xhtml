@@ -21,7 +21,7 @@
 	<div class="cadre">
 	<h1 style="text-align: center; color: black">Formulaire d'ajout de produit</h1>
 
-	<h:form>
+	<h:form enctype="multipart/form-data">
 	<center>
 		<h:panelGrid columns="2">
 		
@@ -38,7 +38,9 @@
         <p:autoComplete id="acMaxResults"  value="0"  />
  
         <p:outputLabel value="Prix:" for="acForce" />
-        <p:autoComplete id="acForce"  value="#{pMB.produit.prix}" completeMethod="#{autoCompleteView.completeText}" />
+        <p:fileUpload fileUploadListener="#{pMB.upload}" mode="advanced"
+					auto="true" id="acForce" update="idImg" style="width:135px"/>
+				<h:graphicImage id="idImg" value="#{pMB.image}" />
  
         <p:outputLabel value="Stock:" for="dd" />
         <p:autoComplete id="dd"  value="#{pMB.produit.quantite}" completeMethod="#{autoCompleteView.completeText}" />

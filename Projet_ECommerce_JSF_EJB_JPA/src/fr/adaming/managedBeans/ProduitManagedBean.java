@@ -10,6 +10,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
+
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Produit;
 import fr.adaming.service.IProduitService;
@@ -28,23 +32,22 @@ public class ProduitManagedBean {
 	private Categorie categorie;
 
 	private HttpSession maSession;
-	
-	private boolean indice=false;
+
+	private String image;
 
 	// constructeur
-
 	public ProduitManagedBean() {
 
 		this.produit = new Produit();
-		this.categorie=new Categorie();
-		
+		this.categorie = new Categorie();
+
 	}
 
-	
 	@PostConstruct
 	public void init() {
 		this.maSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
 	}
+
 	// getters et setters
 	public Produit getProduit() {
 		return produit;
@@ -65,21 +68,6 @@ public class ProduitManagedBean {
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
 	}
-	
-	
-	
-
-
-	
-	public boolean isIndice() {
-		return indice;
-	}
-
-
-	public void setIndice(boolean indice) {
-		this.indice = indice;
-	}
-
 
 	public Categorie getCategorie() {
 		return categorie;
@@ -88,73 +76,88 @@ public class ProduitManagedBean {
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
-	
-	//methodes
 
-	public String ajouterProduit(){
-		
-		
-		Produit p=produitService.addProduit(this.produit, this.categorie );
-		
-		if (p!=null) {
-			//récupération de la nouvelle liste de la bd
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	// methodes
+	public String ajouterProduit() {
+
+		Produit p = produitService.addProduit(this.produit, this.categorie);
+
+		if (p != null) {
+			// récupération de la nouvelle liste de la bd
 			this.listeProduit = produitService.getProduitByCat(this.categorie);
-			
-			//mettre à jour la liste dans la session
+
+			// mettre à jour la liste dans la session
 			maSession.setAttribute("produitList", this.listeProduit);
-			
+
 			return "afficheProduit";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("L'ajout a échoué"));
 			return "ajoutProduit";
 		}
 	}
-	public double calculPrix(){
-		double prix=this.produit.getPrix()-(this.produit.getPrix()*this.produit.getRemise()/100);
+
+	public double calculPrix() {
+		double prix = this.produit.getPrix() - (this.produit.getPrix() * this.produit.getRemise() / 100);
 		return prix;
 	}
-	
-	public String afficherProduit(){
-		this.produit=produitService.getProduitbyIdorName(this.produit);
-		
-		if(this.produit!=null){
-		maSession.setAttribute("produit", this.produit);
-		this.indice=true;
-		
-		return "afficheProduit";}
-		else{
+
+	public String afficherProduit() {
+		this.produit = produitService.getProduitbyIdorName(this.produit);
+
+		if (this.produit != null) {
+			maSession.setAttribute("produit", this.produit);
+
+			return "afficheProduit";
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Liste vide"));
-			this.indice=false;
 			return "afficheProduit";
 		}
 	}
-	
-	public String supprimerProduit(){
-		int verif=produitService.deleteProduit(this.produit.getIdProduit());
-		if(verif==1){
-			//this.listeProduit = produitService.getProduitByCat(this.categorie.getIdCategorie());
-			//maSession.setAttribute("produitList", this.listeProduit);
+
+	public String supprimerProduit() {
+		int verif = produitService.deleteProduit(this.produit.getIdProduit());
+		if (verif == 1) {
+			// this.listeProduit =
+			// produitService.getProduitByCat(this.categorie.getIdCategorie());
+			// maSession.setAttribute("produitList", this.listeProduit);
 			return "rechercheCat";
-			
-		}else{
+
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec suppression"));
-			return "supprProduit";}
-		
+			return "supprProduit";
+		}
+
 	}
-	
-	public String modifierProduit(){
-		Produit p=produitService.updateProduit(this.produit, this.categorie);
-		if(p!=null){
+
+	public String modifierProduit() {
+		Produit p = produitService.updateProduit(this.produit, this.categorie);
+		if (p != null) {
 			maSession.setAttribute("produit", this.produit);
 			return "rechercheCat";
-		}else{
+		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("echec modification"));
 			return "modifProduit";
 		}
 	}
-	
-	
-	
-	
-	
+
+	// méthode pour transformer une image en table de byte
+	public void upload(FileUploadEvent event) {
+		UploadedFile uploadedFile = event.getFile();
+		// récupérer le contenu de l'image en byte
+		byte[] contents = uploadedFile.getContents();
+
+		// stocker le contenu dans l'attribut photo de categorie
+		produit.setPhoto(contents);
+		// transforme byteArray en string (format base64)
+		this.image = "data:image/png;base64," + Base64.encodeBase64String(contents);
+	}
+
 }

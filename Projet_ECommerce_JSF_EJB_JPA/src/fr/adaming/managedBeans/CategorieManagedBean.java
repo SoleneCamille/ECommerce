@@ -44,8 +44,6 @@ public class CategorieManagedBean implements Serializable {
 	private HttpSession maSession;
 	private String image;
 
-	private boolean indices;
-	private boolean indiceProduit;
 
 	public CategorieManagedBean() {
 		this.categorie = new Categorie();
@@ -94,25 +92,6 @@ public class CategorieManagedBean implements Serializable {
 		this.listeProduits = listeProduits;
 	}
 
-	public boolean isIndices() {
-		return indices;
-	}
-
-	public void setIndices(boolean indices) {
-		this.indices = indices;
-	}
-
-	public void setProduitService(IProduitService produitService) {
-		this.produitService = produitService;
-	}
-
-	public boolean isIndiceProduit() {
-		return indiceProduit;
-	}
-
-	public void setIndiceProduit(boolean indiceProduit) {
-		this.indiceProduit = indiceProduit;
-	}
 
 	// les méthodes métiers
 	public String entrerSite() {
@@ -212,7 +191,6 @@ public class CategorieManagedBean implements Serializable {
 				}
 			
 			this.categorie = catFind;
-			this.indices=true;
 
 			//ajout de la catégorie dans la session
 			maSession.setAttribute("categ", this.categorie);
@@ -222,20 +200,17 @@ public class CategorieManagedBean implements Serializable {
 
 			if (liste != null) {
 				this.listeProduits = liste;
-				this.indiceProduit = true;
 				
 				//ajout de la liste de produits dans la session
 				maSession.setAttribute("listeProd2", this.listeProduits);
 
 			} else {
-				this.indiceProduit = false;
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage("Pas de produit dans cette catégorie"));
 
 			}
 
 		} else {
-			this.indices = false;
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette catégorie n'existe pas !", null));
 			
