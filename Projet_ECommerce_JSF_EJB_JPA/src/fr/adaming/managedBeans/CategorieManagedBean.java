@@ -212,23 +212,27 @@ public class CategorieManagedBean implements Serializable {
 				}
 			
 			this.categorie = catFind;
+			this.indices=true;
 
 			//ajout de la catégorie dans la session
-			maSession.setAttribute("categorie", this.categorie);
+			maSession.setAttribute("categ", this.categorie);
 			
 			
-//			List<Produit> liste = produitService.getProduitByCat(this.categorie);
-//
-//			if (liste != null) {
-//				this.listeProduits = liste;
-//				this.indiceProduit = true;
-//
-//			} else {
-//				this.indiceProduit = false;
-//				FacesContext.getCurrentInstance().addMessage(null,
-//						new FacesMessage("Pas de produit dans cette catégorie"));
-//
-//			}
+			List<Produit> liste = this.categorie.getListeProduits();
+
+			if (liste != null) {
+				this.listeProduits = liste;
+				this.indiceProduit = true;
+				
+				//ajout de la liste de produits dans la session
+				maSession.setAttribute("listeProd2", this.listeProduits);
+
+			} else {
+				this.indiceProduit = false;
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage("Pas de produit dans cette catégorie"));
+
+			}
 
 		} else {
 			this.indices = false;

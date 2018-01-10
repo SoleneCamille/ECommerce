@@ -35,15 +35,15 @@
 					value="#{catMB.categorie.nomCategorie}" />
 			</h:panelGrid>
 			<p:spacer height="10" />
-			<h:commandButton value="Consulter Catégorie"
-				action="#{catMB.consulterCategorie}"  style="background-color:dodgerblue;backgroung-border:dodgerblue"/>
+			<p:commandButton value="Consulter Catégorie"
+				action="#{catMB.consulterCategorie}" update="@all"  style="background-color:dodgerblue;backgroung-border:dodgerblue"/>
 			</center>	
 		</h:form>
 		
 		</div>
 
 	<h:form>
-			<p:dataTable var="cat" value="#{sessionScope.categorie}">
+			<p:dataTable var="cat" value="#{sessionScope.categ}">
 				<f:facet name="header">
             Expand rows to see detailed information
         </f:facet>
@@ -61,7 +61,7 @@
 					<p:panelGrid columns="2" columnClasses="label,value"
 						style="width:300px">
 						<f:facet name="header">
-							<p:graphicImage value="#{sessionScope.categorie}" />
+							<h:graphicImage value="#{cat.image}" />
 						</f:facet>
 
 						<h:outputText value="Id:" />
@@ -77,8 +77,53 @@
 				</p:rowExpansion>
 			</p:dataTable>
 		</h:form>
+		
+		<h:form>
+			<p:dataTable var="p" value="#{sessionScope.listeProd2}">
+				<f:facet name="header">
+            Expand rows to see detailed information
+        </f:facet>
+				<p:column style="width:16px">
+					<p:rowToggler />
+				</p:column>
+				<p:column headerText="Id">
+					<h:outputText value="#{p.idProduit}" />
+				</p:column>
+				<p:column headerText="Designation:">
+					<h:outputText value="#{p.designation}" />
+				</p:column>
+
+				<p:rowExpansion>
+					<p:panelGrid columns="2" columnClasses="label,value"
+						style="width:300px">
+						<f:facet name="header">
+							<h:graphicImage value="photo" />
+						</f:facet>
+
+						<h:outputText value="Id:" />
+						<h:outputText value="#{p.idProduit}" />
+
+						<h:outputText value="Designation:" />
+						<h:outputText value="#{p.designation}" />
+
+						<h:outputText value="Description:" />
+						<h:outputText value="#{p.description}"/>
+						
+						<h:outputText value="Prix:" />
+						<h:outputText value="#{p.prix}"/>
+						
+						<h:outputText value="Remise:" />
+						<h:outputText value="#{p.remise}"/>
+						
+						<h:outputText value="Quantite:" />
+						<h:outputText value="#{p.quantite}"/>
+
+					</p:panelGrid>
+				</p:rowExpansion>
+			</p:dataTable>
+		</h:form>
 	
-	
+	<h:messages/>
 
 </h:body>
 </html>
