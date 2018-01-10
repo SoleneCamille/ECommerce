@@ -1,12 +1,13 @@
 package fr.adaming.managedBeans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +20,7 @@ import fr.adaming.model.Produit;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "pMB")
-@RequestScoped
+@ViewScoped
 public class ProduitManagedBean {
 
 	// UML en java
@@ -88,11 +89,21 @@ public class ProduitManagedBean {
 	// methodes
 	public String ajouterProduit() {
 
-		Produit p = produitService.addProduit(this.produit, this.categorie);
+		this.produit = produitService.addProduit(this.produit, this.categorie);
 
-		if (p != null) {
+		if (this.produit != null) {
 			// récupération de la nouvelle liste de la bd
-			this.listeProduit = produitService.getProduitByCat(this.categorie);
+			List<Produit> listOut = produitService.getProduitByCat(this.categorie);
+			this.listeProduit = new ArrayList<Produit>();
+
+			for (Produit element : listOut) {
+				if (element.getPhoto() == null) {
+					element.setImage(null);
+				} else {
+					element.setImage("data:image/jpeg;base64," + Base64.encodeBase64String(element.getPhoto()));
+				}
+				this.listeProduit.add(element);
+			}
 
 			// mettre à jour la liste dans la session
 			maSession.setAttribute("produitList", this.listeProduit);
@@ -110,9 +121,16 @@ public class ProduitManagedBean {
 	}
 
 	public String afficherProduit() {
-		this.produit = produitService.getProduitbyIdorName(this.produit);
+		Produit pFind = produitService.getProduitbyIdorName(this.produit);
 
-		if (this.produit != null) {
+		if (pFind != null) {
+			if (pFind.getPhoto() == null) {
+				pFind.setImage(null);
+			} else {
+				pFind.setImage("data:image/jpeg;base64," + Base64.encodeBase64String(pFind.getPhoto()));
+			}
+			
+			this.produit=pFind;
 			maSession.setAttribute("produit", this.produit);
 
 			return "afficheProduit";
@@ -125,9 +143,6 @@ public class ProduitManagedBean {
 	public String supprimerProduit() {
 		int verif = produitService.deleteProduit(this.produit.getIdProduit());
 		if (verif == 1) {
-			// this.listeProduit =
-			// produitService.getProduitByCat(this.categorie.getIdCategorie());
-			// maSession.setAttribute("produitList", this.listeProduit);
 			return "rechercheCat";
 
 		} else {
