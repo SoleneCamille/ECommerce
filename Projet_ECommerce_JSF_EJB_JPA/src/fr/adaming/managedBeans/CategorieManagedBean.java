@@ -170,10 +170,22 @@ public class CategorieManagedBean implements Serializable {
 	}
 
 	public String supprimerCategorie() {
-		int verif = categorieService.deleteCategorie(this.categorie.getIdCategorie());
+		Categorie catOut = categorieService.getCategorieByIdOrName(this.categorie);
 
-		if (verif == 1) {
-			// récupération de la nouvelle liste de la bd
+		if (catOut!=null) {
+			
+			//récupération de la liste des produits de cette categorie
+			listeProduits = catOut.getListeProduits();
+			
+			//supprimer les produits de cette categorie
+			for (Produit p : listeProduits) {
+				produitService.deleteProduit(p.getIdProduit());
+			}
+			
+			//supprimer la categorie
+			categorieService.deleteCategorie(catOut.getIdCategorie());
+			
+			// récupération de la nouvelle liste de categories de la bd
 			this.listeCategories = categorieService.getAllCategories();
 
 			// mettre à jour la liste dans la session
