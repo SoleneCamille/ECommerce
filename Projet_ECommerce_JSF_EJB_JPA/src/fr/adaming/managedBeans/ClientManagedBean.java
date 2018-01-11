@@ -35,6 +35,7 @@ public class ClientManagedBean implements Serializable {
 	// constructeur vide
 	public ClientManagedBean() {
 		this.client = new Client();
+		this.categorie = new Categorie();
 
 	}
 	
@@ -95,12 +96,9 @@ public class ClientManagedBean implements Serializable {
 
 	// methodes
 	public String consulterCategorie() {
-		Categorie catFind = catService.getCategorieByIdOrName(this.categorie);
+		System.out.println("------------------  tototo");
+		System.out.println("--------------------  id :  "+this.categorie.getNomCategorie()+" "+this.categorie.getDescription()+" "+this.categorie.getListeProduits().size());
 
-		this.categorie = catFind;
-
-		// ajout de la catégorie dans la session
-		maSession.setAttribute("categ", this.categorie);
 
 		List<Produit> liste = this.categorie.getListeProduits();
 
@@ -108,15 +106,14 @@ public class ClientManagedBean implements Serializable {
 			listeProduit = liste;
 
 			// ajout de la liste de produits dans la session
-			maSession.setAttribute("listeProd2", this.listeProduit);
-			
+			maSession.setAttribute("listeProduits", this.listeProduit);
 
 		} else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Pas de produit dans cette catégorie"));
 
 		}
 
-		return "afficheProduitsClients";
+		return "afficheProduitsClient";
 
 	}
 

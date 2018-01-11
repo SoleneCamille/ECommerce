@@ -7,44 +7,54 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Affichage produits de la catégorie</title>
+	<title>Produits d'une catégorie</title>
 	<h:outputStylesheet library="css" name="myStyle.css" />
 </h:head>
 
 <h:body>
+	<!-- insertion du header -->
 	<ui:insert name="page">
 		<!-- insérer concrètement le layout avec la balise ui:include -->
-		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
+		<ui:include src="/templates/headerAccueil.xhtml"></ui:include>
 	</ui:insert>
 
 
-	<p:dataTable var="pdt" value="#{sessionScope.produit}" >
+	<h:form id="form">
+		<p:dataGrid var="pdt" value="#{sessionScope.listeProduits}"
+			columns="2" layout="grid" rows="16" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}">
 
-		<p:column headerText="Id">
-			<h:outputText value="#{pdt.idProduit}" />
-		</p:column>
+			<f:facet name="header">
+           Produits
+        </f:facet>
 
-		<p:column headerText="Désignation">
-			<h:outputText value="#{pdt.designation}" />
-		</p:column>
-		<p:column headerText="Description">
-			<h:outputText value="#{pdt.description}" />
-		</p:column>
+			<p:panel header="#{pdt.idProduit}" style="text-align:center">
+				<h:panelGrid columns="2" style="width:300px"
+					columnClasses="logo,detail">
+					
+					<h:graphicImage value="#{pdt.image}" />
 
-		<p:column headerText="Prix">
-			<h:outputText value="#{pdt.prix}" />
-		</p:column>
+					<p:outputPanel>
+						<h:panelGrid columns="2" cellpadding="2">
+							<h:outputText value="Nom:" />
+							<h:outputText value="#{pdt.description}"
+								style="font-weight: bold" />
 
-		<p:column headerText="Remise">
-			<h:outputText value="#{pdt.remise}" />
-		</p:column>
-
-
-		<p:column headerText="photo">
-			<h:outputText value="photo" />
-		</p:column>
-	</p:dataTable>
-
+							<h:outputText value="Prix:" />
+							<h:outputText value="#{pdt.prix}"
+								style="font-weight: bold" />
+								<h:outputText value="Remise:" />
+							<h:outputText value="#{pdt.remise}"
+								style="font-weight: bold" />
+								<h:outputText value="Stock:" />
+							<h:outputText value="#{pdt.quantite}"
+								style="font-weight: bold" />
+						</h:panelGrid>
+					</p:outputPanel>
+				</h:panelGrid>
+			</p:panel>
+		</p:dataGrid>
+	</h:form>
 
 
 </h:body>
