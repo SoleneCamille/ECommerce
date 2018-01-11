@@ -69,8 +69,6 @@ public class ProduitServiceImpl implements IProduitService {
 
 	@Override
 	public List<Produit> getProduitByCat(Categorie c) {
-		//Categorie cOut=catDao.getCategorieByIdOrName(c);
-		
 		return produitDao.getProduitByCat(c);
 	}
 	

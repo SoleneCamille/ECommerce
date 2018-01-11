@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,11 +24,11 @@ public class Commande implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id_comm")
-	private Long idCommande;
+	private int idCommande;
 	private Date dateCommande;
 
 	// transformation UML en java
-	 @OneToMany(mappedBy="commande", cascade=CascadeType.ALL)
+	 @OneToMany(mappedBy="commande", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	 private List<LignesCommande> listeLigneCommande;
 	 @ManyToOne
 	 @JoinColumn(name="client_id", referencedColumnName="id_client")
@@ -45,7 +45,7 @@ public class Commande implements Serializable {
 		this.dateCommande = dateCommande;
 	}
 
-	public Commande(Long idCommande, Date dateCommande) {
+	public Commande(int idCommande, Date dateCommande) {
 		super();
 		this.idCommande = idCommande;
 		this.dateCommande = dateCommande;
@@ -53,11 +53,11 @@ public class Commande implements Serializable {
 
 	// getters & setters
 
-	public Long getIdCommande() {
+	public int getIdCommande() {
 		return idCommande;
 	}
 
-	public void setIdCommande(Long idCommande) {
+	public void setIdCommande(int idCommande) {
 		this.idCommande = idCommande;
 	}
 

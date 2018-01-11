@@ -1,0 +1,26 @@
+package fr.adaming.dao;
+
+import java.util.List;
+
+import javax.ejb.Local;
+
+import fr.adaming.model.Client;
+import fr.adaming.model.Commande;
+
+@Local
+public interface ICommandeDao {
+
+	// déclaration des méthodes
+	public List<Commande> getAllCommandes();
+	
+	public List<Commande> getAllCommandesFromClient(Client client);
+
+	public Commande addCommande(Commande comm);
+
+	public Commande updateCommande(Commande comm);
+
+	public int deleteCommande(int idCommande);
+
+	public Commande getCommandeById(Commande comm);
+
+}

@@ -16,20 +16,17 @@ public class ProduitDaoImpl implements IProduitDao {
 	@PersistenceContext(unitName = "PU_Projet")
 	EntityManager em;
 
-	private List<Produit>listeProduits;
 	// setters pour l'injection de l'indépendance
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-	
-	
 
 	@Override
 	public Produit addProduit(Produit p) {
-		
+
 		em.merge(p);
 		return p;
-		
+
 	}
 
 	@Override
@@ -57,22 +54,21 @@ public class ProduitDaoImpl implements IProduitDao {
 
 	@Override
 	public Produit getProduitbyIdorName(Produit p) {
-		
-		//creation de la requete JPQL
-				String req = "select p from Produit as p where p.idProduit=:pId "
-						+ "or p.designation=:pNom";
-				
-				//creation du query
-				Query query = em.createQuery(req);
-				
-				//assignation des paramètres
-				query.setParameter("pId", p.getIdProduit());
-				query.setParameter("pNom", p.getDesignation());
-				
-				//envoi de la requete et récupération du resultat
-				Produit pFind = (Produit) query.getSingleResult();
-					
-				return pFind;
+
+		// creation de la requete JPQL
+		String req = "select p from Produit as p where p.idProduit=:pId " + "or p.designation=:pNom";
+
+		// creation du query
+		Query query = em.createQuery(req);
+
+		// assignation des paramètres
+		query.setParameter("pId", p.getIdProduit());
+		query.setParameter("pNom", p.getDesignation());
+
+		// envoi de la requete et récupération du resultat
+		Produit pFind = (Produit) query.getSingleResult();
+
+		return pFind;
 
 	}
 
@@ -93,8 +89,6 @@ public class ProduitDaoImpl implements IProduitDao {
 		query.setParameter("pIdC", c.getIdCategorie());
 
 		// envoi de la requete et récupération du résultat
-		System.out.println("############################");
-		System.out.println(query.getResultList());
 		return query.getResultList();
 	}
 

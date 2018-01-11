@@ -3,7 +3,6 @@ package fr.adaming.dao;
 import java.util.List;
 
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -52,7 +51,7 @@ public class CategorieDaoImpl implements ICategorieDao {
 
 	@Override
 	public int deleteCategorie(int idCategorie) {
-		//création de la requete SQL
+		//création de la requete JPQL
 		String req = "delete from Categorie as cat where cat.idCategorie = :pId";
 		
 		//creation du query
