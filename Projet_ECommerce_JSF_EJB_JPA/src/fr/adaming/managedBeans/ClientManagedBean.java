@@ -1,16 +1,18 @@
 package fr.adaming.managedBeans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.codec.binary.Base64;
 
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
@@ -18,7 +20,7 @@ import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 
 @ManagedBean(name = "clientMB")
-@RequestScoped
+@ViewScoped
 public class ClientManagedBean implements Serializable {
 
 	// transformation de l'association uml en java
@@ -32,6 +34,7 @@ public class ClientManagedBean implements Serializable {
 	private Categorie categorie;
 	private HttpSession maSession;
 	private List<Produit> listeProduit;
+	
 	// constructeur vide
 	public ClientManagedBean() {
 		this.client = new Client();
@@ -90,21 +93,23 @@ public class ClientManagedBean implements Serializable {
 	public void setListeProduit(List<Produit> listeProduit) {
 		this.listeProduit = listeProduit;
 	}
-	
-	
-	
 
 	// methodes
 	public String consulterCategorie() {
-		System.out.println("------------------  tototo");
-		System.out.println("--------------------  id :  "+this.categorie.getNomCategorie()+" "+this.categorie.getDescription()+" "+this.categorie.getListeProduits().size());
-
-
 		List<Produit> liste = this.categorie.getListeProduits();
+		this.listeProduit = new ArrayList<Produit>();
 
 		if (liste != null) {
-			listeProduit = liste;
-
+			for (Produit element : liste) {
+				if (element.getPhoto()==null) {
+					element.setImage(null);
+				} else {
+					element.setImage("data:image/png;base64," + Base64.encodeBase64String(element.getPhoto()));
+				}
+				
+				this.listeProduit.add(element);
+			}
+			
 			// ajout de la liste de produits dans la session
 			maSession.setAttribute("listeProduits", this.listeProduit);
 

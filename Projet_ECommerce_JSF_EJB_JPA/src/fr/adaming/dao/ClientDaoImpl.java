@@ -7,11 +7,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import fr.adaming.model.Commande;
-import fr.adaming.model.LignesCommande;
+import fr.adaming.model.Client;
 
 @Stateless
-public class LignesCommandeDaoImpl implements ILignesCommandeDao {
+public class ClientDaoImpl implements IClientDao {
 
 	@PersistenceContext(unitName = "PU_Projet") // pour l'injection d'un EM
 	EntityManager em;
@@ -23,50 +22,46 @@ public class LignesCommandeDaoImpl implements ILignesCommandeDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<LignesCommande> getAllLignes(int idCommande) {
+	public List<Client> getAllClients() {
 		// construire la requete JPQL
-		String req = "select l from LignesCommande as l where l.commande.idCommande=:pIdComm";
+		String req = "select c from Client as c";
 
 		// créer un query
 		Query query = em.createQuery(req);
-
-		// assignation des paramètres
-		query.setParameter("pIdComm", idCommande);
 
 		// envoi de la requete et récupération du result
 		return query.getResultList();
 	}
 
 	@Override
-	public LignesCommande addLigne(LignesCommande ligne) {
-		em.persist(ligne);
-		// envoi de la requete
-		return ligne;
+	public Client addClient(Client client) {
+		em.persist(client);
+		return client;
 	}
 
 	@Override
-	public LignesCommande updateLigne(LignesCommande ligne) {
-		em.merge(ligne);
-		return ligne;
+	public Client updateClient(Client client) {
+		em.merge(client);
+		return client;
 	}
 
 	@Override
-	public int deleteLigne(int idLigne) {
+	public int deleteClient(int idClient) {
 		// creation de la requete JPQL
-		String req = "delete from LignesCommande as l where l.idLigne=:pIdLigne";
+		String req = "delete from Client as c where c.idClient=:pIdClient";
 
 		// créer un query
 		Query query = em.createQuery(req);
 
 		// assignation des paramètres
-		query.setParameter("pIdLigne", idLigne);
+		query.setParameter("pIdClient", idClient);
 
 		return query.executeUpdate();
 	}
 
 	@Override
-	public LignesCommande getLigneById(LignesCommande ligne) {
-		return em.find(LignesCommande.class, ligne.getIdLigne());
+	public Client getClientById(Client client) {
+		return em.find(Client.class, client.getIdClient());
 	}
 
 }

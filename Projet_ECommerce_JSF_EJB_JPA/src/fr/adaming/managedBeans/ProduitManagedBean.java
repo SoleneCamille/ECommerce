@@ -1,5 +1,6 @@
 package fr.adaming.managedBeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "pMB")
 @ViewScoped
-public class ProduitManagedBean {
+public class ProduitManagedBean implements Serializable{
 
 	// UML en java
 

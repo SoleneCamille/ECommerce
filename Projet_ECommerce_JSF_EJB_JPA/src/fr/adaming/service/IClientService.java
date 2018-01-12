@@ -1,4 +1,4 @@
-package fr.adaming.dao;
+package fr.adaming.service;
 
 import java.util.List;
 
@@ -6,10 +6,9 @@ import javax.ejb.Local;
 
 import fr.adaming.model.Client;
 
-
 @Local
-public interface IClientDao {
-
+public interface IClientService {
+	
 	// déclaration des méthodes
 	public List<Client> getAllClients();
 

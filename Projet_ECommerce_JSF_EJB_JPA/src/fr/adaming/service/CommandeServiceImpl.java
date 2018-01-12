@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 
+import fr.adaming.dao.IClientDao;
 import fr.adaming.dao.ICommandeDao;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
@@ -15,8 +16,8 @@ public class CommandeServiceImpl implements ICommandeService {
 	@EJB
 	private ICommandeDao commandeDao;
 
-	// @EJB
-	// private IClientDao clientDao;
+	@EJB
+	private IClientDao clientDao;
 
 	// setters
 	public void setCommandeDao(ICommandeDao commandeDao) {
@@ -35,15 +36,15 @@ public class CommandeServiceImpl implements ICommandeService {
 
 	@Override
 	public Commande addCommande(Commande comm, Client client) {
-		// Client cOut = clientDao.getClientById(client)
-		// comm.setClient(cOut);
+		Client cOut = clientDao.getClientById(client);
+		comm.setClient(cOut);
 		return commandeDao.addCommande(comm);
 	}
 
 	@Override
 	public Commande updateCommande(Commande comm, Client client) {
-		// Client cOut = clientDao.getClientById(client)
-		// comm.setClient(cOut);
+		Client cOut = clientDao.getClientById(client);
+		comm.setClient(cOut);
 		return commandeDao.updateCommande(comm);
 	}
 

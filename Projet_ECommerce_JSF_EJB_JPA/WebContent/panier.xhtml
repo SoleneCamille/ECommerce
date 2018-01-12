@@ -14,18 +14,43 @@
 <h:body>
 	<ui:insert name="page">
 		<!-- insérer concrètement le layout avec la balise ui:include -->
-		<ui:include src="/templates/headerAdmin.xhtml"></ui:include>
+		<ui:include src="/templates/headerAccueil.xhtml"></ui:include>
 	</ui:insert>
-	
-	<div class="cadre">
-	<h1 style="text-align: center; color: black">Récapitulatif de votre commande :</h1>
-		
-	<h:form>
 
+	<div class="cadre">
+		<h1 style="text-align: center; color: black">Récapitulatif de
+			votre commande :</h1>
 	</div>
 
+	<h:form>
+		<p:dataTable var="ligne" value="#{sessionScope.lignesListe}">
+			<p:column headerText="Produit">
+				<h:outputText value="#{ligne.produit.designation}" />
+			</p:column>
 
+			<p:column headerText="Description">
+				<h:outputText value="#{ligne.produit.description}" />
+			</p:column>
 
+			<p:column headerText="Prix Unitaire">
+				<h:outputText value="#{ligne.produit.prix}" />
+			</p:column>
+			
+			<p:column headerText="Remise">
+				<h:outputText value="#{ligne.produit.remise}" />
+			</p:column>
+			
+			
+			<p:column headerText="Quantité">
+				<h:outputText value="#{ligne.quantite}" />
+			</p:column>
+
+			<p:column headerText="Prix total">
+				<h:outputText value="#{ligne.prix}" />
+			</p:column>
+
+		</p:dataTable>
+	</h:form>
 
 </h:body>
 </html>

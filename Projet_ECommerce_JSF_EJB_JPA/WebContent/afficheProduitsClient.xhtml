@@ -31,24 +31,30 @@
 			<p:panel header="#{pdt.idProduit}" style="text-align:center">
 				<h:panelGrid columns="2" style="width:300px"
 					columnClasses="logo,detail">
-					
+
 					<h:graphicImage value="#{pdt.image}" />
 
 					<p:outputPanel>
 						<h:panelGrid columns="2" cellpadding="2">
 							<h:outputText value="Nom:" />
+							<h:outputText value="#{pdt.designation}"
+								style="font-weight: bold" />
+							<h:outputText value="Description:" />
 							<h:outputText value="#{pdt.description}"
 								style="font-weight: bold" />
 
 							<h:outputText value="Prix:" />
-							<h:outputText value="#{pdt.prix}"
-								style="font-weight: bold" />
-								<h:outputText value="Remise:" />
-							<h:outputText value="#{pdt.remise}"
-								style="font-weight: bold" />
-								<h:outputText value="Stock:" />
-							<h:outputText value="#{pdt.quantite}"
-								style="font-weight: bold" />
+							<h:outputText value="#{pdt.prix}" style="font-weight: bold" />
+							<h:outputText value="Remise:" />
+							<h:outputText value="#{pdt.remise}" style="font-weight: bold" />
+							<h:outputText value="Stock:" />
+							<h:outputText value="#{pdt.quantite}" style="font-weight: bold" />
+
+							<p:commandButton value="Ajouter au panier"
+								action="#{lMB.ajouterLigne}">
+								<f:setPropertyActionListener value="#{pdt}"
+									target="#{lMB.produit}" />
+							</p:commandButton>
 						</h:panelGrid>
 					</p:outputPanel>
 				</h:panelGrid>

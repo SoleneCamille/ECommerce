@@ -13,18 +13,18 @@ import fr.adaming.model.LignesCommande;
 import fr.adaming.model.Produit;
 
 @Stateful
-public class LignesCommandeServiceImpl implements ILignesCommandeService{
+public class LignesCommandeServiceImpl implements ILignesCommandeService {
 
 	@EJB
 	private ILignesCommandeDao ligneDao;
-	
+
 	@EJB
 	private IProduitDao produitDao;
-	
+
 	@EJB
 	private ICommandeDao commandeDao;
-	
-	//setters
+
+	// setters
 	public void setLigneDao(ILignesCommandeDao ligneDao) {
 		this.ligneDao = ligneDao;
 	}
@@ -32,24 +32,25 @@ public class LignesCommandeServiceImpl implements ILignesCommandeService{
 	public void setProduitDao(IProduitDao produitDao) {
 		this.produitDao = produitDao;
 	}
-	
+
 	public void setCommandeDao(ICommandeDao commandeDao) {
 		this.commandeDao = commandeDao;
 	}
 
 	@Override
-	public List<LignesCommande> getAllLignes(Commande comm) {
-		return ligneDao.getAllLignes(comm);
+	public List<LignesCommande> getAllLignes(int idCommande) {
+		return ligneDao.getAllLignes(idCommande);
 	}
-
 
 	@Override
 	public LignesCommande addLigne(LignesCommande ligne, Commande comm, Produit p) {
 		Produit pOut = produitDao.getProduitbyIdorName(p);
 		ligne.setProduit(pOut);
-		
 		Commande cOut = commandeDao.getCommandeById(comm);
 		ligne.setCommande(cOut);
+		ligne.setQuantite(1);
+		double prixTotal = p.getPrix()-(p.getPrix()*p.getRemise())/100;
+		ligne.setPrix(prixTotal);
 
 		return ligneDao.addLigne(ligne);
 	}
@@ -58,7 +59,7 @@ public class LignesCommandeServiceImpl implements ILignesCommandeService{
 	public LignesCommande updateLigne(LignesCommande ligne, Commande comm, Produit p) {
 		Produit pOut = produitDao.getProduitbyIdorName(p);
 		ligne.setProduit(pOut);
-		
+
 		Commande cOut = commandeDao.getCommandeById(comm);
 		ligne.setCommande(cOut);
 		return ligneDao.updateLigne(ligne);
@@ -73,7 +74,5 @@ public class LignesCommandeServiceImpl implements ILignesCommandeService{
 	public LignesCommande getLigneById(LignesCommande ligne) {
 		return ligneDao.getLigneById(ligne);
 	}
-	
-	
 
 }

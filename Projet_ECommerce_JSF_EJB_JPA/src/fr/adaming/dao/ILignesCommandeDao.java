@@ -11,7 +11,7 @@ import fr.adaming.model.LignesCommande;
 public interface ILignesCommandeDao {
 
 	// déclaration des méthodes
-	public List<LignesCommande> getAllLignes(Commande comm);
+	public List<LignesCommande> getAllLignes(int idCommande);
 
 	public LignesCommande addLigne(LignesCommande ligne);
 
