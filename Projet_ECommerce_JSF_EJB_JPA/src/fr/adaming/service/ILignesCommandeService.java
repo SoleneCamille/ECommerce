@@ -18,9 +18,11 @@ public interface ILignesCommandeService {
 
 	public LignesCommande updateLigne(LignesCommande ligne, Commande comm, Produit p);
 
-	public int deleteLigne(int idLigne);
+	public int deleteLigne(LignesCommande ligne);
 
 	public LignesCommande getLigneById(LignesCommande ligne);
+	
+	public LignesCommande getLigneByIdProduit (Produit p);
 	
 
 }

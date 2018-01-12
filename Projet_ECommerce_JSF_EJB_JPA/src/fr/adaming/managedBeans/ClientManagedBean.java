@@ -18,6 +18,7 @@ import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
+import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "clientMB")
 @ViewScoped
@@ -28,6 +29,9 @@ public class ClientManagedBean implements Serializable {
 	// private IClientService clientService;
 	@EJB
 	private ICategorieService catService;
+	
+	@EJB
+	private IProduitService prodService;
 
 	private Client client;
 	private List<Categorie> listeCategories;
@@ -96,7 +100,7 @@ public class ClientManagedBean implements Serializable {
 
 	// methodes
 	public String consulterCategorie() {
-		List<Produit> liste = this.categorie.getListeProduits();
+		List<Produit> liste = prodService.getProduitByCat(this.categorie);
 		this.listeProduit = new ArrayList<Produit>();
 
 		if (liste != null) {

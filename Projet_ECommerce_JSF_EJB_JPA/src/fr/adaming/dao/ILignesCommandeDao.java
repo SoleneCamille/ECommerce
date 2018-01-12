@@ -6,6 +6,7 @@ import javax.ejb.Local;
 
 import fr.adaming.model.Commande;
 import fr.adaming.model.LignesCommande;
+import fr.adaming.model.Produit;
 
 @Local
 public interface ILignesCommandeDao {
@@ -20,5 +21,7 @@ public interface ILignesCommandeDao {
 	public int deleteLigne(int idLigne);
 
 	public LignesCommande getLigneById(LignesCommande ligne);
+	
+	public LignesCommande getLigneByIdProduit (Produit p);
 
 }

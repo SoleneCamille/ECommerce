@@ -31,7 +31,7 @@ public class Produit implements Serializable {
 	private double prix;
 	private double remise;
 	private int quantite;
-	private boolean selectionne;
+	private boolean selectionne = false;
 	@Lob
 	private byte[] photo;
 	

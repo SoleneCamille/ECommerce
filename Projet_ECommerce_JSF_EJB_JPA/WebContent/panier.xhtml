@@ -35,12 +35,12 @@
 			<p:column headerText="Prix Unitaire">
 				<h:outputText value="#{ligne.produit.prix}" />
 			</p:column>
-			
+
 			<p:column headerText="Remise">
 				<h:outputText value="#{ligne.produit.remise}" />
 			</p:column>
-			
-			
+
+
 			<p:column headerText="Quantité">
 				<h:outputText value="#{ligne.quantite}" />
 			</p:column>
@@ -49,7 +49,26 @@
 				<h:outputText value="#{ligne.prix}" />
 			</p:column>
 
+			<p:column headerText="Supprimer le produit du panier">
+				<p:commandButton icon="ui-icon-scissors"
+					action="#{lMB.supprimerLigne}" update="@all">
+					<f:setPropertyActionListener value="#{ligne}" target="#{lMB.ligne}" />
+				</p:commandButton>
+			</p:column>
+
 		</p:dataTable>
+		<br />
+		<br />
+		<p:commandButton value="Continuer mes achats"
+			action="accueil.xhtml" update="@all"
+			style="background-color:dodgerblue;backgroung-border:dodgerblue" />
+		<p:commandButton value="Annuler la commande"
+			action="#{lMB.viderPanier}" update="@all"
+			style="background-color:dodgerblue;backgroung-border:dodgerblue" />
+
+		<p:commandButton value="Valider la commande"
+			action="validationCommande.xhtml" update="@all"
+			style="background-color:dodgerblue;backgroung-border:dodgerblue" />
 	</h:form>
 
 </h:body>

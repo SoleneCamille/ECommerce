@@ -116,11 +116,6 @@ public class ProduitManagedBean implements Serializable{
 		}
 	}
 
-	public double calculPrix() {
-		double prix = this.produit.getPrix() - (this.produit.getPrix() * this.produit.getRemise() / 100);
-		return prix;
-	}
-
 	public String afficherProduit() {
 		Produit pFind = produitService.getProduitbyIdorName(this.produit);
 

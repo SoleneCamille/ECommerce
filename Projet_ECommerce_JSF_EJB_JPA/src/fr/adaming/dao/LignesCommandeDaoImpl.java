@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import fr.adaming.model.Commande;
 import fr.adaming.model.LignesCommande;
+import fr.adaming.model.Produit;
 
 @Stateless
 public class LignesCommandeDaoImpl implements ILignesCommandeDao {
@@ -67,6 +68,21 @@ public class LignesCommandeDaoImpl implements ILignesCommandeDao {
 	@Override
 	public LignesCommande getLigneById(LignesCommande ligne) {
 		return em.find(LignesCommande.class, ligne.getIdLigne());
+	}
+
+	@Override
+	public LignesCommande getLigneByIdProduit(Produit p) {
+		// construire la requete JPQL
+		String req = "select l from LignesCommande as l where l.produit.idProduit=:pIdProd";
+
+		// créer un query
+		Query query = em.createQuery(req);
+
+		// assignation des paramètres
+		query.setParameter("pIdProd", p.getIdProduit());
+
+		// envoi de la requete et récupération du result
+		return (LignesCommande) query.getSingleResult();
 	}
 
 }

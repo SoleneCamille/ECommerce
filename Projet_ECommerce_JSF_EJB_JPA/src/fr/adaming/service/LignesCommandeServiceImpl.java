@@ -45,6 +45,7 @@ public class LignesCommandeServiceImpl implements ILignesCommandeService {
 	@Override
 	public LignesCommande addLigne(LignesCommande ligne, Commande comm, Produit p) {
 		Produit pOut = produitDao.getProduitbyIdorName(p);
+		pOut.setSelectionne(true);
 		ligne.setProduit(pOut);
 		Commande cOut = commandeDao.getCommandeById(comm);
 		ligne.setCommande(cOut);
@@ -66,13 +67,21 @@ public class LignesCommandeServiceImpl implements ILignesCommandeService {
 	}
 
 	@Override
-	public int deleteLigne(int idLigne) {
-		return ligneDao.deleteLigne(idLigne);
+	public int deleteLigne(LignesCommande ligne) {
+		Produit pOut = ligne.getProduit();
+		pOut.setSelectionne(false);
+		produitDao.updateProduit(pOut);
+		return ligneDao.deleteLigne(ligne.getIdLigne());
 	}
 
 	@Override
 	public LignesCommande getLigneById(LignesCommande ligne) {
 		return ligneDao.getLigneById(ligne);
+	}
+
+	@Override
+	public LignesCommande getLigneByIdProduit(Produit p) {
+		return ligneDao.getLigneByIdProduit(p);
 	}
 
 }
