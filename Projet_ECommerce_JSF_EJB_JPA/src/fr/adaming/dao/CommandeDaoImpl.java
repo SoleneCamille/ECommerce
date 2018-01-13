@@ -9,6 +9,7 @@ import javax.persistence.Query;
 
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.LignesCommande;
 
 @Stateless
 public class CommandeDaoImpl implements ICommandeDao {
@@ -81,4 +82,44 @@ public class CommandeDaoImpl implements ICommandeDao {
 		em.find(Commande.class, comm.getIdCommande());
 		return comm;
 	}
+
+	@Override
+	public double getPrixTotalAvantRemise(Commande com) {
+		String req = "select l from LignesCommande as l where l.commande.idCommande=:pIdcom";
+		// creation du query
+				Query query = em.createQuery(req);
+
+				// assignation des paramètres de la requete
+				query.setParameter("pIdcom", com.getIdCommande());
+				List<LignesCommande> liste= query.getResultList();
+				
+				double somme = 0;
+				 
+				for(LignesCommande l: liste) {
+					double prixAvant=(l.getPrix()/(1- (l.getProduit().getRemise())/100));
+				    somme = somme + prixAvant;
+				}
+		
+			
+				return somme;
+
+	}
+	public double getPrixTotalApresRemise(Commande com) {
+		String req = "select l from LignesCommande as l where l.commande.idCommande=:pIdcom";
+		// creation du query
+				Query query = em.createQuery(req);
+
+				// assignation des paramètres de la requete
+				query.setParameter("pIdcom", com.getIdCommande());
+				List<LignesCommande> liste= query.getResultList();
+				double somme = 0;
+				for(int i=0;i<liste.size();i++) {
+					double prixApres=liste.get(i).getPrix();
+				    somme = somme + prixApres;
+				}
+		
+				return somme;
+
+	}
+	
 }

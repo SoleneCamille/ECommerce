@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Affichage panier</title>
+	<title>Envoi commande par mail</title>
 	<h:outputStylesheet library="css" name="myStyle.css" />
 </h:head>
 
@@ -52,43 +52,28 @@
 				<h:outputText value="#{ligne.prix}" />
 			</p:column>
 
-			<p:column headerText="Supprimer le produit du panier">
-				<p:commandButton icon="ui-icon-scissors"
-					action="#{lMB.supprimerLigne}" update="@all">
-					<f:setPropertyActionListener value="#{ligne}" target="#{lMB.ligne}" />
-				</p:commandButton>
-			</p:column>
 
 		</p:dataTable>
 		<br />
 		<br />
 		
+		
+		<br/>	
+		<br/>	
+		<br/>	
+		
 	<div>
+	
 	<h:form>
 		
-		<p:commandButton value="Voir le montant total de votre panier"
-			action="#{clientMB.getPrixCommande()}" 
+		<p:commandButton value="Envoi récapitulatif commande par mail"
+			action="#{clientMB.envoiMail()}" 
 			style="background-color:dodgerblue;backgroung-border:dodgerblue" />
 		</h:form>
 		</div>
 		
 		
-		<br/>	
-		<br/>	
-		<br/>	
 		
-		<h:form>
-		<p:commandButton value="Continuer mes achats"
-			action="accueil.xhtml" update="@all"
-			style="background-color:dodgerblue;backgroung-border:dodgerblue" />
-		<p:commandButton value="Annuler la commande"
-			action="#{lMB.viderPanier}" update="@all"
-			style="background-color:dodgerblue;backgroung-border:dodgerblue" />
-
-		<p:commandButton value="Valider la commande"
-			action="validationCommande.xhtml" update="@all"
-			style="background-color:dodgerblue;backgroung-border:dodgerblue" />
-	</h:form>
 
 </h:body>
 </html>

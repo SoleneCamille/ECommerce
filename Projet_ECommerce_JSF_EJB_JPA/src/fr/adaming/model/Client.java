@@ -26,6 +26,7 @@ public class Client implements Serializable {
 	private String adresse;
 	private String email;
 	private String tel;
+	private String mdp;
 	
 
 	// UML en java
@@ -36,22 +37,24 @@ public class Client implements Serializable {
 		super();
 	}
 
-	public Client(String nomClient, String adresse, String email, String tel) {
+	public Client(String nomClient, String adresse, String email, String tel,String mdp) {
 		super();
 		this.nomClient = nomClient;
 		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
+		this.mdp=mdp;
 
 	}
 
-	public Client(Long idClient, String nomClient, String adresse, String email, String tel) {
+	public Client(Long idClient, String nomClient, String adresse, String email, String tel,String mdp) {
 		super();
 		this.idClient = idClient;
 		this.nomClient = nomClient;
 		this.adresse = adresse;
 		this.email = email;
 		this.tel = tel;
+		this.mdp=mdp;
 
 	}
 
@@ -102,5 +105,15 @@ public class Client implements Serializable {
 	public void setListeCommande(List<Commande> listeCommande) {
 		this.listeCommande = listeCommande;
 	}
+
+	public String getMdp() {
+		return mdp;
+	}
+
+	public void setMdp(String mdp) {
+		this.mdp = mdp;
+	}
+	
+	
 
 }

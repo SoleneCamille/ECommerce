@@ -22,5 +22,8 @@ public interface ICommandeService {
 	public int deleteCommande(int idCommande);
 
 	public Commande getCommandeById(Commande comm);
+	
+	public double getPrixTotalAvantRemise(Commande com);
+	public double getPrixTotalApresRemise(Commande com);
 
 }

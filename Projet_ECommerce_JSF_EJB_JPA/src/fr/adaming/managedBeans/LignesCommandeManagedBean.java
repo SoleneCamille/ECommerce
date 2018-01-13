@@ -31,6 +31,8 @@ public class LignesCommandeManagedBean implements Serializable {
 	private List<LignesCommande> listeLignes;
 	private Produit produit;
 
+	
+
 	private HttpSession maSession;
 
 	public LignesCommandeManagedBean() {
@@ -73,16 +75,23 @@ public class LignesCommandeManagedBean implements Serializable {
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
 	}
+	
+	
 
+
+	
+	//methodes
+	
+	
 	public String ajouterLigne() {
 		Commande comDefaut = new Commande();
 		comDefaut.setIdCommande(1);
-
 		if (!this.produit.isSelectionne()) {
 			this.ligne = ligneService.addLigne(this.ligne, comDefaut, this.produit);
 		} else {
 			this.ligne = ligneService.getLigneByIdProduit(this.produit);
 			int quantite = this.ligne.getQuantite();
+			
 			this.ligne.setQuantite(quantite+1);
 			double prix = (this.ligne.getPrix()/quantite)*(quantite+1);
 			this.ligne.setPrix(prix);
@@ -92,13 +101,17 @@ public class LignesCommandeManagedBean implements Serializable {
 		// récupérer la liste de lignes dont la commande est nulle
 		this.listeLignes = ligneService.getAllLignes(comDefaut.getIdCommande());
 
-		for (LignesCommande element : listeLignes) {
-			System.out.println(element.getIdLigne());
-		}
+//		for (LignesCommande element : listeLignes) {
+//			System.out.println(element.getIdLigne());
+//		}
 
 		// ajout de la liste dans la session
-		maSession.setAttribute("lignesListe", this.listeLignes);
 
+		//maSession.setAttribute("lignesListe", this.listeLignes);
+		//calcul prix avant la remise
+		
+		
+		
 		return "panier";
 	}
 
@@ -134,5 +147,7 @@ public class LignesCommandeManagedBean implements Serializable {
 
 		return "panier";
 	}
+
+	
 
 }

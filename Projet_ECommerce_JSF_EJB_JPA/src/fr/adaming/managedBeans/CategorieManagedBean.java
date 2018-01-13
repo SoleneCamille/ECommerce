@@ -1,21 +1,21 @@
 
 package fr.adaming.managedBeans;
 
-import java.io.File;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+
 import javax.faces.application.FacesMessage;
-import javax.faces.application.FacesMessage.Severity;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
+
 
 import org.apache.commons.codec.binary.Base64;
 import org.primefaces.event.FileUploadEvent;

@@ -18,10 +18,17 @@
 		<ui:include src="/templates/headerAccueil.xhtml"></ui:include>
 	</ui:insert>
 
-	<p:panelGrid columns="2">
-		<div class="cadre">déjà client ? = formulaire de connexion + bouton se connecter</div>
-		<div class="cadre">nouveau client ? = formulaire d'inscription + bouton s'inscrire</div>
-	</p:panelGrid>
+	
+	<h:form>
+		<p:commandButton value="Déjà client : se connecter"
+			action="connexionClient.xhtml" update="@all"
+			style="background-color:dodgerblue;backgroung-border:dodgerblue" />
+		<p:commandButton value="Nouveau client : s'inscrire"
+			action="inscriptionClient.xhtml" update="@all"
+			style="background-color:dodgerblue;backgroung-border:dodgerblue" />
+
+		
+	</h:form>
 	
 	les deux div pourraient être l'une à coté de l'autre et les deux boutons ramèneraient vers une page de "paiement"
 	bouton d'inscription nécessite une méthode d'ajout de client dans clientMB

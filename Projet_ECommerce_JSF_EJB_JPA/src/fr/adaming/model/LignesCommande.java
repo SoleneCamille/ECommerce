@@ -22,6 +22,7 @@ public class LignesCommande implements Serializable {
 	private int idLigne;
 	private int quantite;
 	private double prix;
+	private double prixAvantRemise;
 	
 	//transformation de l'association UML en java
 	@ManyToOne
@@ -43,11 +44,12 @@ public class LignesCommande implements Serializable {
 		this.prix = prix;
 	}
 
-	public LignesCommande(int idLigne, int quantite, double prix) {
+	public LignesCommande(int idLigne, int quantite, double prix, double prixAvantRemise) {
 		super();
 		this.idLigne = idLigne;
 		this.quantite = quantite;
 		this.prix = prix;
+		this.prixAvantRemise=prixAvantRemise;
 	}
 
 	public int getIdLigne() {
@@ -88,6 +90,14 @@ public class LignesCommande implements Serializable {
 
 	public void setCommande(Commande commande) {
 		this.commande = commande;
+	}
+
+	public double getPrixAvantRemise() {
+		return prixAvantRemise;
+	}
+
+	public void setPrixAvantRemise(double prixAvantRemise) {
+		this.prixAvantRemise = prixAvantRemise;
 	}
 	
 	

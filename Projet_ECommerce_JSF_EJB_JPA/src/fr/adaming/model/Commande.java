@@ -26,7 +26,8 @@ public class Commande implements Serializable {
 	@Column(name="id_comm")
 	private int idCommande;
 	private Date dateCommande;
-
+private double prixAvant;
+private double prixApres;
 	// transformation UML en java
 	 @OneToMany(mappedBy="commande", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	 private List<LignesCommande> listeLigneCommande;
@@ -49,6 +50,8 @@ public class Commande implements Serializable {
 		super();
 		this.idCommande = idCommande;
 		this.dateCommande = dateCommande;
+		this.prixAvant=prixAvant;
+		this.prixApres=prixApres;
 	}
 
 	// getters & setters
@@ -83,6 +86,22 @@ public class Commande implements Serializable {
 
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	public double getPrixAvant() {
+		return prixAvant;
+	}
+
+	public void setPrixAvant(double prixAvant) {
+		this.prixAvant = prixAvant;
+	}
+
+	public double getPrixApres() {
+		return prixApres;
+	}
+
+	public void setPrixApres(double prixApres) {
+		this.prixApres = prixApres;
 	}
 	
 	

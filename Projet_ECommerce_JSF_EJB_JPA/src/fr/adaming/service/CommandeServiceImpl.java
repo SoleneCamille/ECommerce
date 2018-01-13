@@ -58,4 +58,16 @@ public class CommandeServiceImpl implements ICommandeService {
 		return commandeDao.getCommandeById(comm);
 	}
 
+	@Override
+	public double getPrixTotalAvantRemise(Commande com) {
+	
+		return commandeDao.getPrixTotalAvantRemise(com);
+	}
+
+	@Override
+	public double getPrixTotalApresRemise(Commande com) {
+	
+		return commandeDao.getPrixTotalApresRemise(com);
+	}
+
 }
