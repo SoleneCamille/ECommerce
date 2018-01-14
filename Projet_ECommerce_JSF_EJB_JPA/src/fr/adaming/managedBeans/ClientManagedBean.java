@@ -345,6 +345,7 @@ public class ClientManagedBean implements Serializable {
 		this.listeLignes = ligneService.getAllLignes(this.commande.getIdCommande());
 		
 		maSession.setAttribute("lignesList", this.listeLignes);
+		maSession.setAttribute("commande", this.commande);
 		
 		return "detailCommande";
 	}
