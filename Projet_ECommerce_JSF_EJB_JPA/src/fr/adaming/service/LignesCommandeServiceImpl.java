@@ -44,19 +44,16 @@ public class LignesCommandeServiceImpl implements ILignesCommandeService {
 
 	@Override
 	public LignesCommande addLigne(LignesCommande ligne, Commande comm, Produit p) {
-		int quantite=ligne.getQuantite();
 		Produit pOut = produitDao.getProduitbyIdorName(p);
 		pOut.setSelectionne(true);
 		
 		ligne.setProduit(pOut);
 		Commande cOut = commandeDao.getCommandeById(comm);
 		ligne.setCommande(cOut);
-		ligne.setQuantite(quantite);
-		double prixTotal = ligne.getQuantite()*(p.getPrix()-(p.getPrix()*(p.getRemise()/100)));
+		ligne.setQuantite(1);
+		double prixTotal = p.getPrix()-(p.getPrix()*(p.getRemise()/100));
 		ligne.setPrix(prixTotal);
-		System.out.println("###############################################MB prix apres remise"+(ligne.getPrix()));
-		System.out.println("###############################################MB prix avant remise"+(ligne.getPrix())/(1-(p.getRemise()/100)));
-		ligne.setPrixAvantRemise((ligne.getPrix())/(1-(p.getRemise()/100)));
+		ligne.setPrixAvantRemise(p.getPrix());
 
 		return ligneDao.addLigne(ligne);
 	}
@@ -68,6 +65,11 @@ public class LignesCommandeServiceImpl implements ILignesCommandeService {
 
 		Commande cOut = commandeDao.getCommandeById(comm);
 		ligne.setCommande(cOut);
+		
+		double prixTotal = ligne.getQuantite()*(p.getPrix()-(p.getPrix()*(p.getRemise()/100)));
+		ligne.setPrix(prixTotal);
+		ligne.setPrixAvantRemise(p.getPrix()*ligne.getQuantite());
+		
 		return ligneDao.updateLigne(ligne);
 	}
 

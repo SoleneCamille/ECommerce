@@ -47,6 +47,11 @@ public class ClientServiceImpl implements IClientService {
 	}
 
 	@Override
+	public Client isExist(Client client) {
+		return clientDao.isExist(client);
+	}
+
+	@Override
 	public Client getClientById(Client client) {
 		return clientDao.getClientById(client);
 	}

@@ -18,6 +18,8 @@ public interface IClientService {
 
 	public int deleteClient(int idClient);
 
+	public Client isExist(Client client);
+	
 	public Client getClientById(Client client);
 
 }

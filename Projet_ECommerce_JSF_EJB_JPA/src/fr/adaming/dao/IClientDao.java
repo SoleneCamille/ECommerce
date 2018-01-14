@@ -20,5 +20,7 @@ public interface IClientDao {
 	public int deleteClient(int idClient);
 
 	public Client getClientById(Client client);
+	
+	public Client isExist(Client client);
 
 }

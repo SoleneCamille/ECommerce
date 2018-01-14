@@ -31,14 +31,16 @@ import org.apache.commons.codec.binary.Base64;
 
 import com.sun.mail.smtp.SMTPTransport;
 
-
+import fr.adaming.model.Administrateur;
 import fr.adaming.model.Categorie;
 import fr.adaming.model.Client;
 import fr.adaming.model.Commande;
+import fr.adaming.model.LignesCommande;
 import fr.adaming.model.Produit;
 import fr.adaming.service.ICategorieService;
 import fr.adaming.service.IClientService;
 import fr.adaming.service.ICommandeService;
+import fr.adaming.service.ILignesCommandeService;
 import fr.adaming.service.IProduitService;
 
 @ManagedBean(name = "clientMB")
@@ -57,15 +59,18 @@ public class ClientManagedBean implements Serializable {
 	@EJB
 	private ICommandeService comService;
 	
-//	@EJB
-//	private IClientService clientService;
+	@EJB
+	private ILignesCommandeService ligneService;
+	
 
 	private Client client;
 	private List<Categorie> listeCategories;
 	private Categorie categorie;
 	private HttpSession maSession;
 	private List<Produit> listeProduit;
+	private List<LignesCommande> listeLignes;
 	private Commande commande;
+	
 	// constructeur vide
 	public ClientManagedBean() {
 		this.client = new Client();
@@ -145,12 +150,26 @@ public class ClientManagedBean implements Serializable {
 		this.comService = comService;
 	}
 	
-	
-	
 
-//	public void setClientService(IClientService clientService) {
-//		this.clientService = clientService;
-//	}
+	public List<LignesCommande> getListeLignes() {
+		return listeLignes;
+	}
+
+	public void setListeLignes(List<LignesCommande> listeLignes) {
+		this.listeLignes = listeLignes;
+	}
+
+	public void setClientService(IClientService clientService) {
+		this.clientService = clientService;
+	}
+
+	public void setProdService(IProduitService prodService) {
+		this.prodService = prodService;
+	}
+
+	public void setLigneService(ILignesCommandeService ligneService) {
+		this.ligneService = ligneService;
+	}
 
 	// methodes
 	public String consulterCategorie() {
@@ -181,24 +200,47 @@ public class ClientManagedBean implements Serializable {
 	}
 
 	public String getPrixCommande(){
+		Client clientDefaut = new Client();
+		clientDefaut.setIdClient(1);
+		clientDefaut = clientService.getClientById(clientDefaut);
+		
 		this.commande.setIdCommande(1);
-		
-		
+		this.commande = comService.getCommandeById(this.commande);		
 		
 		double prixAvant=comService.getPrixTotalAvantRemise(this.commande);
 		this.commande.setPrixAvant(prixAvant);
 		
 		double prixApres=comService.getPrixTotalApresRemise(this.commande);		
 		this.commande.setPrixApres(prixApres);
+		
+		this.commande = comService.updateCommande(this.commande, clientDefaut);
 		maSession.setAttribute("com", this.commande);
-		return "ValidationPanier";
+		return "validationPanier";
 		
 
 	}
 	
 	public String ajouterClient(){
-		clientService.addClient(this.client);
-		return "envoiMail";
+		Client cOut = clientService.addClient(this.client);
+		
+		//récupérer la liste de lignes de sa commande
+		List<LignesCommande> listOut = ligneService.getAllLignes(1);
+		
+		Commande comDefaut = new Commande();
+		comDefaut.setIdCommande(1);
+		comDefaut = comService.getCommandeById(comDefaut);
+		
+		Commande commOut = new Commande(comDefaut.getPrixAvant(), comDefaut.getPrixApres());
+		
+		//créer une commande avec ces lignes de commande
+		commOut = comService.addCommande(commOut, cOut);
+		
+		commOut.setListeLigneCommande(listOut);
+		
+		for (LignesCommande element : listOut) {
+			ligneService.updateLigne(element, commOut, element.getProduit());
+		}
+		return "paiement";
 	}
 	
 	
@@ -236,6 +278,38 @@ public class ClientManagedBean implements Serializable {
         t.sendMessage(msg, msg.getAllRecipients());
         System.out.println("Mail envoyé");
         t.close();
+	}
+	
+	public String seConnecter() {
+
+		try {
+			Client cOut = clientService.isExist(this.client);
+
+			//récupérer la liste de lignes de sa commande
+			this.listeLignes = ligneService.getAllLignes(1);
+			
+			Commande comDefaut = new Commande();
+			comDefaut.setIdCommande(1);
+			comDefaut = comService.getCommandeById(comDefaut);
+			
+			Commande commOut = new Commande(comDefaut.getPrixAvant(), comDefaut.getPrixApres());
+			
+			//créer une commande avec ces lignes de commande
+			commOut = comService.addCommande(commOut, cOut);
+			
+			commOut.setListeLigneCommande(this.listeLignes);
+			for (LignesCommande element : this.listeLignes) {
+				ligneService.updateLigne(element, commOut, element.getProduit());
+			}
+
+			return "paiement";
+
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage("L'identifiant ou le mot de passe est incorrect"));
+
+		}
+		return "validationCommande";
 	}
 	
 }

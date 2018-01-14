@@ -49,10 +49,7 @@
 							<h:outputText value="#{pdt.remise}" style="font-weight: bold" />
 							<h:outputText value="Stock:" />
 							<h:outputText value="#{pdt.quantite}" style="font-weight: bold" />
-
-							<h:outputText  value="quantité : " />
 							
-							<h:inputText value="#{lMB.ligne.quantite}" style="font-weight: bold" />
 							<p:commandButton value="Ajouter au panier"
 								action="#{lMB.ajouterLigne}">
 								<f:setPropertyActionListener value="#{pdt}"

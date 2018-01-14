@@ -23,35 +23,44 @@ public class Commande implements Serializable {
 	// attributs
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_comm")
+	@Column(name = "id_comm")
 	private int idCommande;
 	private Date dateCommande;
-private double prixAvant;
-private double prixApres;
+	private double prixAvant;
+	private double prixApres;
 	// transformation UML en java
-	 @OneToMany(mappedBy="commande", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	 private List<LignesCommande> listeLigneCommande;
-	 @ManyToOne
-	 @JoinColumn(name="client_id", referencedColumnName="id_client")
-	 private Client client;
-	
-	 // constructeurs
+	@OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<LignesCommande> listeLigneCommande;
+	@ManyToOne
+	@JoinColumn(name = "client_id", referencedColumnName = "id_client")
+	private Client client;
+
+	// constructeurs
 
 	public Commande() {
 		super();
 	}
 
-	public Commande(Date dateCommande) {
+	public Commande(Date dateCommande, double prixAvant, double prixApres) {
 		super();
 		this.dateCommande = dateCommande;
+		this.prixAvant = prixAvant;
+		this.prixApres = prixApres;
+	}
+	
+	
+	public Commande(double prixAvant, double prixApres) {
+		super();
+		this.prixAvant = prixAvant;
+		this.prixApres = prixApres;
 	}
 
-	public Commande(int idCommande, Date dateCommande) {
+	public Commande(int idCommande, Date dateCommande, double prixAvant, double prixApres) {
 		super();
 		this.idCommande = idCommande;
 		this.dateCommande = dateCommande;
-		this.prixAvant=prixAvant;
-		this.prixApres=prixApres;
+		this.prixAvant = prixAvant;
+		this.prixApres = prixApres;
 	}
 
 	// getters & setters
@@ -103,7 +112,5 @@ private double prixApres;
 	public void setPrixApres(double prixApres) {
 		this.prixApres = prixApres;
 	}
-	
-	
 
 }

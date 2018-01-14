@@ -31,7 +31,7 @@ public class LignesCommandeManagedBean implements Serializable {
 	private List<LignesCommande> listeLignes;
 	private Produit produit;
 
-	
+	private int qteAchetee;
 
 	private HttpSession maSession;
 
@@ -75,14 +75,17 @@ public class LignesCommandeManagedBean implements Serializable {
 	public void setProduitService(IProduitService produitService) {
 		this.produitService = produitService;
 	}
-	
-	
 
+	public int getQteAchetee() {
+		return qteAchetee;
+	}
 
-	
-	//methodes
-	
-	
+	public void setQteAchetee(int qteAchetee) {
+		this.qteAchetee = qteAchetee;
+	}
+
+	// methodes
+
 	public String ajouterLigne() {
 		Commande comDefaut = new Commande();
 		comDefaut.setIdCommande(1);
@@ -91,27 +94,21 @@ public class LignesCommandeManagedBean implements Serializable {
 		} else {
 			this.ligne = ligneService.getLigneByIdProduit(this.produit);
 			int quantite = this.ligne.getQuantite();
-			
-			this.ligne.setQuantite(quantite+1);
-			double prix = (this.ligne.getPrix()/quantite)*(quantite+1);
+
+			this.ligne.setQuantite(quantite + 1);
+			double prix = (this.ligne.getPrix() / quantite) * (quantite + 1);
 			this.ligne.setPrix(prix);
+			double prixAvantRemise = (this.produit.getPrix() * (quantite + 1));
+			this.ligne.setPrixAvantRemise(prixAvantRemise);
 			ligneService.updateLigne(this.ligne, comDefaut, this.produit);
 		}
 
 		// récupérer la liste de lignes dont la commande est nulle
 		this.listeLignes = ligneService.getAllLignes(comDefaut.getIdCommande());
 
-//		for (LignesCommande element : listeLignes) {
-//			System.out.println(element.getIdLigne());
-//		}
+		// ajouter la liste dans la session
+		maSession.setAttribute("lignesListe", this.listeLignes);
 
-		// ajout de la liste dans la session
-
-		//maSession.setAttribute("lignesListe", this.listeLignes);
-		//calcul prix avant la remise
-		
-		
-		
 		return "panier";
 	}
 
@@ -148,6 +145,41 @@ public class LignesCommandeManagedBean implements Serializable {
 		return "panier";
 	}
 
-	
+	public String augmenterQuantite() {
+
+		Commande comDefaut = new Commande();
+		comDefaut.setIdCommande(1);
+
+		System.out.println(this.ligne.getQuantite());
+
+		this.ligne.setQuantite(this.ligne.getQuantite() + 1);
+
+		this.ligne = ligneService.updateLigne(this.ligne, comDefaut, this.ligne.getProduit());
+
+		return "panier";
+	}
+
+	public String diminuerQuantite() {
+
+		Commande comDefaut = new Commande();
+		comDefaut.setIdCommande(1);
+
+		if (this.ligne.getQuantite() > 1) {
+			this.ligne.setQuantite(this.ligne.getQuantite() - 1);
+			this.ligne = ligneService.updateLigne(this.ligne, comDefaut, this.ligne.getProduit());
+		} else {
+			if (this.ligne.getQuantite() == 1) {
+				ligneService.deleteLigne(this.ligne);
+			}
+		}
+
+		// récupérer la nouvelle liste de lignes de la BD
+		this.listeLignes = ligneService.getAllLignes(1);
+
+		// ajouter la liste dans la session
+		maSession.setAttribute("lignesListe", this.listeLignes);
+
+		return "panier";
+	}
 
 }

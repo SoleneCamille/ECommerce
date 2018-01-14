@@ -63,5 +63,20 @@ public class ClientDaoImpl implements IClientDao {
 	public Client getClientById(Client client) {
 		return em.find(Client.class, client.getIdClient());
 	}
+	
+	@Override
+	public Client isExist(Client client) {
+		// creation de la requete JPQL
+		String req = "select c from Client as c where c.email=:pMail and c.mdp=:pMdp";
+
+		// créer un query
+		Query query = em.createQuery(req);
+		
+		//assignation des paramètres
+		query.setParameter("pMail", client.getEmail());
+		query.setParameter("pMdp", client.getMdp());
+
+		return (Client) query.getSingleResult();
+	}
 
 }
