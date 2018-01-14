@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<title>Paiement et mail</title>
+	<title>Paiement</title>
 	<h:outputStylesheet library="css" name="myStyle.css" />
 </h:head>
 
@@ -18,36 +18,27 @@
 	</div>
 
 
-	<p:dataTable var="ligne" value="#{lMB.listeLignes}">
-		<p:column headerText="Produit">
-			<h:outputText value="#{ligne.produit.designation}" />
+	<p:dataTable var="com" value="#{sessionScope.comListe}">
+		<p:column headerText="ID">
+			<h:outputText value="#{com.idCommande}" />
 		</p:column>
 
-		<p:column headerText="Description">
-			<h:outputText value="#{ligne.produit.description}" />
+		<p:column headerText="Total avant remise">
+			<h:outputText value="#{com.prixAvant}" />
 		</p:column>
 
-		<p:column headerText="Prix Unitaire">
-			<h:outputText value="#{ligne.produit.prix}" />
+		<p:column headerText="Total après remise">
+			<h:outputText value="#{com.prixApres}" />
 		</p:column>
-
-		<p:column headerText="Remise">
-			<h:outputText value="#{ligne.produit.remise}" />
+		
+		<p:column headerText="Détail de la commande">
+			<p:commandButton value="Voir"
+				action="#{clientMB.afficherDetail}"
+				style="background-color:dodgerblue;backgroung-border:dodgerblue">
+				<f:setPropertyActionListener value="#{com}"
+							target="#{clientMB.commande}" />
+				</p:commandButton>
 		</p:column>
-
-
-		<p:column headerText="Quantité">
-			<h:outputText value="#{ligne.quantite}" />
-		</p:column>
-		<p:column headerText="Prix total avant remise">
-			<h:outputText value="#{ligne.prixAvantRemise}" />
-		</p:column>
-
-		<p:column headerText="Prix total après remise">
-			<h:outputText value="#{ligne.prix}" />
-		</p:column>
-
-
 
 	</p:dataTable>
 	<br />

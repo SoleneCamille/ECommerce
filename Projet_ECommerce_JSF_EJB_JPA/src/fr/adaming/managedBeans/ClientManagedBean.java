@@ -327,6 +327,9 @@ public class ClientManagedBean implements Serializable {
 				prodService.updateProduit(p, p.getCategorie());
 			}
 
+			List<Commande> listeCom = comService.getAllCommandesFromClient(cOut);
+			maSession.setAttribute("comListe", listeCom);
+			
 			return "recapCommandes";
 
 		} catch (Exception e) {
@@ -335,6 +338,15 @@ public class ClientManagedBean implements Serializable {
 
 		}
 		return "validationCommande";
+	}
+	
+	public String afficherDetail() {
+		
+		this.listeLignes = ligneService.getAllLignes(this.commande.getIdCommande());
+		
+		maSession.setAttribute("lignesList", this.listeLignes);
+		
+		return "detailCommande";
 	}
 	
 }
