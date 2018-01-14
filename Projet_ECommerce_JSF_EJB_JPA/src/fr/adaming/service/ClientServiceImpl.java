@@ -3,10 +3,12 @@ package fr.adaming.service;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateful;
 
 import fr.adaming.dao.IClientDao;
 import fr.adaming.model.Client;
 
+@Stateful
 public class ClientServiceImpl implements IClientService {
 
 	// transformation de l'association UML en java
