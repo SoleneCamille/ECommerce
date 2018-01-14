@@ -253,7 +253,9 @@ public class ClientManagedBean implements Serializable {
 			p.setSelectionne(false);
 			prodService.updateProduit(p, p.getCategorie());
 		}
-		return "paiement";
+		
+		maSession.setAttribute("comListe", commOut);
+		return "recapCommandes";
 	}
 	
 	
@@ -325,7 +327,7 @@ public class ClientManagedBean implements Serializable {
 				prodService.updateProduit(p, p.getCategorie());
 			}
 
-			return "paiement";
+			return "recapCommandes";
 
 		} catch (Exception e) {
 			FacesContext.getCurrentInstance().addMessage(null,
