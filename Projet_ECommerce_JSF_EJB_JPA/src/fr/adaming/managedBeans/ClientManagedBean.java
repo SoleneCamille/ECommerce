@@ -223,14 +223,24 @@ public class ClientManagedBean implements Serializable {
 	public String ajouterClient(){
 		Client cOut = clientService.addClient(this.client);
 		
-		//récupérer la liste de lignes de sa commande
-		List<LignesCommande> listOut = ligneService.getAllLignes(1);
 		
 		Commande comDefaut = new Commande();
 		comDefaut.setIdCommande(1);
 		comDefaut = comService.getCommandeById(comDefaut);
 		
+		
+		
+		//récupérer la liste de lignes de sa commande		
+		List<LignesCommande> listOut = ligneService.getAllLignes(1);
+		
+		
+		
 		Commande commOut = new Commande(comDefaut.getPrixAvant(), comDefaut.getPrixApres());
+		comDefaut.setListeLigneCommande(null);
+		
+		comDefaut.setPrixApres(0);
+		comDefaut.setPrixAvant(0);
+		comService.updateCommande(comDefaut, comDefaut.getClient());
 		
 		//créer une commande avec ces lignes de commande
 		commOut = comService.addCommande(commOut, cOut);
@@ -239,6 +249,9 @@ public class ClientManagedBean implements Serializable {
 		
 		for (LignesCommande element : listOut) {
 			ligneService.updateLigne(element, commOut, element.getProduit());
+			Produit p = element.getProduit();
+			p.setSelectionne(false);
+			prodService.updateProduit(p, p.getCategorie());
 		}
 		return "paiement";
 	}
@@ -283,6 +296,7 @@ public class ClientManagedBean implements Serializable {
 	public String seConnecter() {
 
 		try {
+			
 			Client cOut = clientService.isExist(this.client);
 
 			//récupérer la liste de lignes de sa commande
@@ -293,13 +307,22 @@ public class ClientManagedBean implements Serializable {
 			comDefaut = comService.getCommandeById(comDefaut);
 			
 			Commande commOut = new Commande(comDefaut.getPrixAvant(), comDefaut.getPrixApres());
+			comDefaut.setListeLigneCommande(null);
+			
+			comDefaut.setPrixApres(0);
+			comDefaut.setPrixAvant(0);
+			comService.updateCommande(comDefaut, comDefaut.getClient());
 			
 			//créer une commande avec ces lignes de commande
 			commOut = comService.addCommande(commOut, cOut);
 			
 			commOut.setListeLigneCommande(this.listeLignes);
+			
 			for (LignesCommande element : this.listeLignes) {
 				ligneService.updateLigne(element, commOut, element.getProduit());
+				Produit p = element.getProduit();
+				p.setSelectionne(false);
+				prodService.updateProduit(p, p.getCategorie());
 			}
 
 			return "paiement";

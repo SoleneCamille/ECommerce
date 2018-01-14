@@ -79,47 +79,48 @@ public class CommandeDaoImpl implements ICommandeDao {
 
 	@Override
 	public Commande getCommandeById(Commande comm) {
-		em.find(Commande.class, comm.getIdCommande());
-		return comm;
+		return em.find(Commande.class, comm.getIdCommande());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public double getPrixTotalAvantRemise(Commande com) {
 		String req = "select l from LignesCommande as l where l.commande.idCommande=:pIdcom";
 		// creation du query
-				Query query = em.createQuery(req);
+		Query query = em.createQuery(req);
 
-				// assignation des paramètres de la requete
-				query.setParameter("pIdcom", com.getIdCommande());
-				List<LignesCommande> liste= query.getResultList();
-				
-				double somme = 0;
-				 
-				for(LignesCommande l: liste) {
-					double prixAvant=(l.getPrix()/(1- (l.getProduit().getRemise())/100));
-				    somme = somme + prixAvant;
-				}
-		
-			
-				return somme;
+		// assignation des paramètres de la requete
+		query.setParameter("pIdcom", com.getIdCommande());
+		List<LignesCommande> liste = query.getResultList();
+
+		double somme = 0;
+
+		for (LignesCommande l : liste) {
+			double prixAvant = (l.getPrix() / (1 - (l.getProduit().getRemise()) / 100));
+			somme = somme + prixAvant;
+		}
+
+		return somme;
 
 	}
+
+	@SuppressWarnings("unchecked")
 	public double getPrixTotalApresRemise(Commande com) {
 		String req = "select l from LignesCommande as l where l.commande.idCommande=:pIdcom";
 		// creation du query
-				Query query = em.createQuery(req);
+		Query query = em.createQuery(req);
 
-				// assignation des paramètres de la requete
-				query.setParameter("pIdcom", com.getIdCommande());
-				List<LignesCommande> liste= query.getResultList();
-				double somme = 0;
-				for(int i=0;i<liste.size();i++) {
-					double prixApres=liste.get(i).getPrix();
-				    somme = somme + prixApres;
-				}
-		
-				return somme;
+		// assignation des paramètres de la requete
+		query.setParameter("pIdcom", com.getIdCommande());
+		List<LignesCommande> liste = query.getResultList();
+		double somme = 0;
+		for (int i = 0; i < liste.size(); i++) {
+			double prixApres = liste.get(i).getPrix();
+			somme = somme + prixApres;
+		}
+
+		return somme;
 
 	}
-	
+
 }
