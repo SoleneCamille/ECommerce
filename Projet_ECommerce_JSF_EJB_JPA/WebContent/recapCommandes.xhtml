@@ -32,12 +32,14 @@
 		</p:column>
 		
 		<p:column headerText="Détail de la commande">
+		<h:form>
 			<p:commandButton value="Voir"
 				action="#{clientMB.afficherDetail}"
 				style="background-color:dodgerblue;backgroung-border:dodgerblue">
 				<f:setPropertyActionListener value="#{com}"
 							target="#{clientMB.commande}" />
 				</p:commandButton>
+				</h:form>
 		</p:column>
 
 	</p:dataTable>

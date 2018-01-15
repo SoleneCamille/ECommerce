@@ -13,12 +13,21 @@
 
 <h:body>
 
-<div class="cadre">
-		<h1 style="text-align: center; color: black">Récapitulatif de la commande : #{sessionScope.commande.idCommande}</h1>
+	<div class="cadre">
+		<h1 style="text-align: center; color: black">Récapitulatif de la
+			commande : #{sessionScope.commande.idCommande}</h1>
 	</div>
 
 
-	<p:dataTable var="ligne" value="#{sessionScope.lignesList}">
+	<p:dataTable id="tbl" var="ligne" value="#{sessionScope.lignesList}">
+	
+	 <f:facet name="{Exporters}">
+            <h:commandLink>
+                <p:graphicImage name="C:\\Users\\inti-0257\\Desktop\\index.jpg" width="24"/>
+                <p:dataExporter type="pdf" target="tbl" fileName="Commande" />
+            </h:commandLink>
+            </f:facet>
+            
 		<p:column headerText="Produit">
 			<h:outputText value="#{ligne.produit.designation}" />
 		</p:column>
@@ -37,7 +46,7 @@
 
 
 		<p:column headerText="Quantité">
-			<h:outputText value="#{ligne.quantite}"/>
+			<h:outputText value="#{ligne.quantite}" />
 		</p:column>
 		<p:column headerText="Prix total avant remise">
 			<h:outputText value="#{ligne.prixAvantRemise}" />
@@ -46,16 +55,23 @@
 		<p:column headerText="Prix total après remise">
 			<h:outputText value="#{ligne.prix}" />
 		</p:column>
+		
+	
 
 	</p:dataTable>
 	
 	
+
+
 	<div>
 		<h:form>
 
 			<p:commandButton value="Recevoir mail"
 				action="#{clientMB.envoiMail()}"
-				style="background-color:dodgerblue;backgroung-border:dodgerblue" />
+				style="background-color:dodgerblue;backgroung-border:dodgerblue">
+				<f:setPropertyActionListener value="#{sessionScope.lignesList}"
+					target="#{clientMB.listeLignes}" />
+			</p:commandButton>
 		</h:form>
 	</div>
 
