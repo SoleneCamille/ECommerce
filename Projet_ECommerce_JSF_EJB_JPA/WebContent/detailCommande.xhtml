@@ -18,12 +18,12 @@
 			commande : #{sessionScope.commande.idCommande}</h1>
 	</div>
 
-
-	<p:dataTable id="tbl" var="ligne" value="#{sessionScope.lignesList}">
+<h:form>
+	<p:dataTable id="tbl" var="ligne" value="#{sessionScope.lignesList}" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}" paginator="true">
 	
 	 <f:facet name="{Exporters}">
             <h:commandLink>
-                <p:graphicImage name="C:\\Users\\inti-0257\\Desktop\\index.jpg" width="24"/>
+                <p:graphicImage value="resources/images/pdf.png" width="24"/>
                 <p:dataExporter type="pdf" target="tbl" fileName="Commande" />
             </h:commandLink>
             </f:facet>
@@ -60,7 +60,7 @@
 
 	</p:dataTable>
 	
-	
+</h:form>	
 
 
 	<div>
